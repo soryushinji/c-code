@@ -4,7 +4,7 @@
         {
             "label": "编译（gcc）",
             "type": "process",
-            "command": "D:\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\gcc.exe",
+            "command": "C:\\Users\\soryu\\Downloads\\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\\mingw64\\bin\\gcc.exe",
             "args": [
                 "-Wall",
                 "-Wextra",
@@ -50,7 +50,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "编译后在 VS Code 集成终端里运行，不弹外部窗口，输出永久保留"
+            "detail": "编译后在集成终端里运行，不弹外部窗口"
         }
     ]
 }

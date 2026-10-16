@@ -2296,12 +2296,15 @@ if(note == 0)
 else
 {
     printf("%d 不是质数\n",n);
+    //再打印最小质因数
+    
     //再打印所有正因数
     printf("所有正因数:");
     for(int j = 0;j < note;j++)
     {
         printf(" %d",posdivisor[j]);
     }
+    printf("\n");
 }
 
 printf("\n");
