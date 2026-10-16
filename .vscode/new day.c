@@ -1,0 +1,2206 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<string.h>
+#include<windows.h>
+#include<ctype.h>
+int main()
+{
+    // float salary;
+
+    // printf("\aEnter your desired monthly salary:");
+    // printf(" $_______\b\b\b\b\b\b\b");
+    // scanf("%f", &salary);
+    // printf("\n\t$%.2f a month is $%.2f a year.", salary, salary * 12.0);
+    // printf("\rGee!\n");
+    //printf("%o",32);
+    // char arr[100];
+    // printf("Enter a string: ");
+    // scanf("%99s", arr);
+    // printf("You entered: %s\n", arr);
+//     int i;
+//     printf("请输入一个整数：");
+//     scanf("%d",&i);
+//     int j = i;
+//     while( i >= 1)
+//     {
+//         int a = i % 10;
+//         printf("%d\n", a);
+//         i = i / 10;
+//     }
+//     printf("反转\n");
+//     int c = 10;
+//    while(j / c >= 10)
+//    {
+//        c *= 10;
+//    }
+//     while( j >= 1)
+//     {
+//         int b =j / c;
+//         printf("%d\n", b);
+//         j = j % c;
+//         c = c / 10;
+//     }
+// int a = 0;
+// for(int i = 1;i <= 100;i++)
+// {
+//     if(i % 3 == 0)
+//     {
+//         a = a + i;
+//     }
+
+   
+
+// }
+    // printf("Sum of multiples of 3 from 1 to 100 is: %d\n", a);
+
+// for(int i = 2;i <= 1200;i++)
+// {
+//     int a = 2;
+//     while(a < i)
+
+//     {
+//         if(i % a == 0)
+//         {
+//             a = 0;
+//             break;
+//         }
+//         a++;
+//     }
+
+//     if(a)
+//     {
+//         printf("%d\n", i);
+//     }
+// }
+
+// a:
+// printf("请输入一个整数：");
+// int i;  
+// scanf("%d",&i);
+// printf("您输入的整数是：%d\n",i);
+// goto a;
+// int i = 0;
+// int arr[3][5] = {1,2,6,7,10,14,15};
+// for(i = 0;i < 3;i++)
+// {
+//     int j = 0;
+//     for(j = 0;j < 5;j++)
+//     {
+//         scanf("%d",&arr[i][j]);
+//     }
+// }
+// for(i = 0;i < 3;i++)
+// {
+//     int j = 0;
+//     for(j = 0;j < 5;j++)
+//     {
+//         printf("%d ",arr[i][j]);
+//     }
+//     printf("\n");
+// }
+// int num = sizeof(arr) / sizeof(arr[0][0]);
+// printf("Total number of elements: %d\n", num);
+//welcome to bit!!!!!
+//################### 19
+// char arr[19][19];
+// int i = 0;
+// int k = 0;
+// int a = 19;
+// for(i = 0;i < 19;i++)
+// {
+    
+//         for(int j = 0;j < a;j++)
+//     {
+//         arr[j][k] = '#';
+//         printf("%c ", arr[j][k]);
+//     }
+//     printf("\n");
+//     k++;
+//     a--;
+// }
+// char text[1024];
+
+//     printf("请输入一段话：");
+//     if (fgets(text, sizeof(text), stdin) == NULL) {
+//         return 1;
+//     }
+
+//     // 去掉 fgets 读入的末尾换行符
+//     size_t len = strlen(text);
+//     if (len > 0 && text[len - 1] == '\n') {
+//         text[len - 1] = '\0';
+//         len--;
+//     }
+
+//     int n = (int)len;
+
+//     // i 表示左右两边各保留的字符数
+//     for (int i = 0; i <= (n + 1) / 2; i++) {
+//         for (int j = 0; j < n; j++) {
+//             // 左边保留 i 个字符，右边保留 i 个字符
+//             if (j < i || j >= n - i) {
+//                 putchar(text[j]);
+//             } else {
+//                 putchar('#');
+//             }
+//         }
+//         putchar('\n');
+//     }
+
+// char text[] = "sweet death!!!!";
+// char text1[] = "###############";
+// int n = strlen(text) - 1;
+// int m = 0;
+// while(m <= n)
+// {
+//     text1[m] = text[m];
+//     text1[n] = text[n];
+//     printf("%s\n", text1);
+//     sleep(1);
+//     system("cls"); 
+//     m++;
+//     n--;
+// }
+// printf("%s\n", text1);
+// char test1[1024]; 
+// char test2[1024];
+// printf("请输入一段话：");
+// fgets(test1,sizeof(test1),stdin);
+// int num = strlen(test1);
+// int i = 0;
+// while(i <= num - 2)
+// {
+//     test2[i] = '#';
+//     i++;
+// }
+// int left = 0;
+// int right = num - 2;
+// while(left <= right)
+// {
+//     test2[left] = test1[left];
+//     test2[right] = test1[right];
+//     left++;
+//     right--;
+//     sleep(1);
+//     system("cls");
+//     printf("%s\n", test2);
+// }
+//查找数字
+// int number;
+// printf("请输入数组的长度：");
+// scanf("%d", &number);
+// int arr[number];
+// srand((unsigned)time(NULL));
+// for(int i = 0;i < number;i++)
+// {
+//     arr[i] = rand() % (2 * number - 1 + 1);
+//     printf("%d ", arr[i]);
+// }
+// printf("\n");
+// printf("该数组从小到大排列为：");
+// int min = arr[0];
+// for(int i = 0;i < number;i++)
+// {
+//     for(int j = 1 + i;j < number;j++)
+//     {
+//         if(arr[i] >= arr[j])
+//         {
+//             int abc = arr[j];
+//             arr[j] = arr[i];
+//             arr[i] = abc;
+//         }
+//     }
+// }
+// for(int i = 0;i < number;i++)
+// {
+//     printf("%d ", arr[i]);
+// }
+// printf("\n");
+// printf("请输入您要查找的数字(1-20):");
+// int num;
+// scanf("%d", &num);
+// //逐个查找
+// /*int a = 0;
+// for(int i = 0;i < number;i++)
+// {
+//     if(arr[i] == num)
+//     {
+//         printf("找到了,该数字在调整后的数组中下标为：[%d]\n",i);
+//         a++;
+//     }
+// }
+// if(a == 0)
+// {
+//     printf("没有\n");
+// }*/
+// //二分查找
+// int b = 0;
+// int l = 0;
+// int r = number - 1;
+// int ave = (l + r) / 2;
+// while(l <= r)
+// {
+//     if(num == arr[ave])
+//     {
+//         //printf("找到了,该数字在调整后的数组中下标为：[%d]\n",ave);
+//         b++;
+//         break;
+//     }
+//     else if(num < arr[ave])
+//     {
+//         r = ave - 1;
+//     }
+//     else
+//     {
+//         l = ave + 1;
+//     }
+//     ave = (l + r) / 2;
+// }
+// if(b == 0)
+// {
+//     printf("没有\n");
+// }
+// else
+// {
+//     int le = ave;
+//     int ri = ave;
+//     while(arr[le] == num && le >= 0)
+//     {
+//         le--;
+//     }
+//     while(arr[ri] == num && ri < number - 1)
+//     {
+//         ri++;
+//     }
+//     for(le + 1;le + 1 <= ri - 1;le++)
+//     {
+//         printf("找到了,该数字在调整后的数组中下标为：[%d]\n",le);
+//     }
+// }
+
+// int num;
+// int num1;
+// int num2 = scanf("%d %d", &num, &num1);
+// printf("%d %d %d\n", num, num1, num2);
+//6.16 3题
+// char arr;
+// printf("请输入一个字母：");
+// int a = scanf("%c", &arr);
+// int num = (int)arr;
+// //a97 z122 A65 Z90
+// int gin = 97;
+// int gin1 = 65;
+// if(a == 0)
+// {
+//     printf("输入错误\n");
+// }
+
+// else if(num >= 97 && num <= 122)
+// {
+//     int b = num;
+//     for(num;num >= 97;num--)
+//     {
+//         for(int i = b;i >= num;i--)
+//         {
+//             printf("%c", i);
+//         }
+//         printf("\n");
+//     }
+// }
+// else if(num >= 65 && num <= 90)
+// {
+//     int c = num;
+//    for(num;num >= 65;num--)
+//     {
+//         for(int i = c;i >= num;i--)
+//         {
+//             printf("%c", i);
+//         }
+//         printf("\n");
+//     }
+// }
+// else
+// {
+//     printf("不是字母\n");
+// }
+//6.16 4题
+// char arr[2];
+// printf("请输入两个字母(大小写相同):");
+// scanf("%c %c", &arr[0], &arr[1]);
+// int num1 = (int)arr[0];
+// int num2 = (int)arr[1];
+// char temp = arr[0];
+// if(num1 > num2)
+// {
+//     arr[0] = arr[1];
+//     arr[1] = temp;
+// }
+// int i = (int)arr[0];
+// int j = (int)arr[1];
+// int l = 1;
+// while(1)
+// {
+//     int k = 1;
+//     for(int k = 1;k <=l;k++)
+//     {
+//         printf("%c", i);
+//         i++;
+//         if(i > j)
+//         {
+//             goto end;
+//         }
+//     }
+//     printf("\n");
+//     l++;
+// }
+// end:
+//6.16 5题
+// printf("请输入一个大写字母：");
+// char arr;
+// scanf("%c", &arr);
+// int num = (int)arr - 65;
+// int mon = num * 2 + 1;
+// for(int i = 0;i <= num;i++)
+// {
+//     for(int j = i;j <num;j++)
+//     {
+//         printf(" ");
+//     }
+//     for(int k = 0;k <= i;k++)
+//     {
+//         printf("%c", 65 + k);
+//     }
+//     for(int l = i - 1;l >= 0;l--)
+//     {
+//         printf("%c", 65 + l);
+//     }
+//     printf("\n");
+// }
+// //6.16 11题
+// srand((unsigned)time(NULL));
+// int num[8];
+// for(int i = 0;i < 8;i++)
+// {
+//     num[i] = rand() % (100 - 1 + 1);
+// }
+// int max = num[0];
+// for(int i = 0;i < 8;i++)
+// {
+//     for(int j =i + 1;j < 8;j++)
+//     {
+//         if(num[j] >= num[i])
+//         {
+//             max = num[j];
+//             num[j] = num[i];
+//             num[i] = max;
+//         }
+//     }
+// }
+// for(int i = 0;i < 8;i++)
+// {
+//    printf("%d ",num[i]);
+// }
+//6.16 12题
+// int num;
+// printf("计算至第(次):");
+// scanf("%d",&num);
+// double mount = 1.0;
+// for(int i = 1;2 * i <= num;i++)
+// {
+//     double le = -(1.0 / (2 * i));
+//     mount += le;
+// }
+// for(int j = 1;2 * j + 1 <= num;j++)
+// {
+//     double ri = (1.0 / (2 * j + 1));
+//     mount += ri;
+// }
+// printf("%d项时的总和为:%lf",num,mount);
+//6.16 18题
+// int num = 5;
+// int i = 1;
+// while(num < 150)
+// {
+//     num -= i;
+//     num *= 2;
+//     printf("第%d周有%d位朋友\n",i,num);
+//     i++;
+// }
+//6.16 14题
+// srand((unsigned)time(NULL));
+// int num;
+// printf("你想要多长的数组：");
+// scanf("%d",&num);
+// int arr1[num];
+// int arr2[num];
+// for(int i = 0;i < num;i++)
+// {
+//     arr1[i] = rand() %(100 -1 + 1);
+// }
+// int min = arr1[0];
+// for(int i = 0;i < num;i++)
+// {
+//     for(int j = i + 1;j < num;j++)
+//     {
+//         if(arr1[j] < arr1[i])
+//         {
+//             min = arr1[j];
+//             arr1[j] = arr1[i];
+//             arr1[i] = min;
+//         }
+//     }
+// }
+// for(int i = 0;i < num;i++)
+// {
+//     int zero = 0;
+//     for(int j = 0;j <= i;j++)
+//     {
+//         zero += arr1[j];
+//     }
+//     arr2[i] = zero;
+// }
+// for(int i = 0;i < num;i++)
+// {
+//     printf("%d ",arr1[i]);
+// }
+// printf("\n");
+// for(int i = 0;i < num;i++)
+// {
+//     printf("%d ",arr2[i]);
+// }
+//7.12 7题
+// int hour;
+// printf("请输入每周工作的小时数：");
+// scanf("%d",&hour);
+// double total = 0;
+// if(hour <= 40)
+// {
+//     total = hour * 10;
+// }
+// else
+// {
+//     total = hour * 1.5 * 10;
+// }
+// double paper = 0;
+// if(total <= 300)
+// {
+//     paper = total * 0.85;
+// }
+// else if(total > 300 && total <= 450)
+// {
+//     paper = 300 * 0.85 + (total - 300) * 0.8;
+// }
+// else
+// {
+//     paper = 300 * 0.85 + 150 * 0.8 + (total - 450) * 0.75;
+// }
+// printf("您一周的工资总额,税金,净收入分别为:%.2lf$,%.2lf$,%.2lf$",total,total-paper,paper);
+//7.12 9题
+// printf("请输入一个正整数：");
+// int num;
+// scanf("%d",&num);
+// int i = 2;
+// while(i <= num)
+// {
+//     int k = 0;
+//     int j = 2;
+//     while(j * j <= i)
+//     {
+//         if(i % j == 0 && j != i)
+//         {
+//             k++;
+//         }
+//         j++;
+//     }
+//     if(k == 0)
+//     {
+//         printf("%d ",i);
+//     }
+//     i++;
+// const double yangji = 2.05;
+// const double tiancai = 1.15;
+// const double huluobo = 1.09;
+// // 方法一：用goto语句
+// // char key;
+// // start:
+// // printf("请问您要买(a:洋蓟)(b:甜菜)(c:胡萝卜)(q:退出):");
+// // scanf(" %c",&key);
+// // double ynum = 0;
+// // double tnum = 0;
+// // double hnum = 0;
+// // switch(key)
+// //     {
+// //     case 'a':
+// //         {
+// //             printf("请输入洋蓟的磅数：");
+// //             scanf("%lf",&ynum);
+// //             goto start;
+// //         }
+// //     case 'b':
+// //         {
+// //             printf("请输入甜菜的磅数：");
+// //             scanf("%lf",&tnum);
+// //             goto start;
+// //         }
+// //     case 'c':
+// //         {
+// //             printf("请输入胡萝卜的磅数：");
+// //             scanf("%lf",&hnum);
+// //             goto start;
+// //         }
+// //     case 'q':
+// //         {
+// //             printf("购买结束,即将打印小票");
+// //             break;
+// //         }
+// //         default:
+// //         {
+// //             printf("请输入正确的字母！");
+// //         }
+// //     }
+// //方法二：用while语句
+// char key;
+// double ynum = 0;
+// double tnum = 0;
+// double hnum = 0;
+// double amount;
+// do
+// {
+// printf("请问您要买(a:洋蓟)(b:甜菜)(c:胡萝卜)(q:退出):");
+// scanf(" %c",&key);
+// switch(key)
+//     {
+//     case 'a':
+//         {
+//             printf("请输入洋蓟的磅数：");
+//             scanf("%lf",&amount);
+//             ynum += amount;
+//             break;
+//         }
+//     case 'b':
+//         {
+//             printf("请输入甜菜的磅数：");
+//             scanf("%lf",&amount);
+//             tnum += amount;
+//             break;
+//         }
+//     case 'c':
+//         {
+//             printf("请输入胡萝卜的磅数：");
+//             scanf("%lf",&amount);
+//             hnum += amount;
+//             break;
+//         }
+//     case 'q':
+//         {
+//             printf("购买结束,即将打印小票\n");
+//             break;
+//         }
+//         default:
+//         {
+//             printf("请输入正确的字母！\n");
+//             break;
+//         }
+//     }
+// }
+// while(key != 'q');
+
+
+
+// double total = ynum * yangji + tnum *tiancai + hnum * huluobo;
+// double total_cai =total;
+// double zhekou = 0;
+// if(total >= 100)
+// {
+//     zhekou = total * 0.05;
+//     total *= 0.95;
+// }
+// double total_dingdan = total;
+// double num = ynum + tnum + hnum;
+// double yab = 0;
+// if(num <= 5)
+// {
+//     total += 6.5;
+//     yab = 6.5;
+// }
+// else if(num > 5 && num <= 20)
+// {
+//     total += 14;
+//     yab =14;
+// }
+// else
+// {
+//     yab = 14 + (num - 20) * 0.5;
+//     total += yab;
+// }
+// printf("***********************************************************************************\n");
+// printf("物品售价:洋蓟2.05美元/磅,甜菜1.15美元/磅,胡萝卜1.09美元/磅\n");
+// printf("订购的重量(单位:磅):洋蓟(%.2lf),甜菜(%.2lf),胡萝卜(%.2lf)\n",ynum,tnum,hnum);
+// printf("订购的蔬菜费用:%.2lf$\n",total_cai);
+// printf("订单的总费用:%.2lf$\n",total_dingdan);
+// printf("折扣:%.2lf$\n",zhekou);
+// printf("运费和包装费:%.2lf$\n",yab);
+// printf("总费用:%.2lf$\n",total);
+// printf("***********************************************************************************");
+
+//  int c;
+
+//     while ((c = getchar()) != EOF || (c = getchar()) != '\n') 
+//     {
+//         putchar(c);
+//     }
+// printf("请随意输入(除中文):");
+// int c;
+// int alpha = 0;
+// int digit = 0;
+// int space = 0;
+// int enter = 0;
+// int punct = 0;
+// while((c = getchar()) != '#')
+// {
+//     if(isalpha(c))
+//     {
+//         alpha += 1;
+//     }
+//     else if(isdigit(c))
+//     {
+//         digit += 1;
+//     }
+//     else if(ispunct(c))
+//     {
+//         punct += 1;
+//     }
+//     else if(c == '\n')
+//     {
+//         enter += 1;
+//     }
+//     else if(c == ' ')
+//     {
+//         space += 1;
+//     }
+// }
+// printf("您输入的话中有字母%d个,数字%d个,标点符号%d个,空格%d个,换行符%d个",alpha,digit,punct,space,enter);
+
+// int ch;
+//     int count = 0;
+
+//     printf("请输入一些字符，输入 # 结束：\n");
+
+//     while ((ch = getchar()) != '#' && ch != EOF)
+//     {
+//         printf("'%c':%d  ", ch, ch);
+//         count++;
+
+//         if (count % 8 == 0)
+//             putchar('\n');
+//     }
+
+//     if (count % 8 != 0)
+//         putchar('\n');
+
+//7.12 3题
+// int num[1024];
+// int num1[1024];
+// printf("请输入整数(按零结束):\n");
+// int i = 0;
+// int j = 0;
+// int input;
+// while(scanf("%d",&input) == 1 && input != 0)
+// {
+//     if(input % 2 == 0)
+//     {
+//         num[i] = input;
+//         i++;
+//     }
+//     else
+//     {
+//         num1[j] = input;
+//         j++;
+//     }
+// }
+// double total = 0.0;
+// double total1 = 0.0;
+// printf("输入的偶数为:\n");
+// for(int k = 0;k < i;k++)
+// {
+//     printf("%-4d ",num[k]);
+//     total += num[k];
+//     if((k + 1) % 8 == 0)
+//     {
+//         printf("\n");
+//     }
+// }
+// printf("\n");
+// printf("输入的奇数为:\n");
+// for(int k = 0;k < j;k++)
+// {
+//     printf("%-4d ",num1[k]);
+//     total1 += num1[k];
+//     if((k + 1) % 8 == 0)
+//     {
+//         printf("\n");
+//     }
+// }
+// double ave = (i > 0)? total / (double)i : 0.0;
+// double ave1 = (j > 0)? total1 / (double)j: 0.0;
+// printf("\n");
+// printf("****************************************************************\n");
+// printf("偶数的个数为：%d,平均值为:%.2lf\n",i,ave);
+// printf("奇数的个数为：%d,平均值为:%.2lf\n",j,ave1);
+// printf("****************************************************************\n");
+//7.12 4 6题
+// int c;
+// int num1 = 0;
+// int num2 = 0;
+// int num3 = 0;
+// int pre = 0;
+// printf("请输入(输入#退出):");
+// while((c = getchar()) != EOF && c != '#')
+// {
+//     if(c == '.')
+//     {
+//         num1 += 1;
+//         putchar('!');
+//     }
+//     else if(c == '!')
+//     {
+//         num2 += 1;
+//         putchar('!');
+//         putchar('!');
+//     }
+//     else if(pre == 'e' && c == 'i')
+//     {
+//         num3 += 1;
+//         putchar(c);
+//     }
+//     else
+//     {
+//     putchar(c);
+//     }
+//     pre = c;
+// }
+// printf("\n");
+// printf("交替了%d次,ei出现了%d次",num1 + num2,num3);
+//8.11 1题
+// int num1 = 0;
+// int num2 = 0;
+// int c;
+// while((c = getchar()) != EOF && c != '#')
+// {
+//     num1++;
+//     if(isdigit(c))
+//     {
+//         num2 += 1;
+//     }
+//     putchar(c);
+// }
+// printf("\n");
+// printf("在文件结尾之前读到的字符数为%d,数字为%d",num1,num2);
+
+// printf("请随意打印:");
+// int c;
+// int num = 0;
+// int i = 0;
+// int j = 0;
+// while((c = getchar()) != EOF)
+// {
+//     if(c == '\n')
+//     {
+//         putchar('\\');
+//         putchar('n');
+//         j = (int)'\n';
+//         printf(" %d",j);
+//         printf("\n");
+//         i++;
+//     }
+//     else if(c == '\t')
+//     {
+//         putchar('\\');
+//         putchar('t');
+//         j = (int)'\t';
+//         printf(" %d",j);
+//         printf("   ");
+//         i++;
+//     }
+//     else
+//     {
+//         num = (int)c;
+//         putchar(c);
+//         printf(" %d",num);
+//         printf("   ");
+//         i++;
+//     }
+// if(i % 10 == 0 && c != '\n')
+// {
+//     printf("\n");
+// }
+// }
+// //8.11 8题(不完善)
+// start:
+// printf("请输入您的选择:\na.加        s.减\nm.乘        d.除\nq.退出\n");
+// int c;
+// int ch;
+// double first;
+// double second;
+// while((c = getchar()) != EOF && c != 'q')
+// {
+//     switch(c)
+//     {
+//         case'a':
+//         {
+//             printf("请输入第一个数字:");
+//             while((scanf(" %lf",&first)) != 1)
+//             {
+//                 while((ch = getchar()) != '\n')
+//                 {
+//                     putchar(ch);
+//                 }
+//                 printf("不是数字");
+//                 printf("请输入一个数字,如2.5,-1.78E8或3:");
+//             }
+//             printf("请输入第二个数字:");
+//             while((scanf(" %lf",&second)) != 1)
+//             {
+//                 while((ch = getchar()) != '\n')
+//                 {
+//                     putchar(ch);
+//                 }
+//                 printf("不是数字");
+//                 printf("请输入一个数字,如2.5,-1.78E8或3:");
+//             }
+//             printf("%.2f + %.2f = %.2f\n",first,second,first + second);
+//             while (getchar() != '\n')
+//             continue;
+//             goto start;
+//         }
+//         case's':
+//         {
+//             printf("请输入第一个数字:");
+//             while((scanf(" %lf",&first)) != 1)
+//             {
+//                 while((ch = getchar()) != '\n')
+//                 {
+//                     putchar(ch);
+//                 }
+//                 printf("不是数字");
+//                 printf("请输入一个数字,如2.5,-1.78E8或3:");
+//             }
+//             printf("请输入第二个数字:");
+//             while((scanf(" %lf",&second)) != 1)
+//             {
+//                 while((ch = getchar()) != '\n')
+//                 {
+//                     putchar(ch);
+//                 }
+//                 printf("不是数字");
+//                 printf("请输入一个数字,如2.5,-1.78E8或3:");
+//             }
+//             printf("%.2f - %.2f = %.2f\n",first,second,first - second);
+//             while (getchar() != '\n')
+//             continue;
+//             goto start;
+//         }
+//         case'm':
+//         {
+//                         printf("请输入第一个数字:");
+//             while((scanf(" %lf",&first)) != 1)
+//             {
+//                 while((ch = getchar()) != '\n')
+//                 {
+//                     putchar(ch);
+//                 }
+//                 printf("不是数字");
+//                 printf("请输入一个数字,如2.5,-1.78E8或3:");
+//             }
+//             printf("请输入第二个数字:");
+//             while((scanf(" %lf",&second)) != 1)
+//             {
+//                 while((ch = getchar()) != '\n')
+//                 {
+//                     putchar(ch);
+//                 }
+//                 printf("不是数字");
+//                 printf("请输入一个数字,如2.5,-1.78E8或3:");
+//             }
+//             printf("%.2f * %.2f = %.2f\n",first,second,first * second);
+//             while (getchar() != '\n')
+//             continue;
+//             goto start;
+//         }
+//         case'd':
+//         {
+//             printf("请输入第一个数字:");
+//             while((scanf(" %lf",&first)) != 1)
+//             {
+//                 while((ch = getchar()) != '\n')
+//                 {
+//                     putchar(ch);
+//                 }
+//                 printf("不是数字");
+//                 printf("请输入一个数字,如2.5,-1.78E8或3:");
+//             }
+//             printf("请输入第二个数字:");
+//             while((scanf(" %lf",&second)) != 1 )
+//             {
+//                 while((ch = getchar()) != '\n')
+//                 {
+//                     putchar(ch);
+//                 }
+//                 printf("不是数字");
+//                 printf("请输入一个数字,如2.5,-1.78E8或3:");
+//             }
+//             while(second == 0)
+//             {
+//                 printf("请输入非零数字");
+//                 while (scanf("%lf", &second) != 1)
+//                 {
+//                     while ((ch = getchar()) != '\n')
+//                         putchar(ch);
+//                     printf("不是数字");
+//                     printf("请输入一个数字，如 2.5, -1.78E8 或 3: ");
+//     }
+//             }
+//             printf("%.2f / %.2f = %.2f\n",first,second,first / second);
+//             while (getchar() != '\n')
+//             continue;
+//             goto start;
+//         }
+//         default:
+//         {
+//             printf("输入失败,请重新输入\n");
+//             while (getchar() != '\n')
+//             continue;
+//             break;
+//         }
+
+//     }
+// }
+// printf("再见");
+//综合题1
+// printf("请输入一个非负整数:");
+// long long int num;
+// int i = 0;
+// int j = 0;
+// int max = 0;
+// int min  = 9;
+// int he = 0;
+// int ch;
+// long long int ji = 1;
+// long long int num1 = 0;
+// long long int num2 = 0;
+// long long int num3 = 0;
+// start:
+// if((scanf(" %lld",&num)) != 1 || num < 0)
+// {
+//     printf("请输入一个非负整数:");
+//     while((ch = getchar()) != '\n' && ch != 'EOF')
+//         continue;
+//     if (ch == EOF) 
+//     {                        /* 输入真的结束了 */
+//         printf("\n输入结束,程序退出。\n");
+//         return 0;
+//     }
+//     goto start;
+// }
+// else if(num > 0)
+// {
+// num3 = num;
+// num1 = num;
+// while(num1 >= 1)
+// {
+//     num1 /= 10;
+//     j++;
+// }
+// while(num >= 1)
+// {
+//     i = num % 10;
+//     he += i;
+//     ji *= i;
+//     if(i <= min)
+//     {
+//         min = i;
+//     }
+//     if (i >= max)
+//     {
+//         max = i;
+//     }
+//     num2 += i;
+//     num2 *= 10;;
+//     num /= 10;
+// }
+// }
+// else
+// {
+//     j = 1;
+//     ji = 0;
+//     min = 0;
+// }
+// num2 /= 10;
+// printf("位数:%d\n",j);
+// printf("各个位数之和:%d\n",he);
+// printf("各个位数之积:%lld\n",ji);
+// printf("把这个数逆序后得到的新数:%lld\n",num2);
+// printf("最大位:%d    最小位:%d\n",max,min);
+// if(num2 == num3)
+// {
+//     printf("是否回文：是");
+// }
+// else
+// {
+//     printf("是否回文：否");
+// }
+
+
+// int n;
+ 
+//     while (1) 
+//     {
+//         printf("请输入 1 到 100 之间的整数：");
+ 
+//         /* ① 检查返回值 */
+//         if (scanf("%d", &n) != 1) 
+//         {
+//             printf("  这不是一个整数，请重新输入。\n");
+//             /* ② 清空这一行的残留字符 —— 少了这两行就会死循环 */
+//             while (getchar() != '\n')
+//                 continue;
+//             continue;
+//         }
+ 
+//         /* ③ 检查取值范围 */
+//         if (n < 1 || n > 100) 
+//         {
+//             printf("  超出范围了（你输入的是 %d），请重新输入。\n", n);
+//             continue;
+//         }
+ 
+//         break;                            /* 三重检查都过了，才跳出 */
+//     }
+ 
+//     printf("输入合法：%d\n", n);
+
+//综合题2
+// int button = 0;
+// int ch;
+// int h;
+// int num1 = 0;
+// int num2 = 0;
+// start:
+// printf("************************************************************************************************\n");
+// printf("输出示例\n");
+// printf("1) 直角三角形        2) 等腰三角形\n*                     *\n**                   ***\n***                 *****\n****               *******                      ← 等腰三角形共 4 行，第 n 行有 2n-1 个 *\n");
+// printf("3) 菱形（h=2 时共 3 行）      4) 数字金字塔（h=4）\n  *                             1\n ***                           121\n  *                           12321\n                             1234321\n");
+// printf("5) 退出\n");
+// printf("************************************************************************************************\n");
+// start1:
+// printf("请选择:");
+
+// if((scanf("%d",&button)) != 1 || button <= 0 || button == 5 || button >5)
+// {
+//     if(button == 5)
+//     {
+//         goto end;
+//     }
+//     while((ch = getchar()) != '\n' && ch != EOF)
+//     {
+//     continue;
+//     }
+//     printf("无效选项，请重新选择:\n");
+//     goto start;
+// }
+// else
+// {
+//     printf("请输入高度h(1-15):");
+//     start2:
+//     if((scanf("%d",&h)) != 1 || h <= 0 || h > 15)
+//     {
+//         printf("高度必须在 1-15 之间，请重新输入:");
+//         while((ch = getchar()) != '\n' && ch != EOF)
+//         {
+//         continue;
+//         }
+//         goto start2;
+//     }
+//     else
+//     {
+//         while((ch = getchar()) != '\n' && ch != EOF)
+//         {
+//         continue;
+//         }
+//         switch(button)
+//         {
+//         case 1:
+//             for(int i = 1;i <= h;i++)
+//             {
+//                 for(int j = 1;j <= i;j++)
+//                 {
+//                     printf("*");
+//                 }
+//                 printf("\n");
+//             }
+//             num1++;
+//             num2 += h;
+//             break;
+//         case 2:
+//             for(int i = 1;i <= h;i++)
+//             {
+//                 for(int k = i;k <= h - 1;k++)
+//                 {
+//                     printf(" ");
+//                 }
+//                 for(int j = 1;j <= 2 * i - 1;j++)
+//                 {
+//                     printf("*");
+//                 }
+//                 printf("\n");
+//             }
+//             num1++;
+//             num2 += h;
+//             break;
+//         case 3:
+//             for(int i = 1;i <= (h / 2) + 1;i++)
+//             {
+//                 for(int m = i;m <= (h / 2) + 1;m++)
+//                 {
+//                     printf(" ");
+//                 }
+//                 for(int j = 1;j <= 2 * i - 1;j++)
+//                 {
+//                     printf("*");
+//                 }
+//                 printf("\n");
+//             }
+//             for(int l = (h / 2);l >= 1;l--)
+//             {
+//                 for(int n = l;n <= (h / 2) + 1;n++)
+//                 {
+//                     printf(" ");
+//                 }
+//                 for(int k = 2 * l - 1;k >= 1;k--)
+//                 {
+//                     printf("*");
+//                 }
+//                 printf("\n");
+//             }
+//             num1++;
+//             if(h % 2 == 0)
+//             {
+//                 num2 += h + 1;
+//             }
+//             else
+//             {
+//             num2 += h;
+//             }
+//             break;
+//         case 4:
+//             for(int i = 1;i <= h;i++)
+//             {
+//                 for(int k = i;k <= h - 1;k++)
+//                 {
+//                     printf(" ");
+//                 }
+//                 for(int j = 1;j <= i;j++)
+//                 {
+//                     printf("%d",j);
+//                 }
+//                 for(int m = i - 1;m >= 1;m--)
+//                 {
+//                         printf("%d",m);
+//                 }
+//                 printf("\n");
+//             }
+//             num1++;
+//             num2 += h;
+//             break;
+//         }
+//     } 
+// }
+// goto start1;
+// end:
+// if(num1 == 0)
+// {
+// printf("本次共打印 0 个图案，合计 0 行。再见~~\n");
+// }
+// else
+// {
+// printf("本次共打印 %d 个图案，合计 %d 行。再见~~\n",num1,num2);
+// }
+
+// /* ============================================================================
+//    第 2 题　「只用前八章知识」版
+//    ----------------------------------------------------------------------------
+//    约束：不使用自己定义的函数、不使用指针、不使用数组（字符串以外的）。
+//    只用：printf / getchar / 运算符 / while / if / switch / continue / break
+//          / 标志变量 / EOF                       （全部出自第 3~8 章）
+//    三个要点：
+//    ① 不用函数 → 用「一个循环 + need 标记」把「等菜单选择」和「等高度」
+//       合并到同一处，避免把读输入的代码写两遍。
+//    ② 不用指针 → 放弃 strtol，改用 getchar() **逐字符**读入并当场校验。
+//    ③ 不用 goto  → while(!quit) + continue/break；输入结束用 quit 标志退出。
+//    ============================================================================ */
+//     int patternCount = 0;        /* 共打印了多少个图案 */
+//     int totalLines = 0;          /* 共打印了多少行     */
+//     int button = 0;              /* 菜单选择 */
+//     int h = 0;                   /* 高度     */
+//     int need = 0;                /* 0 = 正在等菜单选择；1 = 正在等高度 */
+//     int quit = 0;                /* 输入结束标志（标志变量，第 7 章） */
+//     /* ---------- 启动时展示一次示例 ---------- */
+//     printf("================ 输出示例 ================\n");
+//     printf("1) 直角三角形      2) 等腰三角形\n");
+//     printf("*                     *\n");
+//     printf("**                   ***\n");
+//     printf("***                 *****\n");
+//     printf("****               *******\n");
+//     printf("3) 菱形（h=2 共 3 行）   4) 数字金字塔（h=4）\n");
+//     printf("  *                       1\n");
+//     printf(" ***                     121\n");
+//     printf("  *                     12321\n");
+//     printf("                       1234321\n");
+//     printf("==========================================\n");
+//     while (!quit) 
+//     {                       /* ← 主循环：替代 goto */
+//         int value = 0;                    /* 本次读到的数值 */
+//         int state = 1;                    /* 1=成功  0=非法  2=输入结束 */
+//         int digits = 0;                   /* 读到了几位数字 */
+//         int neg = 0;                      /* 是不是负数 */
+//         int ch;                           /* 必须是 int，才能装下 EOF */
+//         /* ---------- ① 提示（由 need 决定问什么） ---------- */
+//         if (need == 0) 
+//         {
+//             printf("------------------------------------------\n");
+//             printf("  1) 直角三角形     2) 等腰三角形\n");
+//             printf("  3) 菱形           4) 数字金字塔\n");
+//             printf("  5) 退出\n");
+//             printf("------------------------------------------\n");
+//             printf("请选择:");
+//         } else 
+//         {
+//             printf("请输入高度h(1-15):");
+//         }
+//         /* ---------- ② 逐字符严格读一个整数 ----------
+//            不使用任何函数和指针，只用 getchar() 一个字符一个字符地读，
+//            读到什么就当场判断什么。                              */
+//         do 
+//         {                              /* 跳过前导空白（不含换行） */
+//             ch = getchar();
+//         } while (ch == ' ' || ch == '\t');
+//         if (ch == EOF) 
+//         {
+//             state = 2;                    /* 输入结束了 */
+//         } 
+//         else 
+//         {
+//             if (ch == '+' || ch == '-') 
+//             { /* 允许正负号 */
+//                 neg = (ch == '-');
+//                 ch = getchar();
+//             }
+//             while (ch >= '0' && ch <= '9') 
+//             {   /* 收集数字 */
+//                 if (digits < 9)                /* 只收 9 位，避免 int 溢出 */
+//                     value = value * 10 + (ch - '0');
+//                 digits++;
+//                 ch = getchar();
+//             }
+//             while (ch == ' ' || ch == '\t')    /* 允许数字后面跟空白 */
+//                 ch = getchar();
+//             /* 关键校验：必须读到了数字，且后面除了换行（或输入结束）
+//                不能再有任何别的东西。1.5 / 1abc / 1e2 都死在这里。 */
+//             if (digits == 0 || digits > 9 || (ch != '\n' && ch != EOF)) 
+//             {
+//                 state = 0;                     /* 非法 */
+//                 while (ch != '\n' && ch != EOF) /* 丢掉本行剩余部分 */
+//                     ch = getchar();
+//             } 
+//             else if (neg) 
+//             {
+//                 value = -value;
+//             }
+//         }
+//         /* ---------- ③ 按状态决定下一步 ---------- */
+//         if (state == 2) 
+//         {
+//             quit = 1;                          /* 输入结束 → 退出主循环 */
+//         } 
+//         else if (need == 0) 
+//         {                /* 正在处理菜单选择 */
+//             if (state == 0 || value < 1 || value > 5) 
+//             {
+//                 printf("无效选项，请重新选择。\n");
+//             } 
+//             else if (value == 5) 
+//             {
+//                 quit = 1;                      /* 选 5 → 退出 */
+//             } 
+//             else 
+//             {
+//                 button = value;                /* 记下选择 */
+//                 need = 1;                      /* 下次循环改问高度 */
+//             }
+//         } 
+//         else 
+//         {                               /* 正在处理高度 */
+//             if (state == 0 || value < 1 || value > 15) 
+//             {
+//                 printf("高度必须是 1 到 15 之间的整数，请重新输入。\n");
+//             } 
+//             else 
+//             {
+//                 h = value;
+//                 /* ---------- 打印图案（嵌套循环，第 6 章） ---------- */
+//                 switch (button) 
+//                 {
+//                 case 1:                        /* 直角三角形：第 n 行 n 个星号 */
+//                     for (int i = 1; i <= h; i++) 
+//                     {
+//                         for (int j = 1; j <= i; j++)
+//                             printf("*");
+//                         printf("\n");
+//                     }
+//                     totalLines += h;
+//                     break;
+//                 case 2:                        /* 等腰三角形：第 n 行 (h-n) 空格 + (2n-1) 星号 */
+//                     for (int i = 1; i <= h; i++) 
+//                     {
+//                         for (int k = i; k <= h - 1; k++)
+//                             printf(" ");
+//                         for (int j = 1; j <= 2 * i - 1; j++)
+//                             printf("*");
+//                         printf("\n");
+//                     }
+//                     totalLines += h;
+//                     break;
+//                 case 3:                        /* 菱形：上半 (h/2)+1 行 + 下半 h/2 行 */
+//                     for (int i = 1; i <= (h / 2) + 1; i++) 
+//                     {
+//                         for (int m = i; m <= (h / 2) + 1; m++)
+//                             printf(" ");
+//                         for (int j = 1; j <= 2 * i - 1; j++)
+//                             printf("*");
+//                         printf("\n");
+//                     }
+//                     for (int l = (h / 2); l >= 1; l--) 
+//                     {
+//                         for (int n = l; n <= (h / 2) + 1; n++)
+//                             printf(" ");
+//                         for (int k = 2 * l - 1; k >= 1; k--)
+//                             printf("*");
+//                         printf("\n");
+//                     }
+//                     totalLines += (h / 2) + 1 + (h / 2);
+//                     break;
+//                 case 4:                        /* 数字金字塔：第 n 行 1..n 再 n-1..1 */
+//                     for (int i = 1; i <= h; i++) 
+//                     {
+//                         for (int k = i; k <= h - 1; k++)
+//                             printf(" ");
+//                         for (int j = 1; j <= i; j++)
+//                             printf("%d", j);
+//                         for (int m = i - 1; m >= 1; m--)
+//                             printf("%d", m);
+//                         printf("\n");
+//                     }
+//                     totalLines += h;
+//                     break;
+//                 }
+//                 patternCount++;
+//                 need = 0;                      /* 回到菜单 */
+//             }
+//         }
+//     }
+//     printf("本次共打印 %d 个图案，合计 %d 行。再见~~\n", patternCount, totalLines);
+ 
+//综合题3
+// int quit = 0;
+// int ch;
+// int num = 0;
+// int add = 0;
+// int subtract = 0;
+// int multiply = 0;
+// int divide = 0;
+// int modulo = 0;
+// while(!quit)
+// {
+//     double first = 0;
+//     char operator;
+//     double second = 0;
+//     int neg = 0;
+//     int digits = 0;
+//     int decimals = 0;//计算小数部分的位数
+//     int o = 0;//记录first是不是浮点数
+//     printf("请输入表达式（如 12.5 * 3,输入 q 退出)\n(支持 +、-、*、/、%% 五种运算):");
+// //允许一开始有空格
+//     do
+//     {
+//         ch = getchar();
+//     } while (ch == ' ' || ch == '\t');
+//     if(ch == EOF)
+//     {
+//         quit = 1;
+//         continue;
+//     }
+//     else if(ch == 'q' || ch == 'Q')
+//     {
+//         quit = 1;
+//         continue;
+//     }
+//     else//非q非EOF
+//     {
+//         /*带+-号的部分*/
+//         if(ch == '+' || ch == '-')
+//         {
+//             neg = (ch == '-');
+//             ch = getchar();
+//         }
+//         /*整数部分*/
+//         while(ch >= '0' && ch <= '9')
+//         {
+//             first = first * 10 + (ch - '0');
+//             digits++;//计算位数
+//             ch = getchar();
+//         }
+//         /*小数部分*/
+//         if(ch == '.')
+//         {
+//             ch = getchar();
+//             while(ch >= '0' && ch <= '9')
+//             {
+//                 first = first * 10 + (ch - '0');
+//                 digits++;
+//                 decimals++;
+//                 ch = getchar();
+//             } 
+//         }
+//     }//条件1结束
+// //计算first的值
+// for(int i = 1;i <= decimals;i++)
+// {
+//     first /= 10;
+// }
+// //加+-号
+// if(neg)
+// {
+//     first = -first;
+// }
+// //判断是否输入有效的数字
+// if(digits == 0)
+// {
+//     printf("错误：第一个数格式不正确。\n");
+//     while (ch != '\n' && ch != EOF) ch = getchar();
+//     continue;  
+// }
+// else
+// {
+//     //第一个数字之后
+//     //如果输入完第一个数字之后输入abc或者,.之类非空格字符 12.3+也不行，必须至少空一格
+//     if(ch != ' ')
+//     {
+//         printf("错误：数字和运算符之间需要一个空格。\n");
+//         while (ch != '\n' && ch != EOF) ch = getchar();
+//         continue; 
+//     }
+//     do
+//     {
+//         ch = getchar();
+//     } while (ch == ' ' || ch == '\t');//允许空格存在
+// }
+// //接下来读运算符
+// //如果输入第一个数字+空格之后输入其他符号
+// if(ch != '+' && ch != '-' && ch != '*' && ch != '/' && ch != '%')
+// {
+//     printf("错误：未知运算符，请输入 + - * / %%\n");
+//     while (ch != '\n' && ch != EOF) ch = getchar();
+//     continue; }
+// else if(ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '%')
+// {
+//     operator = (char)ch;
+// }
+// //也同样允许有空格
+// do
+// {
+//     ch = getchar();
+// } while (ch == ' ' || ch == '\t');
+// //输入第二个数
+// neg = 0;
+// digits = 0;
+// if(decimals != 0)
+// {
+//     o++;
+// }
+// decimals = 0;
+// //从这一行到1588行与第一个数类似**************************************************************************************
+//     if(ch == EOF)
+//     {
+//         quit = 1;
+//         continue;
+//     }
+//     else if(ch == 'q' || ch == 'Q')
+//     {
+//         quit = 1;
+//         continue;
+//     }
+//     else//非q非EOF
+//     {
+//         /*带+-号的部分*/
+//         if(ch == '+' || ch == '-')
+//         {
+//             neg = (ch == '-');
+//             ch = getchar();
+//         }
+//         /*整数部分*/
+//         while(ch >= '0' && ch <= '9')
+//         {
+//             second = second * 10 + (ch - '0');
+//             digits++;//计算位数
+//             ch = getchar();
+//         }
+//         /*小数部分*/
+//         if(ch == '.')
+//         {
+//             ch = getchar();
+//             while(ch >= '0' && ch <= '9')
+//             {
+//                 second = second * 10 + (ch - '0');
+//                 digits++;
+//                 decimals++;
+//                 ch = getchar();
+//             } 
+//         }
+//     }//条件2结束
+// //计算second的值
+// for(int i = 1;i <= decimals;i++)
+// {
+//     second /= 10;
+// }
+// //加+-号
+// if(neg)
+// {
+//     second = -second;
+// }
+// //判断是否输入有效的数字
+// if(digits == 0)
+// {
+//         printf("错误：第二个数格式不正确。\n");
+//         while (ch != '\n' && ch != EOF) ch = getchar();
+//         continue;  
+// }
+// //从1532行到这一行与第一个数类似**************************************************************************************
+// else
+// {
+//     //第二个数字之后
+//     //如果输入完第二个数字之后输入除了enter之外的任何内容
+//     while (ch == ' ' || ch == '\t')//允许输入空格
+//     ch = getchar();
+//     if (ch != '\n' && ch != EOF)      /* ← 还有别的东西 = 垃圾 */
+//     {
+//         printf("错误：表达式末尾有多余内容。\n");
+//         while (ch != '\n' && ch != EOF) ch = getchar();
+//         continue;    
+//     }
+// }
+// if(operator == '/' && second == 0)
+// {
+//         printf("错误：除数不能为 0。\n");             /* ★ 专门的文案 */
+//         continue;                                   /* 没有垃圾要清 */
+// }
+// else if(operator == '%' && (second == 0 || o == 1 || decimals != 0))
+// {
+//         printf("错误：%% 只支持两个整数，且除数不能为 0。\n");   /* ★ */
+//         continue;
+// }
+//     switch(operator)
+//     {
+//         case '+':
+//             printf("= %f\n",first + second);
+//             add++;
+//             break;
+//         case '-':
+//             printf("= %f\n",first - second);
+//             subtract++;
+//             break;
+//         case '*':
+//             printf("= %f\n",first * second);
+//             multiply++;
+//             break;
+//         case '/':
+//             printf("= %f\n",first / second);
+//             divide++;
+//             break;
+//         case '%':
+//             printf("= %d\n",(int)first % (int)second);
+//             modulo++;
+//             break;
+// }
+// num++;
+// }
+// printf("本次共成功计算 %d 次:\n+ : %d 次    - : %d 次    * : %d 次    / : %d 次    %% : %d 次\n再见~~",num,add,subtract,multiply,divide,modulo);
+
+//综合题4
+// /* ============================================================================
+//    第 4 题　全能文本分析器
+//    ----------------------------------------------------------------------------
+//    这是【在你的原代码基础上修改】的版本：
+//      · 你原来写的部分，用  #if 0 ... #endif  原样包起来保留
+//      · 紧接着是  ✅ 修正后的写法
+//      · 没改动的部分（分类 if-else 等）保持原样，不重复贴
+//    为什么用 #if 0 而不是块注释来注释旧代码？
+//      因为你旧代码里面本身就有块注释，而 C 语言【不允许块注释嵌套】。
+//      外层块注释会被内层的结束符号提前截断，后面的代码就变成"活代码"，编译报错。
+//      #if 0 ... #endif 是预处理指令，可以安全地包住任何内容 —— 包括注释。
+//    ============================================================================ */
+// /* ────────────────────────────────────────────────────────────────────────────
+//    ① 分类计数器  —— 这一段你写对了，一字未改
+//    ──────────────────────────────────────────────────────────────────────────── */
+// int totalnum = 0;
+// int digits = 0;
+// int blank = 0;          /* 32 */
+// int punctuation = 0;    /* 32~64  91~96  123~126 */
+// int others = 0;
+// int dalpha = 0;         /* 65~90 */
+// int xalpha = 0;         /* 97~122 */
+// int yalpha = 0;         /* 65 69 73 79 85 97 101 105 111 117 */
+// #if 0
+// /* ========== 你原来的写法开始（存"字符序列"，n 不可控会越界） ========== */
+// char ch1[128];
+// int ch1num[128];
+// int i = 0;
+// int num = 0;
+// /* ========== 你原来的写法结束 ========== */
+// #endif
+// /* ✅ 改成：大小为 128 的计数数组，下标就是 ASCII 码
+//       —— 题册提示的就是这个。= {0} 不能省，否则初值是随机数。          */
+// int count[128] = {0};
+// int ch;
+// printf("请输入文本（以 # 结束）:");
+// /* ────────────────────────────────────────────────────────────────────────────
+//    ② 读取循环
+//    ──────────────────────────────────────────────────────────────────────────── */
+// #if 0
+// /* ========== 你原来的 do-while 开始 ==========
+//    问题：totalnum++ 写在判断之前，所以 # 和 EOF 也被算进总数；
+//          ch1[i]=ch 把 \n、空格、# 全部存进数组，后面统计会混入。
+// do
+// {
+//     ch = getchar();
+//     totalnum++;
+//     // 不用ctype.h
+//     // （这里是你那段被注释掉的 ASCII 范围判断版本，共约 45 行，略）
+//     // （这里是你后来启用的 ctype.h 版本：islower/isupper/isdigit/
+//     //   ispunct/isspace，逻辑正确，下面新循环里原样保留）
+//     ch1[i] = ch;
+//     i++;
+// } while(ch != '#' && ch != EOF);   // #35
+//    ========== 你原来的 do-while 结束 ========== */
+// #endif
+// /* ✅ 改成：while 的"条件成立才进循环体"
+//       所以 # 和 EOF 根本不会被执行到 → 后面所有的 "- 1" 补丁都能删掉   */
+// while ((ch = getchar()) != EOF && ch != '#')
+// {
+//     totalnum++;                    /* ← 只有真字符才计数 */
+//     /* ── 你的分类逻辑：一字未改（注意 isupper 里原来是双引号 "I"，已改回 'I'）── */
+//     if (islower(ch))
+//     {
+//         xalpha++;
+//         if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
+//         {
+//             yalpha++;
+//         }
+//     }
+//     else if (isupper(ch))
+//     {
+//         dalpha++;
+//         if (ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U')
+//         {
+//             yalpha++;
+//         }
+//     }
+//     else if (isdigit(ch))
+//     {
+//         digits++;
+//     }
+//     else if (ispunct(ch))
+//     {
+//         punctuation++;
+//     }
+//     else if (isspace(ch))
+//     {
+//         blank++;
+//     }
+//     else
+//     {
+//         others++;
+//     }
+//     /* ── ★ 新增：只统计可打印字符（ASCII 33~126）──
+//           \n(10)、空格(32) 自动被排除；下标锁在 33~126，不可能出界。 */
+//     if (ch >= 33 && ch <= 126)
+//     {
+//         count[ch]++;
+//     }
+// }
+// /* ────────────────────────────────────────────────────────────────────────────
+//    ③ 频率统计：整段删除（约 20 行）
+//       它的问题是：只有字符"第一次出现"的位置才等于真实次数，
+//       第二、三次出现的位置会少算；而且 i 没有上限 → 越界写内存。
+//    ──────────────────────────────────────────────────────────────────────────── */
+// #if 0
+// /* ========== 你原来的写法开始 ========== */
+// for(int j = 0;j < i;j++)
+// {
+//     num = 0;
+//     for(int k = j + 1;k < i;k++)
+//     {
+//         if(ch1[j] == ch1[k])
+//         {
+//             num++;
+//         }
+//     }
+//     if(num != 0)
+//     {
+//         num += 1;
+//     }
+//     ch1num[j] = num;
+// }
+// /* ========== 你原来的写法结束 ========== */
+// #endif
+// /* ────────────────────────────────────────────────────────────────────────────
+//    ④ 排序：整段删除（它只是想把最大频字符挪到下标 0，用计数数组后不需要了）
+//    ──────────────────────────────────────────────────────────────────────────── */
+// #if 0
+// /* ========== 你原来的写法开始 ========== */
+// int max = 0;
+// char max1;
+// for(int j = 0;j < i;j++)
+// {
+//     for(int k = j;k < i;k++)
+//     {
+//         if(ch1num[k] >= ch1num[j])
+//         {
+//             max = ch1num[j];
+//             ch1num[j] = ch1num[k];
+//             ch1num[k] = max;
+//             max1 = ch1[j];
+//             ch1[j] = ch1[k];
+//             ch1[k] = max1;
+//         }
+//     }
+// }
+// // 检验数组是否成功选出最大频字符和出现次数
+// // for(int j = 0;j <= i;j++)
+// // {
+// //     printf("%d ",ch1num[j]);
+// // }
+// /* ========== 你原来的写法结束 ========== */
+// #endif
+// /* ────────────────────────────────────────────────────────────────────────────
+//    ⑥ 百分比：删掉所有 "- 1"，改成"分母为 0 时给 0.0"
+//    ──────────────────────────────────────────────────────────────────────────── */
+// #if 0
+// /* ========== 你原来的写法开始 ==========
+//    问题 1：只输入 # 时 totalnum-1 = 0 → 除以 0 → 打印出 -1.$% 这种乱码
+//    问题 2：以 EOF 结束时没有 #，punctuation-1 会变成负数
+// double alphacent = ((double)(dalpha + xalpha) / (totalnum - 1)) * 100;
+// double digitscent = ((double)digits / (totalnum - 1)) * 100;
+// double blankcent = ((double)blank / (totalnum - 1)) * 100;
+// double punctuationcent = ((double)(punctuation - 1) / (totalnum - 1)) * 100;
+// double otherscent = ((double)others / (totalnum - 1)) * 100;
+// printf("总字符数: %d 个\n",totalnum - 1);
+// printf("字母: %d 个(%.1f%%)\n",dalpha + xalpha,alphacent);
+// printf("数字: %d 个(%.1f%%)\n",digits,digitscent);
+// printf("空白: %d 个(%.1f%%)\n",blank,blankcent);
+// printf("标点: %d 个(%.1f%%)\n",punctuation - 1,punctuationcent);
+// printf("其他: %d 个(%.1f%%)\n",others,otherscent);
+//    ========== 你原来的写法结束 ========== */
+// #endif
+// /* ✅ 改成 */
+// double alphacent = 0.0, digitscent = 0.0, blankcent = 0.0;
+// double punctuationcent = 0.0, otherscent = 0.0;
+// if (totalnum > 0)
+// {
+//     alphacent       = (double)(dalpha + xalpha) / totalnum * 100;
+//     digitscent      = (double)digits            / totalnum * 100;
+//     blankcent       = (double)blank             / totalnum * 100;
+//     punctuationcent = (double)punctuation       / totalnum * 100;
+//     otherscent      = (double)others            / totalnum * 100;
+// }
+// printf("\n总字符数: %d 个\n", totalnum);
+// printf("字母: %d 个(%.1f%%)\n", dalpha + xalpha, alphacent);
+// printf("数字: %d 个(%.1f%%)\n", digits, digitscent);
+// printf("空白: %d 个(%.1f%%)\n", blank, blankcent);
+// printf("标点: %d 个(%.1f%%)\n", punctuation, punctuationcent);
+// printf("其他: %d 个(%.1f%%)\n", others, otherscent);
+// printf("\n");
+// printf("大写字母: %d 个    小写字母: %d 个\n", dalpha, xalpha);
+// printf("元音字母: %d 个\n", yalpha);
+// /* ────────────────────────────────────────────────────────────────────────────
+//    ⑤ 出现最多的可打印字符 —— 换成"正序扫描计数数组"
+//    ──────────────────────────────────────────────────────────────────────────── */
+// #if 0
+// /* ========== 你原来的写法开始 ==========
+//    问题：1) 输出了所有并列的字符，不是"ASCII 最小的那一个"
+//          2) 没有说明规则（验收标准④明确要求）
+//          3) m 可能越界读内存
+// printf("出现最多的字符:");
+// int m = 0;
+// while(ch1num[m] == ch1num[0])
+// {
+//     printf("'%c'(%d次)",ch1[m],ch1num[m]);
+//     printf("   ");                 // 隔开
+//     if((m + 1) % 4 == 0)           // 每四个换行
+//     {
+//         printf("\n");
+//         printf("              ");
+//     }
+//     m++;
+// }
+// printf("\n");
+//    ========== 你原来的写法结束 ========== */
+// #endif
+// /* ✅ 改成：从 33 正序扫到 126，用 > 而不是 >=
+//       为什么这样就实现了"并列取 ASCII 最小"？
+//         先到的（ASCII 小的）已经占住 maxChar；
+//         后面的因为用 >，"等于"不算 → 不会覆盖它。
+//       一个额外判断都不用加。                                        */
+// int maxCount = 0;
+// int maxChar  = 0;
+// for (int c = 33; c <= 126; c++)
+// {
+//     if (count[c] > maxCount)
+//     {
+//         maxCount = count[c];
+//         maxChar  = c;
+//     }
+// }
+// if (maxCount == 0)
+// {
+//     printf("出现最多的字符：没有可打印字符\n");
+// }
+// else
+// {
+//     printf("出现最多的字符：'%c'（%d 次）\n", maxChar, maxCount);
+//     printf("（规则：只统计 ASCII 33~126 的可打印字符，空格与结束符 # 不计入；\n");
+//     printf("　　　　若有多个字符并列最多，取 ASCII 码最小的那个）\n");
+// }
+// /* ────────────────────────────────────────────────────────────────────────────
+//    ⑦ 柱状图：cent[] 排序 + 标签
+//    ──────────────────────────────────────────────────────────────────────────── */
+// #if 0
+// /* ========== 你原来的 cent[] 排序开始 ==========
+//    你已经把 cent[j] = cent[k] 改成 cent[j] = maxcent，交换是对的、排序也对了。
+//    但它只是"把值排好"，名字没跟着走 —— 所以下面打印时只能靠
+//    "值相等"反推名字。一旦两个分类百分比相同（如空白 11.8% 和标点 11.8%），
+//    第 4 行就会被印成"空白"。
+//    所以这里换成"值和下标一起排"的标准选择排序。
+// double cent[5] = {alphacent,digitscent,blankcent,punctuationcent,otherscent};
+// double maxcent = 0;
+// for(int j = 0;j < 5;j++)
+// {
+//     maxcent = cent[j];
+//     for(int k = j;k < 5;k++)
+//     {
+//         if(maxcent <= cent[k])
+//         {
+//             maxcent = cent[k];
+//             cent[k] = cent[j];
+//             cent[j] = maxcent;
+//         }
+//     }
+// }
+//    ========== 你原来的 cent[] 排序结束 ========== */
+// #endif
+// /* ✅ 改成：选择排序，cent 和 idx 一起换 */
+// const char *label[5] = {"字母", "数字", "空白", "标点", "其他"};
+// double cent[5] = {alphacent, digitscent, blankcent, punctuationcent, otherscent};
+// int    idx[5]  = {0, 1, 2, 3, 4};      /* ★ 记住每一项原来是谁 */
+// for (int j = 0; j < 5; j++)
+// {
+//     int m = j;                          /* 假设 j 是最大的 */
+//     for (int k = j + 1; k < 5; k++)     /* ★ 从 j+1 开始，不和自己比 */
+//     {
+//         if (cent[k] > cent[m])
+//         {
+//             m = k;                      /* 找真正最大的下标 */
+//         }
+//     }
+//     if (m != j)                         /* 一次交换到位 */
+//     {
+//         double t = cent[j];  
+//         cent[j] = cent[m];  
+//         cent[m] = t;
+//         int u = idx[j];   
+//         idx[j]  = idx[m];   
+//         idx[m]  = u;   /* ★ 名字一起换 */
+//     }
+// }
+// printf("\n占比柱状图（每 2%% 一格）：\n");
+// #if 0
+// /* ========== 你原来的柱状图开始（整段删除）==========
+//    两处问题：
+//      · 标签用 cent[j] == alphacent 这种"浮点相等"反推 → 并列时认错行
+//      · 补空格用 (int)(cent[0]/2) - (int)(xxxcent/2) —— 你已经加了 (int)，
+//        对齐是对的，保留这个思路，但换成"补到固定宽度"更稳
+// for(int j = 0;j < 5;j++)
+// {
+//     if(cent[j] == alphacent)
+//     {
+//         printf("字母  |");
+//         for(int k = 1;k <= (cent[j] / 2);k++) { printf("#"); }
+//         for(int k = 1;k <= (int)((cent[0]) / 2) - (int)((alphacent) / 2);k++) { printf(" "); }
+//         printf("  %.1f%%",cent[j]);
+//         printf("\n");
+//     }
+//     else if(cent[j] == digitscent)
+//     {
+//         printf("数字  |");
+//         for(int k = 1;k <= (cent[j] / 2);k++) { printf("#"); }
+//         for(int k = 1;k <= (int)((cent[0]) / 2) - (int)((digitscent) / 2);k++) { printf(" "); }
+//         printf("  %.1f%%",cent[j]);
+//         printf("\n");
+//     }
+//     else if(cent[j] == blankcent)
+//     {
+//         printf("空白  |");
+//         for(int k = 1;k <= (cent[j] / 2);k++) { printf("#"); }
+//         for(int k = 1;k <= (int)((cent[0]) / 2) - (int)((blankcent) / 2);k++) { printf(" "); }
+//         printf("  %.1f%%",cent[j]);
+//         printf("\n");
+//     }
+//     else if(cent[j] == punctuationcent)
+//     {
+//         printf("标点  |");
+//         for(int k = 1;k <= (cent[j] / 2);k++) { printf("#"); }
+//         for(int k = 1;k <= (int)((cent[0]) / 2) - (int)((punctuationcent) / 2);k++) { printf(" "); }
+//         printf("  %.1f%%",cent[j]);
+//         printf("\n");
+//     }
+//     else
+//     {
+//         printf("其他  |");
+//         for(int k = 1;k <= (cent[j] / 2);k++) { printf("#"); }
+//         for(int k = 1;k <= (int)((cent[0]) / 2) - (int)((otherscent) / 2);k++) { printf(" "); }
+//         printf("  %.1f%%",cent[j]);
+//         printf("\n");
+//     }
+// }
+//    ========== 你原来的柱状图结束 ========== */
+// #endif
+// /* ✅ 改成：先用 idx 取名字，条长算一次、再补到固定宽度 maxLen */
+// int maxLen = (int)(cent[0] / 2);        /* 最长条的格数 */
+// for (int j = 0; j < 5; j++)
+// {
+//     int barLen = (int)(cent[j] / 2);    /* 本行实际画几格 */
+//     printf("%s  |", label[idx[j]]);     /* ★ 直接用名字，不做浮点比较 */
+//     for (int k = 0; k < barLen;  k++) 
+//     {
+//         printf("#");
+//     }
+//     for (int k = barLen; k < maxLen; k++) 
+//     {
+//         printf(" ");   /* ★ 补到固定宽度 */
+//     }
+//         printf("  %.1f%%\n", cent[j]);
+// }
+
+// //综合题5
+// int ch;
+// int num = 0;//统计转换次数
+// int button = 0;//让除了第一轮以外都打印提示
+// int radixnum[15] = {2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};//记录各目标进制
+// int radixchange[15] = {0};//记录各目标进制分别转换多少次
+// printf("请输入十进制数和目标进制(1-16)(输入负数结束):\n");
+// //while((ch = getchar()) != EOF)这样会先打字符再输出提示
+// while(1)
+// {
+// int dicimal = 0;//十进制数
+// int radix = 0;//目标进制
+// int neg = 0;//判断十进制数是不是负数
+// int digit10 = 0;//十进制数不能过大,最大不能超过9位,记录十进制数的位数
+// int digit = 0;//判断数字转换数字的位数
+// int modulus[30] = {0};//要逆序输出的余数,30位封顶
+// if(button != 0)
+// {
+// printf("请输入十进制数和目标进制:\n");
+// }//第一次转换不用输出，之后的转换再循环
+// //提示输入完后再打字符
+// ch = getchar();
+// if(ch == EOF)
+// {
+//     break;//退出循环
+// }
+// while(ch == ' ' || ch == '\t')//允许一开始输入空格
+// {
+//     ch = getchar();
+// }
+// //判断输入的字符
+// if(ch == '+' || ch == '-')//如果输入+-号
+// {
+//     if(ch == '-')//是-先给neg赋1，之后十进制数输入的是整数再判断
+//     {
+//         neg = 1;
+//     }
+// ch = getchar();
+// }
+// //再判断
+// if(ch < '0' || ch > '9')//不是数字
+// {
+//     printf("错误,应输入十进制数!请重新输入\n");
+//     while(ch != '\n' && ch != EOF) ch = getchar();
+//     button++;
+//     continue;//清除缓冲区里的多余字符
+// }
+// else//是数字
+// {
+//     while(ch >= '0' && ch <= '9')//将输入的十进制数赋值给dicimal
+//     {
+//         if(digit10 >= 9)//位数过大,重新循环防止崩溃,等十进制数和目标进制确定完再判断
+//         {
+//         printf("十进制数过大,请重新输入\n");
+//         while(ch != EOF && ch != '\n') ch = getchar();
+//         goto next;
+//         }
+//         dicimal = dicimal * 10 + (ch - '0');
+//         digit10++;
+//         ch = getchar();
+//     }
+// }
+// /* ★★ 放在"检查空格"之前，任何负数都结束 ★★ */
+// if(neg)
+// {
+//     printf("结束输入\n");
+//     break;
+// }
+// //判断输入数字后面是什么,是空格还是其他的字符
+// if(ch == ' ' || ch == '\t')//是空格
+// {
+//     while(ch == ' ' || ch == '\t')//允许两个数中间输入多个空格
+//     {
+//     ch = getchar();
+//     }
+// }
+// else//非空格字符
+// {
+//     printf("错误,应输入十进制数!请重新输入\n");
+//     while(ch != '\n' && ch != EOF) ch = getchar();
+//     next:
+//     button++;
+//     continue;//清除缓冲区里的多余字符
+// }
+// //现在十进制数能确定下来了
+// //接下来到目标进制
+// if(ch < '0' || ch > '9')//目标进制非数字
+// {
+//     printf("错误,目标进制必须是2~16之间的整数,请重新输入\n");
+//     while(ch != '\n' && ch != EOF) ch = getchar();
+//     button++;
+//     continue;
+// }
+// else//目标进制是数字
+// {
+//     while(ch >= '0' && ch <= '9')//将输入的值赋给目标进制
+//     {
+//         radix = radix * 10 + (ch - '0');
+//         ch = getchar();
+//     }
+// }
+// //输入数字之后,判断数字后面是什么
+// //是字符,空格,还是换行符
+// if(ch != ' ' && ch != '\t' && ch != '\n')//字符
+// {   
+//     printf("错误,目标进制必须是2~16之间的整数,请重新输入\n");
+//     while(ch != '\n' && ch != EOF) ch = getchar();
+//     button++;
+//     continue;
+// }
+// else if(ch == ' ' || ch == '\t')//是空格,可大量输入,直到输入回车
+// {
+//     while(ch == ' ' || ch == '\t')
+//     {
+//         ch = getchar();
+//     }
+// }
+// //再对目标进制进一步判断
+// if(radix < 2 || radix > 16)//提示错误并重新输入
+// {
+//     printf("错误,目标进制必须是2~16之间的整数,请重新输入\n");
+//     button++;
+//     continue;
+// }
+// //现在十进制数和目标进制确定下来了
+// /*printf("十进制数%d\n",dicimal);
+// printf("目标进制%d\n",radix);*/
+// //成功打印了
+// //现在要输出转换进制了
+// int dicimal1 = dicimal;//十进制数的替身
+// //循环开始有int digit = 0;
+// if(dicimal > 0)
+// {
+// while(dicimal1 > 0)
+// {
+//     modulus[digit] = dicimal1 % radix;//取余数
+//     dicimal1 = dicimal1 / radix;//除
+//     digit++;
+// }
+// //10-A 11-B 12-C 13-D 14-E 15-F
+// //输出转换数字
+// printf("%d 的 %d 进制是: ",dicimal,radix);
+// for(int i = digit - 1;i >= 0;i--)
+// {
+//     switch(modulus[i])
+//     {
+//         case 15:
+//             printf("%c",'F');
+//             break;
+//         case 14:
+//             printf("%c",'E');
+//             break;
+//         case 13:
+//             printf("%c",'D');
+//             break;
+//         case 12:
+//             printf("%c",'C');
+//             break;
+//         case 11:
+//             printf("%c",'B');
+//             break;
+//         case 10:
+//             printf("%c",'A');
+//             break;
+//         default:
+//             printf("%d",modulus[i]);
+//             break;
+//     }
+// }
+// printf(", 共 %d 位\n",digit);
+// }
+// else//十进制数为0
+// {
+//     printf("%d 的 %d 进制是 %d,共 %d 位\n",dicimal,radix,0,1);
+// }
+// //转换数字打印完成
+// //记录各进制用了几次
+// for(int i = 0;i < 15;i++)
+// {
+//     if(radixnum[i] == radix)
+//     {
+//         radixchange[i]++;
+//     }
+// }
+// button++;//确保循环结束到下一轮仍可以打印提示
+// num++;//每次循环记录一次转换次数
+// }
+// printf("共转换 %d 次:",num);
+// for(int i = 0;i < 15;i++)
+// {
+//     if(radixchange[i] != 0)
+//     {
+//         printf(" %d 进制 %d 次,",radixnum[i],radixchange[i]);
+//     }
+// }
+// printf("\n");
+// printf("再见~~");
+//综合题6
+
+
+    return 0;
+}
+    
