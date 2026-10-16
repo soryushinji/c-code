@@ -2326,7 +2326,7 @@ else//不是质数
 {
     printf("%d 不是质数\n",n);
     //再打印最小质因数
-    for(int j = 1;j < note - 1;j++)
+    /*for(int j = 1;j < note - 1;j++)
     {
         int i1 = 2;//判断最小质因数用的
         while(i1 * i1 <= posdivisor[j])
@@ -2341,11 +2341,12 @@ else//不是质数
             printf("最小质因数: %d\n",posdivisor[j]);
             break;//找到后跳出这个for循环
         }
-    } //不合格 如果(除了1和它本身)因数<= 2时,note = 2,会直接跳过循环,导致最小质因数不打印
-    // if (note >= 2)
-    // {
-    // printf("最小质因数: %d\n", posdivisor[1]);
-    // }
+    } */ //不合格 如果(除了1和它本身)因数<= 2时,note = 2,会直接跳过循环,导致最小质因数不打印
+      //且如果note >= 3时除1的最小因数为5时,会在while里卡死
+    if (note >= 2)
+    {
+    printf("最小质因数: %d\n", posdivisor[1]);
+    }
     //再打印所有正因数
     printf("所有正因数:");
     for(int j = 0;j <= note - 1;j++)//只能打印前一半正因数
