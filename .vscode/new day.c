@@ -2415,5 +2415,9 @@ else//不是质数
 printf("\n");
 }while(ch != EOF);
 
+//综合题7
+
+
+
     return 0;
 }
