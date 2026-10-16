@@ -2742,16 +2742,22 @@ printf("再来一局?(y/n)");
 //输入y/n
 ch = getchar();
 //允许开头输入空格
-
-//判断yn是否正确输入
-if(yn != 'y' && yn != 'n')//输入的非yn
+while(ch == ' ' || ch == '\t')
 {
-    printf("错误\n");
+    ch = getchar();
+}
+//输入字符
+if(ch != 'y' && ch != 'n')//输入非y/n
+{
+    printf("错误!\n");
+    //清除缓冲区的多余字符
+    while(ch != '\n' && ch != EOF) ch = getchar;
 }
 else//输入y/n
 {
-    chosen = 1;
-    //跳出循环
+    yn = 'ch';
+    //如果y/n之后输入空格,允许
+    
 }
 }//小循环结束
 if(yn == 'n')
