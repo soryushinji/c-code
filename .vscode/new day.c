@@ -2280,6 +2280,8 @@ int i = 2;
 int note = 1;//给正因数数组里存放正因数，n是不是指数的判断标准
 int log = 0;//判断1-n之间的数是不是质数的标志
 int num = 0;//算1-n之间的质数数量
+int pridivisor[200] = {0};//记录质因数
+int m = n;//n的影武者
 posdivisor[0] = 1;//第一个正因数一定是1
 while(i * i <= n)
 {
@@ -2349,9 +2351,8 @@ else//不是质数
     }
     printf("\n");
     //打印质因数分解
-
-    //算1-n之间的质数
-    for(int j = 2;j <= n;j++)
+    printf("质因数分解: %d =",n);
+    for(int j = 2;j <= n;j++)//先记录n的质因数
     {
         int i2 = 2;
         while(i2 * i2 <= j)
@@ -2364,9 +2365,25 @@ else//不是质数
         }
         if(log == 0)//是质数
         {
+            pridivisor[num] = j;
             num++;
         }
     }
+//现在pridivisor里面就存放了1-n之间的质因数
+    for(int j = 0;j <= num - 1;j++)
+    {
+        int exponent = 0;//计算质因数分解时各项的指数
+        while(m % pridivisor[j] == 0)
+        {
+            m /= pridivisor[j];
+            exponent++;
+        }
+        if(exponent != 0)//可分解的质因数
+        {
+            printf(" %d^%d *",pridivisor[j],exponent);
+        }
+    }
+    printf("\b\n");
     printf("%d 到 %d 之间共有 %d 个质数\n",1,n,num);
 }
 
