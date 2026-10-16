@@ -2581,6 +2581,10 @@ switch(strength)
         printf("强度:强 (满足 %d / %d 项)",strength,5);
         spwnum++;
         break;
+    default:
+        printf("强度:弱 (满足 %d / %d 项)", strength, 5);
+        wpwnum++;
+        break;
 }
 printf("\n");
 //加密
