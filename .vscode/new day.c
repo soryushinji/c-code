@@ -2201,10 +2201,10 @@ int main()
 //综合题6
 int ch;
 int need = 0;//用来触发循环中的提示
-printf("请输入一个正整数(2-100000):");
-while((ch = getchar()) != EOF)//最外层循环 EOF结束
+do//最外层循环 EOF结束
 {
     int neg = 0;//判断是否是负数
+    int n = 0;//最终输入的整数n,每次循环清零
     if(need != 0)//第二次循环之后打
     {
         printf("请输入一个正整数(2-100000):");
@@ -2226,8 +2226,36 @@ if(ch == '+' || ch == '-')
 if(ch < '0' || ch > '9')//非数字
 {
     printf("错误,应输入一个正整数\n");
+    //清理缓冲区，如输入a 缓冲区中为: a  \n 再次循环时会将\n赋给ch,导致错误提示输出两次
+    while(ch != EOF && ch != '\n') ch = getchar();
+    continue;
 }
+else
+{
+    while(ch >= '0' && ch <= '9')//输入数字时
+    {
+        n = n * 10 + (ch - '0');
+        ch = getchar();
+    }
 }
+//输入数字之后，后面是什么:空格，换行符，还是其他字符
+//允许输入数字之后再输入任意空格
+while(ch == ' ' || ch == '\t')
+{
+    ch = getchar();
+}
+//在判断是不是其他字符
+if((ch < '0' || ch > '9') && ch != '\n')//非换行符字符
+{
+    printf("错误,应输入一个正整数\n");
+    //清理缓冲区，如输入11a 缓冲区中为: a  \n 再次循环时会将\n赋给ch,导致错误提示输出两次
+    while(ch != EOF && ch != '\n') ch = getchar();
+    continue;
+}
+
+
+
+}while((ch = getchar()) != EOF);
 
     return 0;
 }
