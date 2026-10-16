@@ -2315,7 +2315,7 @@ if(note == 1)//是质数
             num++;
         }
     }
-    printf("%d 到 %d 之间共有 %d 个数\n",1,n,num);
+    printf("%d 到 %d 之间共有 %d 个质数\n",1,n,num);
 }
 else//不是质数
 {
@@ -2339,13 +2339,17 @@ else//不是质数
     }
     //再打印所有正因数
     printf("所有正因数:");
-    for(int j = 0;j < note;j++)
+    for(int j = 0;j <= note - 1;j++)//只能打印前一半正因数
     {
         printf(" %d",posdivisor[j]);
     }
+    for(int j = note - 2;j >= 0;j--)//打印后半部分正因数
+    {
+        printf(" %d",n / posdivisor[j]);
+    }
     printf("\n");
     //打印质因数分解
-    
+
     //算1-n之间的质数
     for(int j = 2;j <= n;j++)
     {
@@ -2363,7 +2367,7 @@ else//不是质数
             num++;
         }
     }
-    printf("%d 到 %d 之间共有 %d 个数\n",1,n,num);
+    printf("%d 到 %d 之间共有 %d 个质数\n",1,n,num);
 }
 
 printf("\n");
