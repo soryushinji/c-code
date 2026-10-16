@@ -2435,7 +2435,7 @@ int dalpha = 0;//记录大写字母长度
 int xalpha = 0;//记录小写字母长度
 int digits = 0;//记录数字长度
 int punct = 0;//记录特殊符号长度
-int strength = 0;//记录密码强度
+int strength = 5;//记录密码强度
 int button = 0;//记录密码中间是否含有空格
 int i = 0;//作为存放密码的char数组的下标
 //开始输入密码
@@ -2519,13 +2519,66 @@ if(button != 0)//说明是密码+空格+密码的错误形式
     continue;//重新循环    
 }
 //检查看密码是否存入数组中
-printf("密码是:");
-for(int j = 0;j <= i;j++)
+// printf("密码是:");
+// for(int j = 0;j <= i;j++)
+// {
+//     printf("%c",password[j]);
+// }
+// printf("\n");
+//密码输入完毕,接下来该判断了
+length = i + 1;//确定密码长度
+//判断密码情况
+if(length < 8)
 {
-    printf("%c",password[j]);
+    printf("长度不足 8 位; ");
+    strength--;
+}
+if(dalpha == 0)
+{
+    printf("缺少大写字母; ");
+    strength--;
+}
+if(xalpha == 0)
+{
+    printf("缺少小写字母; ");
+    strength--;
+}
+if(digits == 0)
+{
+    printf("缺少数字; ");
+    strength--;
+}
+if(punct == 0)
+{
+    printf("缺少特殊符号; ");
+    strength--;
+}
+if(strength == 5)
+{
+    printf("✓ 长度 ≥ 8   ✓ 大写字母   ✓ 小写字母   ✓ 数字   ✓ 特殊符号");
 }
 printf("\n");
-//密码输入完毕,接下来该判断了
+//判断强度
+switch(strength)
+{
+    case 1:
+        printf("强度:弱 (满足 %d / %d 项)",strength,5);
+        break;
+    case 2:
+        printf("强度:弱 (满足 %d / %d 项)",strength,5);
+        break;
+    case 3:
+        printf("强度:中 (满足 %d / %d 项)",strength,5);
+        break;
+    case 4:
+        printf("强度:中 (满足 %d / %d 项)",strength,5);
+        break;
+    case 5:
+        printf("强度:强 (满足 %d / %d 项)",strength,5);
+        break;
+}
+printf("\n");
+//加密
 
 
 pwnum++;
