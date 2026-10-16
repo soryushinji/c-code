@@ -2629,7 +2629,7 @@ while(1)//大循环,看循环的条件是什么(或者就用1)
     int ch;
     if(round > 0)//第一局之后打印
     {
-        printf("=== 第 &d 局 ===\n",round);
+        printf("=== 第 %d 局 ===\n",round + 1);
     }
     //每一局猜数字游戏单独一个小循环
 while(times >= 0)//次数耗尽或猜中结束循环
@@ -2696,23 +2696,37 @@ while(times >= 0)//次数耗尽或猜中结束循环
         //与随机数比较,并给出答复
         //times = 7猜的次数  i = 1第几次猜
         //应该是小循环,好吧不是
-        if(num > secret)//猜大了
+        if(num > secret && times > 1)//猜大了
         {
             times--;//剩余次数-1
             printf("太大了!还有 %d 次机会。\n",times);
             i++;//下次提醒还有+1次机会
         }
-        else if(num < secret)//猜小了
+        else if(num < secret && times > 1)//猜小了
         {
             times--;
             printf("太小了!还有 %d 次机会。\n",times);
             i++;
         }
-        else//猜中了
+        else if(num != secret && times == 1)//第七次也没猜中,第七次猜测时times为1,第七次猜后变为零
+        {
+            printf("很遗憾,机会耗尽!答案是: %d。\n",secret);
+            round++;//局数+1,但胜利局数不变
+            break;
+        }
+        else if(num == secret && times > 1)//第七次之前猜中了,
         {
             times--;
             printf("恭喜!你用了 %d 次猜中,答案就是 %d。\n",i,secret);
             round++;//一局玩完,总玩次数+1
+            yround++;//胜利局数+1
+            break;//跳出猜数字循环
+        }
+        else if(num == secret && times == 1)//第七次猜中
+        {
+            printf("恭喜!你用了 %d 次猜中,答案就是 %d。\n",i,secret);
+            round++;//一局玩完,局数+1
+            yround++;
             break;//跳出猜数字循环
         }
  
