@@ -2756,8 +2756,14 @@ if(ch != 'y' && ch != 'n')//输入非y/n
 else//输入y/n
 {
     yn = 'ch';
+    //ch = getchar();
     //如果y/n之后输入空格,允许
-    
+    while(ch == ' ' || ch == '\t')
+    {
+        ch = getchar();
+    }
+    //
+    chosen = 1;
 }
 }//小循环结束
 if(yn == 'n')
