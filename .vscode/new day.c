@@ -2469,25 +2469,25 @@ if(ch == ' ' || ch == '\t')//输入字符后再输入空格
     //如果输入换行enter,跳出循环，说明密码输入完成
     //输入字母数字标号之类的,报错
 }
-if(isupper(ch) == 1 && button == 0)//是大写字母
+if(isupper(ch) && button == 0)//是大写字母
 {
     dalpha++;
     password[i] = ch;
     ch = getchar();
 }
-else if(islower(ch) == 1 && button == 0)//小写字母
+else if(islower(ch) && button == 0)//小写字母
 {
     xalpha++;
     password[i] = ch;
     ch = getchar();
 }
-else if(isdigit(ch) == 1 && button == 0)//数字
+else if(isdigit(ch) && button == 0)//数字
 {
     digits++;
     password[i] = ch;
-    ch = getchar;
+    ch = getchar();
 }
-else if(ispunct(ch) == 1 && ch != '\t' && ch != '\n' && button == 0)//除空格字母数字外的标号,也不包含换行
+else if(ispunct(ch) && ch != '\t' && ch != '\n' && button == 0)//除空格字母数字外的标号,也不包含换行
 {
     punct++;
     password[i] = ch;
@@ -2507,7 +2507,7 @@ if(ch == '\n')//输出换行符
     button = 0;
     break;//跳出这个小循环
 }
-if(button == 0)//记录密码的长度,不记录空格
+if(button == 0 && ch != ' ' && ch != '\t')//记录密码的长度,不记录空格(密码后输入第一个空格时button=0)
 {
 i++;//每循环一次i + 1
 }
@@ -2519,6 +2519,7 @@ if(button != 0)//说明是密码+空格+密码的错误形式
     continue;//重新循环    
 }
 //检查看密码是否存入数组中
+printf("密码是:");
 for(int j = 0;j <= i;j++)
 {
     printf("%c",password[j]);
@@ -2527,6 +2528,7 @@ printf("\n");
 //密码输入完毕,接下来该判断了
 
 
+pwnum++;
 }
 
 
