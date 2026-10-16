@@ -2586,10 +2586,18 @@ for(int j = 0;j <= i;j++)
 {
     if(isalpha(password[j]))//是字母
     {
-        alpha[j] += '3';//将alpha数组中的对应字母转换
+        if(password[j] == 'x' || password[j] == 'y' || password[j] == 'z' || password[j] == 'X' || password[j] == 'Y' || password[j] == 'Z')//是xyz的特殊情况
+        {
+            alpha[j] -= 23;
+        }
+        else
+        {
+        alpha[j] += 3;//将alpha数组中的对应字母转换
+        }
     }
 }
 //打印加密后的密码
+printf("加密后: ");
 for(int j = 0;j <= i;j++)
 {
     if(isalpha(password[j]))//当读到字母时
