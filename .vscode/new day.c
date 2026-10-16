@@ -2627,6 +2627,10 @@ while(1)//大循环,看循环的条件是什么(或者就用1)
     int secret = rand() % (100 - 1 + 1);//获取随机数
     int chosen;//是否再来一局的选项y/n
     int ch;
+    if(round > 0)//第一局之后打印
+    {
+        printf("=== 第 &d 局 ===\n",round);
+    }
     //每一局猜数字游戏单独一个小循环
 while(times >= 0)//次数耗尽或猜中结束循环
 {
@@ -2708,6 +2712,7 @@ while(times >= 0)//次数耗尽或猜中结束循环
         {
             times--;
             printf("恭喜!你用了 %d 次猜中,答案就是 %d。\n",i,secret);
+            round++;//一局玩完,总玩次数+1
             break;//跳出猜数字循环
         }
  
