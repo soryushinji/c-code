@@ -1,5 +1,9 @@
 # C 语言练习代码
 
+> GitHub 仓库：<https://github.com/soryushinji/c-code>
+>
+> 本地目录：`D:\code`　·　**每 10 分钟自动同步**（见 `说明_自动同步.txt`）
+
 《C Primer Plus》第 1–8 章 + 综合编程练习（10 题自测册）的练习代码。
 
 ## 目录结构
@@ -61,3 +65,13 @@ gcc -fexec-charset=GBK -o q1 01_数位分析器.c   # 或者让输出用 GBK
 | 文件 | 编码 |
 |---|---|
 | 全部 `.c` | UTF-8（无 BOM） |
+
+## 自动同步
+
+`D:\code` 已经是 git 仓库，并注册了计划任务「代码自动同步到GitHub」，
+每 10 分钟自动 commit + push。你只管写代码、按 Ctrl+S。
+
+> ⚠️ 需要开着代理（Clash，`127.0.0.1:7897`）。代理没开时推送会失败，
+> 但改动会安全保存在本地，下次自动补推。
+
+日志：`Get-Content "D:\code\.sync.log" -Tail 20`

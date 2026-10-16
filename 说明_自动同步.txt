@@ -1,110 +1,122 @@
 ========================================================================
-  自动同步设置说明
+  GitHub 自动同步 —— 使用说明
 ========================================================================
 
-目标：你在 VS Code 里改完 new day.c（或其他文件），
-      每 10 分钟自动提交并推送到 GitHub，不用手动操作。
+仓库地址：https://github.com/soryushinji/c-code
+本地目录：D:\code
 
 
 ------------------------------------------------------------------------
-  第一步：确认 初始化仓库.ps1 已经成功跑过
+  它是怎么工作的
 ------------------------------------------------------------------------
 
-在 PowerShell 里运行（把 你的用户名 换成你的 GitHub 用户名）：
+  ┌─────────────────┐
+  │ 你在 VS Code 里  │
+  │ 编辑 new day.c   │
+  └────────┬────────┘
+           │ 保存（Ctrl+S）
+           ▼
+  ┌─────────────────────────────────────────┐
+  │ 计划任务「代码自动同步到GitHub」          │
+  │ 每 10 分钟自动运行 自动同步.ps1           │
+  │   1. git add -A                          │
+  │   2. 有改动才 git commit                 │
+  │   3. git push 到 GitHub                  │
+  └─────────────────────────────────────────┘
 
-    powershell -ExecutionPolicy Bypass -File "D:\code\初始化仓库.ps1" -UserName 你的用户名
-
-看到「✅ 完成！」就说明仓库已经建好并推送成功。
-
-
-------------------------------------------------------------------------
-  第二步：手动测一次自动同步脚本
-------------------------------------------------------------------------
-
-    powershell -ExecutionPolicy Bypass -File "D:\code\自动同步.ps1"
-
-输出会是这样：
-    [2026-10-16 21:30:01] 没有改动，跳过
-或者
-    [2026-10-16 21:30:01] 已提交 2 处改动
-    [2026-10-16 21:30:01] 推送成功
-
-去 GitHub 网页上看一眼，改动应该已经上去了。
+  也就是说：你只管写代码、按 Ctrl+S。
+  最多 10 分钟后，GitHub 上就会多一条提交。
 
 
 ------------------------------------------------------------------------
-  第三步：注册成「每 10 分钟自动跑一次」
+  ⚠️ 重要：必须开着代理
 ------------------------------------------------------------------------
 
-在 PowerShell 里【以管理员身份】运行下面这一整段（一次就行）：
+  你的电脑通过本地代理 127.0.0.1:7897（Clash / Mihomo）访问 GitHub。
+  git 已经配置成走这个代理：
 
-    $py = "powershell.exe"
-    $script = "D:\code\自动同步.ps1"
-    $action  = New-ScheduledTaskAction -Execute $py `
-               -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -File `"$script`""
-    $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) `
-               -RepetitionInterval (New-TimeSpan -Minutes 10)
-    $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable `
-                -DontStopOnIdleEnd -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
-    Register-ScheduledTask -TaskName "代码自动同步到GitHub" `
-        -Action $action -Trigger $trigger -Settings $settings -Force
+      git config --global http.proxy  http://127.0.0.1:7897
+      git config --global https.proxy http://127.0.0.1:7897
 
-看到 Success 就成了。
+  ★ 如果代理软件（Clash）没开，推送会失败。
+    没关系 —— 改动会安全地保存在本地，等代理开了下次自动补推。
 
-（如果不想用管理员，可以去掉 -Settings 那行，改成在
-  「任务计划程序」图形界面里手动建一个「登录时触发 + 每 10 分钟重复」。）
+  查看/修改代理配置：
+
+      git config --global --get http.proxy
+      git config --global http.proxy http://127.0.0.1:7897
 
 
 ------------------------------------------------------------------------
-  怎么确认它在工作
+  日常使用
 ------------------------------------------------------------------------
 
-1. 看日志：
+  【什么都不用做】
+    正常写代码、Ctrl+S 保存。10 分钟内自动同步。
 
-       Get-Content "D:\code\.sync.log" -Tail 20
+  【想立刻同步，不想等】
+    在 VS Code 终端里运行：
 
-   应该每隔 10 分钟多出一两行。
+        powershell -ExecutionPolicy Bypass -File "D:\code\自动同步.ps1"
 
-2. 去 GitHub 仓库页面，看 commit 记录里有没有
-   「auto: 2026-10-16 21:40:00」这样的提交。
+    或者双击 D:\code\自动同步.ps1
 
-3. 手动跑一次（随时可以）：
+  【看同步日志】
 
-       powershell -ExecutionPolicy Bypass -File "D:\code\自动同步.ps1"
+        Get-Content "D:\code\.sync.log" -Tail 20
+
+  【看 GitHub 上的提交】
+    浏览器打开 https://github.com/soryushinji/c-code/commits/main
 
 
 ------------------------------------------------------------------------
-  想关掉
+  目录结构
 ------------------------------------------------------------------------
 
-    Unregister-ScheduledTask -TaskName "代码自动同步到GitHub" -Confirm:$false
+  D:\code\
+    README.md                    仓库说明
+    .gitignore                   排除 *.exe / output/
+    .vscode\new day.c             你的草稿本（平时写代码的地方）
+    .vscode\tasks.json            VS Code 的编译配置
+    综合练习\                      自测册综合题（7 个，已取消注释、可独立编译）
+    课本练习\                      课后题（14 个，已取消注释、可独立编译）
+    待整理\                        原文里就断掉的碎片（1 个）
+    自动同步.ps1                   同步脚本
+    初始化仓库.ps1                 一次性初始化脚本（已经跑过了，不用再跑）
+    说明_自动同步.txt               本文件
 
 
 ------------------------------------------------------------------------
   常见问题
 ------------------------------------------------------------------------
 
-Q: 推送失败，提示要输入用户名密码？
-A: GitHub 早就不支持密码推送了。第一次推送时会弹出浏览器
-   让你登录授权（Git Credential Manager 自动处理），
-   授权一次之后就再也不用输了。
+Q: 推送失败怎么办？
+A: 先看日志 Get-Content D:\code\.sync.log -Tail 20
+   · 提示 "Connection was reset" → 代理没开，打开 Clash 即可
+   · 提示要输入用户名密码 → 少了登录凭据，手动跑一次 git push，
+     会弹浏览器让你授权
 
-   如果没弹窗，手动跑一次：
+Q: 我想改同步频率（比如 5 分钟一次）？
+A: 管理员 PowerShell 里：
 
-       cd D:\code
-       git push
+       $t = Get-ScheduledTask -TaskName "代码自动同步到GitHub"
+       $t.Triggers[0].Repetition.Interval = "PT5M"
+       Set-ScheduledTask -TaskName "代码自动同步到GitHub" -Trigger $t.Triggers
 
-   按提示操作。
+Q: 想彻底关掉自动同步？
 
-Q: 我想立刻同步，不想等 10 分钟？
-A: 双击运行 D:\code\自动同步.ps1，或者
-   在 VS Code 里按 Ctrl+` 打开终端，运行：
+       Unregister-ScheduledTask -TaskName "代码自动同步到GitHub" -Confirm:$false
 
-       powershell -ExecutionPolicy Bypass -File .\自动同步.ps1
+Q: 会不会把 .exe 传上去？
+A: 不会。.gitignore 里排除了 *.exe、*.o、output/。
 
-Q: .exe 和 output 目录会不会被传上去？
-A: 不会。.gitignore 里已经排除了 *.exe 和 output/。
-
-Q: 会不会把中文传成乱码？
+Q: 中文会不会变乱码？
 A: 不会。所有 .c 文件都是 UTF-8，git 原样传输。
-   VS Code 的 files.encoding 也已经改成 utf8 了。
+   VS Code 的 files.encoding 也已经是 utf8。
+
+Q: 我不小心改坏了文件，想还原？
+A: 在 D:\code 里运行：
+
+       git checkout -- "路径\文件名.c"     还原单个文件
+       git log --oneline                    看历史
+       git reset --hard 某个提交号           整体回退
