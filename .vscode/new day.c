@@ -2630,7 +2630,7 @@ while(1)//大循环,看循环的条件是什么(或者就用1)
     int ch;
     
     printf("第 %d 次猜测:",i);
-    int state = 0;//决定在什么情况输出什么样的提示 
+    int state = 0;//决定在什么情况输出什么样的提示 =1
     //输入数字
     ch = getchar();
     //允许开头输入空格
@@ -2694,19 +2694,19 @@ while(1)//大循环,看循环的条件是什么(或者就用1)
         if(num > secret)//猜大了
         {
             times--;//剩余次数-1
-            printf("太大了!还有 %d 次机会。",times);
+            printf("太大了!还有 %d 次机会。\n",times);
             i++;//下次提醒还有+1次机会
         }
         else if(num < secret)//猜小了
         {
             times--;
-            printf("太小了!还有 %d 次机会。",times);
+            printf("太小了!还有 %d 次机会。\n",times);
             i++;
         }
         else//猜中了
         {
             times--;
-            printf("恭喜!你用了 %d 次猜中,答案就是 %d。");
+            printf("恭喜!你用了 %d 次猜中,答案就是 %d。\n");
             i++;
         }
         
