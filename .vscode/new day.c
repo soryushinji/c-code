@@ -2260,17 +2260,20 @@ if((ch < '0' || ch > '9') && ch != '\n')//非换行符字符
 if(neg)
 {
     printf("错误,请输入一个2-100000之间的整数\n");
+    continur;
     //不需要清理缓冲区
     //输入-12 后无论之后输入空格还是换行符，都会从缓冲区里被拿走，不会对下轮循环造成影响
 }
 else if(n < 2)
 {
     printf("错误,请输入一个2-100000之间的整数\n");
+    continue;
     //同样不需要清理缓冲区    
 }
 else if(n > 100000)//过大
 {
     printf("错误,请输入一个2-100000之间的整数\n");
+    continue;
     //同样
 }
 //现在开始对n做判断
@@ -2278,7 +2281,6 @@ int posdivisor[200] = {0};//存放正因数的数组
 //判断n是不是质数
 int i = 2;
 int note = 1;//给正因数数组里存放正因数，n是不是指数的判断标准
-int log = 0;//判断1-n之间的数是不是质数的标志
 int num = 0;//算1-n之间的质数数量
 int pridivisor[200] = {0};//记录质因数
 int m = n;//n的影武者
@@ -2304,6 +2306,7 @@ if(note == 1)//是质数
     for(int j = 2;j <= n;j++)
     {
         int i2 = 2;
+        int log = 0;//判断1-n之间的数是不是质数的标志
         while(i2 * i2 <= j)
         {
             if(j % i2 == 0)
@@ -2354,6 +2357,7 @@ else//不是质数
     printf("质因数分解: %d =",n);
     for(int j = 2;j <= n;j++)//先记录n的质因数
     {
+        int log = 0;//判断1-n之间的数是不是质数的标志
         int i2 = 2;
         while(i2 * i2 <= j)
         {
@@ -2383,8 +2387,8 @@ else//不是质数
             printf(" %d^%d *",pridivisor[j],exponent);
         }
     }
-    printf("\b\n");
-    printf("%d 到 %d 之间共有 %d 个质数\n",1,n,num);
+    printf("\b ");
+    printf("\n%d 到 %d 之间共有 %d 个质数\n",1,n,num);
 }
 
 printf("\n");
