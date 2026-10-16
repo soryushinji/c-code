@@ -2625,7 +2625,8 @@ while(1)//大循环,看循环的条件是什么(或者就用1)
     int neg = 0;//输入负数时的信号
     srand((unsigned)time(NULL));//设置随机数种子
     int secret = rand() % (100 - 1 + 1) + 1;//获取随机数
-    int chosen;//是否再来一局的选项y/n
+    int chosen = 0;//是否再来一局的选项y/n
+    char yn;//是否再来一局的选项y/n
     int ch;
     if(round > 0)//第一局之后打印
     {
@@ -2729,14 +2730,42 @@ while(times >= 0)//次数耗尽或猜中结束循环
             yround++;
             break;//跳出猜数字循环
         }
- 
-
 
     }
 }//猜数字小循环结束
+printf("\n");
+//提问是否继续
+while(chosen == 0)
+{
+printf("再来一局?(y/n)");
+//scanf("%c",&yn);//好怀念,这几个题都没见你  好吧还是用不到你
+//输入y/n
+ch = getchar();
+//允许开头输入空格
 
+//判断yn是否正确输入
+if(yn != 'y' && yn != 'n')//输入的非yn
+{
+    printf("错误\n");
+}
+else//输入y/n
+{
+    chosen = 1;
+    //跳出循环
+}
+}//小循环结束
+if(yn == 'n')
+{
 
+    break;
+    //跳出大循环
+}
+printf("\n");
 }//大循环结束
+printf("\n");
+//打印结果
+double ycent =(double)yround / (double)round * 100;
+printf("本次共玩 %d 局,赢 %d 局，胜率 %.1f%%。再见~~",round,yround,ycent);
 
      return 0;
 }
