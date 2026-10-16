@@ -2429,7 +2429,8 @@ if(pin != 0 || pwnum != 0)//第二次循环之后输出
 {
     printf("请输入密码:\n");
 }
-char password[100];
+char password[100];//记录密码的数组
+char alpha[100];//记录密码中的字母
 int length = 0;//记录密码长度
 int dalpha = 0;//记录大写字母长度
 int xalpha = 0;//记录小写字母长度
@@ -2473,12 +2474,14 @@ if(isupper(ch) && button == 0)//是大写字母
 {
     dalpha++;
     password[i] = ch;
+    alpha[i] = ch;
     ch = getchar();
 }
 else if(islower(ch) && button == 0)//小写字母
 {
     xalpha++;
     password[i] = ch;
+    alpha[i] = ch;
     ch = getchar();
 }
 else if(isdigit(ch) && button == 0)//数字
@@ -2579,9 +2582,28 @@ switch(strength)
 }
 printf("\n");
 //加密
+for(int j = 0;j <= i;j++)
+{
+    if(isalpha(password[j]))//是字母
+    {
+        alpha[j] += '3';//将alpha数组中的对应字母转换
+    }
+}
+//打印加密后的密码
+for(int j = 0;j <= i;j++)
+{
+    if(isalpha(password[j]))//当读到字母时
+    {
+        printf("%c",alpha[j]);//输出的是alpha数组的
+    }
+    else
+    {
+        printf("%c",password[j]);
+    }
+}
+printf("\n");
 
-
-pwnum++;
+pwnum++;//记录密码检查次数
 }
 
 
