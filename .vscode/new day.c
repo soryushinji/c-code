@@ -2205,13 +2205,16 @@ do//最外层循环 EOF结束
 {
     int neg = 0;//判断是否是负数
     int n = 0;//最终输入的整数n,每次循环清零
-    if(need != 0)//第二次循环之后打
-    {
-        printf("请输入一个正整数(2-100000):");
-    }
+printf("请输入一个正整数(2-100000):");
+ch = getchar();
 while(ch == ' ' || ch == '\t')//允许一开始输入多个空格
 {
     ch = getchar();
+}
+//如果输入EOF,直接退出
+if(ch == EOF)
+{
+    break;
 }
 //先判断有无+-号
 if(ch == '+' || ch == '-')
@@ -2249,13 +2252,20 @@ if((ch < '0' || ch > '9') && ch != '\n')//非换行符字符
 {
     printf("错误,应输入一个正整数\n");
     //清理缓冲区，如输入11a 缓冲区中为: a  \n 再次循环时会将\n赋给ch,导致错误提示输出两次
-    while(ch != EOF && ch != '\n') ch = getchar();
-    continue;
+    // while(ch != EOF && ch != '\n') ch = getchar();
+    // continue;
+}
+//整数n的值确定下来了
+//如果是负数
+if(neg)
+{
+    printf("错误,请输入一个2-100000之间的整数\n");
+    //不需要清理缓冲区
 }
 
 
 
-}while((ch = getchar()) != EOF);
+}while(ch != EOF);
 
     return 0;
 }
