@@ -2329,9 +2329,9 @@ else//不是质数
     for(int j = 1;j < note - 1;j++)
     {
         int i1 = 2;//判断最小质因数用的
-        while(i1 * i1 <= posdivisor[note])
+        while(i1 * i1 <= posdivisor[j])
         {
-            if(posdivisor[note] % i1 == 0)
+            if(posdivisor[j] % i1 == 0)
             {
                 i1++;
             }
@@ -2348,7 +2348,7 @@ else//不是质数
     {
         printf(" %d",posdivisor[j]);
     }
-    for(int j = note - 2;j >= 0;j--)//打印后半部分正因数
+    for(int j = note - 1;j >= 0;j--)//打印后半部分正因数
     {
         printf(" %d",n / posdivisor[j]);
     }
@@ -2384,7 +2384,15 @@ else//不是质数
         }
         if(exponent != 0)//可分解的质因数
         {
-            printf(" %d^%d *",pridivisor[j],exponent);
+            printf(" %d",pridivisor[j]);
+            if(exponent == 1)
+            {
+                printf(" *");
+            }
+            else
+            {
+                printf("^%d *",exponent);
+            }
         }
     }
     printf("\b ");
