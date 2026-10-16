@@ -2274,11 +2274,7 @@ else if(n > 100000)//过大
     //同样
 }
 //现在开始对n做判断
-int posdivisor[n] = {0};//
-while ()
-{
-    /* code */
-}
+int posdivisor[200] = {0};//存放正因数的数组
 
 
 printf("\n");
