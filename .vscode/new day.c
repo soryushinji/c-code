@@ -2275,7 +2275,34 @@ else if(n > 100000)//过大
 }
 //现在开始对n做判断
 int posdivisor[200] = {0};//存放正因数的数组
-
+//判断n是不是质数
+int i = 2;
+int note = 0;//给正因数数组里存放正因数，n是不是指数的判断标准
+while(i * i <= n)
+{
+    if(n % i == 0)//i是正因数
+    {
+        posdivisor[note] = i;
+        note++;
+    }
+}
+//判断是不是质数
+if(note == 0)
+{
+    printf("%d 是质数\n",n);
+    //再打印所有正因数,质数只有1和它本身
+    printf("所有正因数: %d %d\n",1,n);
+}
+else
+{
+    printf("%d 不是质数\n",n);
+    //再打印所有正因数
+    printf("所有正因数:");
+    for(int j = 0;j < note;j++)
+    {
+        printf(" %d",posdivisor[j]);
+    }
+}
 
 printf("\n");
 }while(ch != EOF);
