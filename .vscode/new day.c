@@ -2475,27 +2475,24 @@ if(isupper(ch) && button == 0)//是大写字母
     dalpha++;
     password[i] = ch;
     alpha[i] = ch;
-    ch = getchar();
 }
 else if(islower(ch) && button == 0)//小写字母
 {
     xalpha++;
     password[i] = ch;
     alpha[i] = ch;
-    ch = getchar();
 }
 else if(isdigit(ch) && button == 0)//数字
 {
     digits++;
     password[i] = ch;
-    ch = getchar();
 }
 else if(ispunct(ch) && ch != '\t' && ch != '\n' && button == 0)//除空格字母数字外的标号,也不包含换行
 {
     punct++;
     password[i] = ch;
-    ch = getchar();
 }
+ch = getchar();
 //如果在输入密码空格后再输入密码——即密码中间插入空格,直接跳出
 if(button != 0 && ch != ' ' && ch != '\t' && ch != '\n')
 {
@@ -2517,7 +2514,7 @@ i++;//每循环一次i + 1
 }//小循环结束
 if(button != 0)//说明是密码+空格+密码的错误形式
 {
-    printf("错误,请输入正确格式的密码！\n");
+    printf("错误,密码之间不能带空格,请输入正确格式的密码!\n");
     pin++;
     continue;//重新循环    
 }
@@ -2566,18 +2563,23 @@ switch(strength)
 {
     case 1:
         printf("强度:弱 (满足 %d / %d 项)",strength,5);
+        wpwnum++;
         break;
     case 2:
         printf("强度:弱 (满足 %d / %d 项)",strength,5);
+        wpwnum++;
         break;
     case 3:
         printf("强度:中 (满足 %d / %d 项)",strength,5);
+        mpwnum++;
         break;
     case 4:
         printf("强度:中 (满足 %d / %d 项)",strength,5);
+        mpwnum++;
         break;
     case 5:
         printf("强度:强 (满足 %d / %d 项)",strength,5);
+        spwnum++;
         break;
 }
 printf("\n");
@@ -2610,10 +2612,8 @@ for(int j = 0;j <= i;j++)
     }
 }
 printf("\n");
-
 pwnum++;//记录密码检查次数
-}
-
-
+}//大循环借宿
+printf("共检查 %d 个密码:强 %d 个，中 %d 个，弱 %d 个。再见~~",pwnum,spwnum,mpwnum,wpwnum);
     return 0;
 }
