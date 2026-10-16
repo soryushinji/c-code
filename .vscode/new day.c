@@ -2751,24 +2751,32 @@ if(ch != 'y' && ch != 'n')//输入非y/n
 {
     printf("错误!\n");
     //清除缓冲区的多余字符
-    while(ch != '\n' && ch != EOF) ch = getchar;
+    while(ch != '\n' && ch != EOF) ch = getchar();
 }
 else//输入y/n
 {
-    yn = 'ch';
-    //ch = getchar();
+    yn = ch;
+    ch = getchar();
     //如果y/n之后输入空格,允许
     while(ch == ' ' || ch == '\t')
     {
         ch = getchar();
     }
-    //
-    chosen = 1;
+    //如果再输入其他非换行字符,重新输入
+    if(ch != '\n')
+    {
+        printf("错误!\n");
+        //清空缓冲区
+        while(ch != '\n' && ch != EOF) ch = getchar();
+    }
+    else//输入\n
+    {
+    chosen = 1;//跳出小循环
+    }
 }
 }//小循环结束
 if(yn == 'n')
 {
-
     break;
     //跳出大循环
 }
