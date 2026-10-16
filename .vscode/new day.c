@@ -2624,7 +2624,7 @@ while(1)//大循环,看循环的条件是什么(或者就用1)
     int i = 1;//提示第几次猜测
     int neg = 0;//输入负数时的信号
     srand((unsigned)time(NULL));//设置随机数种子
-    int secret = rand() % (100 - 1 + 1);//获取随机数
+    int secret = rand() % (100 - 1 + 1) + 1;//获取随机数
     int chosen;//是否再来一局的选项y/n
     int ch;
     if(round > 0)//第一局之后打印
