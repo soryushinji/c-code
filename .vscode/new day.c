@@ -2278,28 +2278,65 @@ int posdivisor[200] = {0};//存放正因数的数组
 //判断n是不是质数
 int i = 2;
 int note = 1;//给正因数数组里存放正因数，n是不是指数的判断标准
+int log = 0;//判断1-n之间的数是不是质数的标志
+int num = 0;//算1-n之间的质数数量
 posdivisor[0] = 1;//第一个正因数一定是1
 while(i * i <= n)
 {
     if(n % i == 0)//i是正因数
     {
-        posdivisor[note] = i;
-        note++;
+        posdivisor[note] = i;//将正因数放数组中
+        note++;//注意最后note比数组实际长度大1
     }
     i++;
 }
 //判断是不是质数
-if(note == 0)
+if(note == 1)//是质数
 {
     printf("%d 是质数\n",n);
     //再打印所有正因数,质数只有1和它本身
     printf("所有正因数: %d %d\n",posdivisor[0],n);
+    //质因数分解
+    printf("质因数分解: %d = %d\n",n,n);
+    //算1-n之间的质数
+    for(int j = 2;j <= n;j++)
+    {
+        int i2 = 2;
+        while(i2 * i2 <= j)
+        {
+            if(j % i2 == 0)
+            {
+                log++;//log非零说明不是质数
+            }
+            i2++;
+        }
+        if(log == 0)//是质数
+        {
+            num++;
+        }
+    }
+    printf("%d 到 %d 之间共有 %d 个数\n",1,n,num);
 }
-else
+else//不是质数
 {
     printf("%d 不是质数\n",n);
     //再打印最小质因数
-    while()
+    for(int j = 1;j < note - 1;j++)
+    {
+        int i1 = 2;//判断最小质因数用的
+        while(i1 * i1 <= posdivisor[note])
+        {
+            if(posdivisor[note] % i1 == 0)
+            {
+                i1++;
+            }
+        }
+        if(i1 == 2)//找到最小质因数的标记
+        {
+            printf("最小质因数: %d\n",posdivisor[j]);
+            break;//找到后跳出这个for循环
+        }
+    }
     //再打印所有正因数
     printf("所有正因数:");
     for(int j = 0;j < note;j++)
@@ -2307,6 +2344,26 @@ else
         printf(" %d",posdivisor[j]);
     }
     printf("\n");
+    //打印质因数分解
+    
+    //算1-n之间的质数
+    for(int j = 2;j <= n;j++)
+    {
+        int i2 = 2;
+        while(i2 * i2 <= j)
+        {
+            if(j % i2 == 0)
+            {
+                log++;//log非零说明不是质数
+            }
+            i2++;
+        }
+        if(log == 0)//是质数
+        {
+            num++;
+        }
+    }
+    printf("%d 到 %d 之间共有 %d 个数\n",1,n,num);
 }
 
 printf("\n");
