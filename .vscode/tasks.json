@@ -10,7 +10,7 @@
                 "-Wextra",
                 "-g",
                 "-finput-charset=UTF-8",
-                "-fexec-charset=UTF-8",
+                "-fexec-charset=GBK",
                 "${file}",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
@@ -50,7 +50,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "编译后在集成终端里运行，不弹外部窗口"
+            "detail": "编译后在集成终端运行，不弹外部窗口"
         }
     ]
 }

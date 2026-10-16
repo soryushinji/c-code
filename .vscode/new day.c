@@ -2285,6 +2285,7 @@ while(i * i <= n)
         posdivisor[note] = i;
         note++;
     }
+    i++;
 }
 //判断是不是质数
 if(note == 0)
