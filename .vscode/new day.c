@@ -3275,10 +3275,10 @@ case 2://显示统计信息（个数、总和、平均分、最大值、最小�
     {
         total += data[i];
     }
-    printf("总和: %d",total);
+    printf("总和: %d\n",total);
     //打印平均数
     double ave = (double)total / (double)num;
-    printf("平均: %.2f",ave);
+    printf("平均: %.2f\n",ave);
     //打印最大值,最小值
     //先排序,必须输出的是当前的状态,且不能改变原数列的状态
     int data2[100] = {0};//设置一个替代数组
@@ -3286,12 +3286,12 @@ case 2://显示统计信息（个数、总和、平均分、最大值、最小�
     {
         data2[i] = data[i];
     }
-    int max = data2[0];
+    int max = 0;
     for(int i = 0;i < num;i++)
     {
         for(int j = i + 1;j < num;j++)
         {
-            if(data[i] <= data2[j])
+            if(data2[i] <= data2[j])
             {
                 max = data2[j];
                 data2[j] = data2[i];
@@ -3299,10 +3299,12 @@ case 2://显示统计信息（个数、总和、平均分、最大值、最小�
             }
         }
     }
-    max = data2[0];
-    int min = data2[num - 1];
-    printf("最大值: %d\n",max);
-    printf("最小值: %d\n",min);
+    for(int i = 0;i < num;i++)
+    {
+        printf("%d ",data2[i]);
+    }
+    printf("最大值: %d\n",data2[0]);
+    printf("最小值: %d\n",data2[num - 1]);
     break;
 }
 case 3://升序排序并显示(每十个一组显示)
@@ -3314,12 +3316,12 @@ case 3://升序排序并显示(每十个一组显示)
         data3[i] = data[i];
     }
     //先升序
-    int max = data3[0];
+    int max = 0;
     for(int i = 0;i < num;i++)
     {
         for(int j = i + 1;j < num;j++)
         {
-            if(data[i] <= data3[j])
+            if(data3[i] <= data3[j])
             {
                 max = data3[j];
                 data3[j] = data3[i];
@@ -3328,7 +3330,7 @@ case 3://升序排序并显示(每十个一组显示)
         }
         //再打印
         //数组位数不一,怎么打印的一致整齐,算了
-        printf("%d ",data[i]);
+        printf("%d ",data3[i]);
         if((i + 1) % 10 == 0)//每打印10个换行
         {
             printf("\n");
