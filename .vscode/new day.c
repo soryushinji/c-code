@@ -2932,12 +2932,12 @@ if(ch == ' ' || ch == '\t')
 
 }//跳出大循环
 //验证成绩是否成功录入
-printf("\n共录入 %d 个\n", num);
-printf("数据: ");
-for(int i = 0; i < num; i++) 
-{
-    printf("%d ", score[i]); 
-}
+// printf("\n共录入 %d 个\n", num);
+// printf("数据: ");
+// for(int i = 0; i < num; i++) 
+// {
+//     printf("%d ", score[i]); 
+// }
 //开始输出结果
 printf("共 %d 个成绩\n",num);
 //打印平均数
@@ -2946,7 +2946,7 @@ for(int i = 0;i < num;i++)
     ave += score[i];
 }
 ave /= (double)num;
-printf("平均分: %.2f",ave);
+printf("平均分: %.2f\n",ave);
 //找最高分和最低分,顺便降序排列
 int max = score[0];
 for(int i = 0;i < num;i++)
@@ -2998,7 +2998,7 @@ for(int i = 0;i < num;i++)
     }
 }
 passrate = (double)pass / (double)num * 100;
-printf("及格率: %.1f",passrate);
+printf("及格率: %.1f%%\n",passrate);
 //打印柱状图,题目没说要求,就默认是和之前一样每2%一个#...补充:50人最多,就是一个人一个#,好吧
 printf("分数段分布:\n");
 for(int k = 0;k <= 4;k++)
@@ -3018,19 +3018,16 @@ switch(k)
         printf("%d-%d  | ",60,69);
         break;
     case 4:
-        printf("%d-%d  | ",0,59);
+        printf("%d-%d   | ",0,59);
         break;
 }
-for(int i = 0;i < num;i++)
+for(int j = 0;j < scoreband[k];j++)
 {
-    for(int j = 0;j < scoreband[k];j++)
-    {
-        printf("#");
-    }
-    for(int j = scoreband[0];j < num;j++)
-    {
-        printf(" ");
-    }
+    printf("#");
+}
+for(int j = scoreband[k];j < num;j++)
+{
+    printf(" ");
 }
 printf("     %d 人\n",scoreband[k]);
 }
@@ -3046,7 +3043,7 @@ printf("\n");
 printf("中位数: ");
 if(num % 2 == 0)//有偶数个
 {
-    median = ((double)(score[num / 2] + score[num / 2 + 1]) / 2.0);
+    median = (double)((score[num / 2] + score[num / 2 + 1]) / 2);
     printf("%.2f\n",median);
 }
 else//有奇数个
@@ -3059,7 +3056,7 @@ for(int i = 0;i < num;i++)
 {
     variance += ((double)score[i] - ave) * ((double)score[i] - ave);
 }
-variance /= (double)num;
+variance /= num;
 printf("方差: %.2f",variance);
      return 0;
 }
