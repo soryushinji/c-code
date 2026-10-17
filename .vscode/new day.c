@@ -3299,10 +3299,6 @@ case 2://显示统计信息（个数、总和、平均分、最大值、最小�
             }
         }
     }
-    for(int i = 0;i < num;i++)
-    {
-        printf("%d ",data2[i]);
-    }
     printf("最大值: %d\n",data2[0]);
     printf("最小值: %d\n",data2[num - 1]);
     break;
@@ -3426,7 +3422,7 @@ case 4://查找某个值
     }
     //开始对比查找
     int count4 = 0;//相同数据出现的次数
-    int i4[100] = {1};
+    int i4[100] = {0};
     int j4 = 0;
     for(int i = 0;i < num;i++)
     {
@@ -3448,15 +3444,15 @@ case 4://查找某个值
         {
             if(i == count4 - 1)
             {
-                printf("第 %d 个",i4[i]);
+                printf("第 %d 个",i4[i] + 1);
             }
             else if(i == count4 - 2)
             {
-                printf("和第 %d 个",i4[i]);
+                printf("和第 %d 个",i4[i] + 1);
             }
             else
             {
-                printf("第 %d 个,",i4[i]);
+                printf("第 %d 个,",i4[i] + 1);
             }
         }
     }
@@ -3507,7 +3503,7 @@ case 6://显示直方图
     {
         data6[i] = data[i];
     }
-    int max6 = data6[0];
+    int max6 = 0;
     for(int i = 0;i < num;i++)
     {
         for(int j = i + 1;j < num;j++)
@@ -3522,6 +3518,7 @@ case 6://显示直方图
     }
     max6 = data6[0];
     int min6 = data6[num - 1];
+    printf("max%d，min%d",max6,min6);
     //算出了最大值最小值
     //计算档数
     if((max6 - min6 + 1) < 10)
@@ -3553,7 +3550,7 @@ case 6://显示直方图
     printf("直方图(按数值范围分 %d 档，档宽 %d):\n",binum,binwidth);
     for(int i = 0;i < binum;i++)
     {
-        printf("%d-%d | ",min6 + i * binum,min6 + (i + 1) * binum - 1);
+        printf("%-10d-%-10d | ",min6 + i * binum,min6 + (i + 1) * binum - 1);
         for(int j = 0;j < bin[i];j++)
         {
             printf("#");
