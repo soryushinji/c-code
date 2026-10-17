@@ -2889,6 +2889,7 @@ if(neg)//输入的是负数
 {
     if(score[num] == 1)//该结束输入了
     {
+        num++;
         break;
     }
     else//输入非-1的负数
