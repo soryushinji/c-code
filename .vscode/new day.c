@@ -2940,6 +2940,12 @@ if(ch == ' ' || ch == '\t')
 // }
 //开始输出结果
 printf("共 %d 个成绩\n",num);
+//如果什么也没输入
+if (num == 0)
+{
+    printf("[提示] 没有录入任何成绩，无法统计。\n");
+    return 0;                 /* 后面全跳过 */
+}
 //打印平均数
 for(int i = 0;i < num;i++)
 {
@@ -3043,12 +3049,12 @@ printf("\n");
 printf("中位数: ");
 if(num % 2 == 0)//有偶数个
 {
-    median = (double)((score[num / 2] + score[num / 2 + 1]) / 2);
+    median = ((double)(score[num / 2 - 1] + score[num / 2]) /2.0);//注意数组是从0开始的
     printf("%.2f\n",median);
 }
 else//有奇数个
 {
-    median = (double)score[num / 2 + 1];
+    median = (double)score[num / 2];
     printf("%.2f\n",median);
 }
 //打印方差variance
