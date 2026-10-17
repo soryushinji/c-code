@@ -3148,6 +3148,7 @@ if((button >= 2 && button <= 7) && num == 0)//没录入数据就选择2-7
 switch(button)//switch小循环
 {
 case 1:
+{
     int pin = 0;//输入错误重新输入时出现提示的记号
     printf("请输入整数(输入 -1 结束,最多 100 个):\n");
     //开始录入数字
@@ -3160,6 +3161,11 @@ case 1:
             printf("请输入整数:\n");
         }
         ch = getchar();
+        //如果一开始输入\n或是输入数字+\n,将\n从缓冲区里清除
+        if(ch == '\n')
+        {
+            ch = getchar();
+        }
         //允许输入多个空格
         while(ch == ' ' || ch == '\t')
         {
@@ -3211,6 +3217,16 @@ case 1:
         //如果输入\n
         //所有输入的东西到了缓冲区里,在循环里运行
         //现在所有的问题均排场,到这说明成功输入了数字
+        //如果是负数,要给digit转负
+        if(neg)
+        {
+            digit = -digit;
+        }
+        //如果是-1,退出
+        if(digit == -1)
+        {
+            break;
+        }
         data[num] = digit;//将输入的数字录给数组
         //如果超过数组范围
         if(num >=100)
@@ -3221,19 +3237,37 @@ case 1:
         num++;//能运行到这说明成功录入了一个数据,数组的下标+1
     }//录数字循环结束
     printf("已录入 %d 个数据\n",num);
+    //检查数据是否录入
+    for(int i = 0;i < num;i++)
+    {
+        printf("%d ",data[i]);
+    }
     break;
+}
 case 2:
+{
     break;
+}
 case 3:
+{
     break;
+}
 case 4:
+{
     break;
+}
 case 5:
+{
     break;
+}
 case 6:
+{
     break;
+}
 case 7:
+{
     break;
+}
 }//switch小循环结束
 //选择8直接退出
 if(button == 8)
