@@ -3316,16 +3316,16 @@ case 3://升序排序并显示(每十个一组显示)
         data3[i] = data[i];
     }
     //先升序
-    int max = 0;
+    int min = 0;
     for(int i = 0;i < num;i++)
     {
         for(int j = i + 1;j < num;j++)
         {
-            if(data3[i] <= data3[j])
+            if(data3[i] >= data3[j])
             {
-                max = data3[j];
+                min = data3[j];
                 data3[j] = data3[i];
-                data3[i] = max;
+                data3[i] = min;
             }
         }
         //再打印
@@ -3426,7 +3426,7 @@ case 4://查找某个值
     }
     //开始对比查找
     int count4 = 0;//相同数据出现的次数
-    int i4[100] = {0};
+    int i4[100] = {1};
     int j4 = 0;
     for(int i = 0;i < num;i++)
     {
@@ -3468,6 +3468,10 @@ case 5://去重显示
     printf("去重后(保持原有顺序):\n");
     //生成一个影武者数组
     int data5[100] = {0};
+    for(int i = 0;i < num;i++)
+    {
+        data5[i] = data[i];
+    }
     //找重复
     for(int i = 0;i < num;i++)
     {
@@ -3558,7 +3562,7 @@ case 6://显示直方图
         {
             printf(" ");
         }
-        printf("%d 个",bin[i]);
+        printf("%d 个\n",bin[i]);
     }
     break;
 }
@@ -3580,10 +3584,12 @@ case 7://反转显示
 }
 case 8://按[录入时的顺序]输出当前数组里的内容
 {
+    printf("当前数组(按录入顺序):\n");
     for(int i = 0;i < num;i++)
     {
         printf("%d ",data[i]);
     }
+    printf("\n");
     break;
 }
 }//switch小循环结束
