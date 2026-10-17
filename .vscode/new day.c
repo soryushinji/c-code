@@ -3001,7 +3001,7 @@ passrate = (double)pass / (double)num * 100;
 printf("及格率: %.1f",passrate);
 //打印柱状图,题目没说要求,就默认是和之前一样每2%一个#...补充:50人最多,就是一个人一个#,好吧
 printf("分数段分布:\n");
-printf("%d-%d | "90,100);
+printf("%d-%d | ",90,100);
 for(int i = 1;i <= num;i++)
 {
 
