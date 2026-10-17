@@ -3569,7 +3569,7 @@ case 7://反转显示
     for(int i = num - 1;i >= 0;i--)
     {
         printf("%d ",data[i]);
-        if("i7 % 10 == 0")
+        if(i7 % 10 == 0)
         {
             printf("\n");
         }
