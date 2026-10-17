@@ -3001,10 +3001,65 @@ passrate = (double)pass / (double)num * 100;
 printf("及格率: %.1f",passrate);
 //打印柱状图,题目没说要求,就默认是和之前一样每2%一个#...补充:50人最多,就是一个人一个#,好吧
 printf("分数段分布:\n");
-printf("%d-%d | ",90,100);
-for(int i = 1;i <= num;i++)
+for(int k = 0;k <= 4;k++)
 {
-
+switch(k)
+{
+    case 0:
+        printf("%d-%d | ",90,100);
+        break;
+    case 1:
+        printf("%d-%d  | ",80,89);
+        break;
+    case 2:
+        printf("%d-%d  | ",70,79);
+        break;
+    case 3:
+        printf("%d-%d  | ",60,69);
+        break;
+    case 4:
+        printf("%d-%d  | ",0,59);
+        break;
 }
+for(int i = 0;i < num;i++)
+{
+    for(int j = 0;j < scoreband[k];j++)
+    {
+        printf("#");
+    }
+    for(int j = scoreband[0];j < num;j++)
+    {
+        printf(" ");
+    }
+}
+printf("     %d 人\n",scoreband[k]);
+}
+printf("\n");
+//打印降序排列
+printf("降序排列: ");
+for(int i = 0;i < num;i++)
+{
+    printf("%d ",score[i]);
+}
+printf("\n");
+//打印中位数
+printf("中位数: ");
+if(num % 2 == 0)//有偶数个
+{
+    median = ((double)(score[num / 2] + score[num / 2 + 1]) / 2.0);
+    printf("%.2f\n",median);
+}
+else//有奇数个
+{
+    median = (double)score[num / 2 + 1];
+    printf("%.2f\n",median);
+}
+//打印方差variance
+for(int i = 0;i < num;i++)
+{
+    variance += ((double)score[i] - ave) * ((double)score[i] - ave);
+}
+variance /= (double)num;
+printf("方差: %.2f",variance);
      return 0;
 }
