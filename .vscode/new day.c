@@ -3078,7 +3078,7 @@ printf("================= 数字分析工具箱 =================\n");
 printf("\n");
 printf("1) 录入数据      2) 显示统计      3) 升序排序\n");
 printf("4) 查找数值      5) 去重显示      6) 显示直方图\n");
-printf("7) 反转显示      8) 退出\n");
+printf("7) 反转显示      8) 显示全部数据  9) 退出\n");
 printf("\n");
 printf("==================================================\n");
 while(1)//最外层大循环
@@ -3097,8 +3097,8 @@ if(ch == EOF)
 {
     break;//直接跳出循环
 }
-//不允许输入任何非数字字符,直接输入\n也不行,输入0或者9也不行,01这种也不行
-if(ch < '1' || ch > '8')
+//不允许输入任何非数字字符,直接输入\n也不行,输入0也不行,01这种也不行
+if(ch < '1' || ch > '9')
 {
     printf("错误,请输入主菜单提供的选项!\n");
     printf("\n");
@@ -3106,15 +3106,15 @@ if(ch < '1' || ch > '8')
     while(ch != '\n' && ch != EOF) ch = getchar();
     continue;
 }
-else//输入1-8
+else//输入1-9
 {
-    while(ch >= '1' && ch <= '8')
+    while(ch >= '1' && ch <= '9')
     {
         button = button * 10 + (ch - '0');//记录输入的数字
         ch = getchar();
     }
 }
-//如果输入1-8之后输入其他
+//如果输入1-9之后输入其他
 //1)输入空格,允许
 while(ch == ' ' || ch == '\t')
 {
@@ -3131,20 +3131,20 @@ if(ch != '\n')
 }
 //3)输入换行符,输入结束
 //看输入的选项
-//1)选项>8
-if(button > 8)
+//1)选项>9
+if(button > 9)
 {
     printf("错误,请输入主菜单显示的选项!\n");
     printf("\n");
     continue;//重新开始选项,不用清理缓冲区
 }
-if((button >= 2 && button <= 7) && num == 0)//没录入数据就选择2-7
+if((button >= 2 && button <= 8) && num == 0)//没录入数据就选择2-8
 {
     printf("[提示] 还没有数据，请先使用选项 1 录入数据。\n");
     printf("\n");
     continue;//重新循环
 }
-//选1录入数据或录入数据后选2-7
+//选1录入数据或录入数据后选2-8
 switch(button)//switch小循环
 {
 case 1:
@@ -3190,7 +3190,7 @@ case 1:
         //输入非数字字符的情况
         if(ch < '0' || ch > '9')
         {
-            printf("1错误,请输入整数!\n");
+            printf("错误,请输入整数!\n");
             printf("请从错误的地方开始输入成绩\n");
             pin++;
             //清理缓冲区
@@ -3209,7 +3209,7 @@ case 1:
         //如果数字后面是非空非换行格字符
         if((ch < '0' || ch > '9') && ch != ' ' && ch != '\t' && ch != '\n')
         {
-            printf("2错误,请输入整数!\n");
+            printf("错误,请输入整数!\n");
             printf("请从错误的地方开始输入成绩\n");
             pin++;
             //清空缓冲区
@@ -3246,18 +3246,76 @@ case 1:
     }//录数字循环结束
     printf("已录入 %d 个数据\n",num);
     //检查数据是否录入
+    // for(int i = 0;i < num;i++)
+    // {
+    //     printf("%d ",data[i]);
+    // }//成功录入
+    break;
+}
+case 2://显示统计信息（个数、总和、平均分、最大值、最小值）
+{
+    printf("=== 统计信息 ===\n");
+    printf("个数: %d\n",num);
+    //计算输入数据的总和
+    int total = 0;
     for(int i = 0;i < num;i++)
     {
-        printf("%d ",data[i]);
-    }//成功录入
+        total += data[i];
+    }
+    printf("总和: %d",total);
+    //打印平均数
+    double ave = (double)total / (double)num;
+    printf("平均: %.2f",ave);
+    //打印最大值,最小值
+    //先排序,必须输出的是当前的状态,且不能改变原数列的状态
+    int data2[100] = {0};//设置一个替代数组
+    for(int i = 0;i < num;i++)
+    {
+        data2[i] = data[i];
+    }
+    int max = data2[0];
+    for(int i = 0;i < num;i++)
+    {
+        for(int j = i + 1;j < num;j++)
+        {
+            if(data[i] <= data2[j])
+            {
+                max = data2[j];
+                data2[j] = data2[i];
+                data2[i] = max;
+            }
+        }
+    }
+    max = data2[0];
+    int min = data2[num - 1];
+    printf("最大值: %d\n",max);
+    printf("最小值: %d\n",min);
     break;
 }
-case 2:
+case 3://升序排序并显示(每八个一组显示)
 {
-    break;
-}
-case 3:
-{
+    printf("升序后的数据显示为:\n");
+    int data3[100] = {0};//设置一个替代数组
+    for(int i = 0;i < num;i++)
+    {
+        data3[i] = data[i];
+    }
+    //先升序
+    int max = data3[0];
+    for(int i = 0;i < num;i++)
+    {
+        for(int j = i + 1;j < num;j++)
+        {
+            if(data[i] <= data3[j])
+            {
+                max = data3[j];
+                data3[j] = data3[i];
+                data3[i] = max;
+            }
+        }
+        //再打印
+        printf("")
+    }
     break;
 }
 case 4:
@@ -3276,9 +3334,17 @@ case 7:
 {
     break;
 }
+case 8://按[录入时的顺序]输出当前数组里的内容
+{
+    for(int i = 0;i < num;i++)
+    {
+        printf("%d ",data[i]);
+    }
+    break;
+}
 }//switch小循环结束
-//选择8直接退出
-if(button == 8)
+//选择9直接退出
+if(button == 9)
 {
     break;
 }
