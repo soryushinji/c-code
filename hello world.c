@@ -17,15 +17,25 @@ int main()
     //     count++;
     // }
     // printf("\n共读了 %d 个字符。\n", count);
-    int num = 0;
-    scanf("%d",&num);
-    if(num == 1)
+    // int num = 0;
+    // scanf("%d",&num);
+    // if(num == 1)
+    // {
+    //     printf("num为一");
+    // }
+    // else  if(num < 2)
+    // {
+    //     printf("num为一但也小于二");
+    // }
+    int ch;
+    ch = getchar();
+    while(ch != EOF)
     {
-        printf("num为一");
+        if(ch == ' ')
+        {
+            continue;
+        }
     }
-    else  if(num < 2)
-    {
-        printf("num为一但也小于二");
-    }
+    
     return 0;
 }
