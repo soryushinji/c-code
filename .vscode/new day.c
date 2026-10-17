@@ -2938,6 +2938,73 @@ for(int i = 0; i < num; i++)
 {
     printf("%d ", score[i]); 
 }
+//开始输出结果
+printf("共 %d 个成绩\n",num);
+//打印平均数
+for(int i = 0;i < num;i++)
+{
+    ave += score[i];
+}
+ave /= (double)num;
+printf("平均分: %.2f",ave);
+//找最高分和最低分,顺便降序排列
+int max = score[0];
+for(int i = 0;i < num;i++)
+{
+    for(int j = i + 1;j < num;j++)
+    {
+        if(score[i] < score[j])
+        {
+            max = score[j];
+            score[j] = score[i];
+            score[i] = max;
+        }
+    }
+}
+//打印最高分最低分
+printf("最高分: %d    最低分: %d\n",score[0],score[num - 1]);
+//统计及格率>= 60
+int pass = 0;//记录及格人数,顺带记录各分数段人数
+for(int i = 0;i < num;i++)
+{
+    int j = 0;//给各分数段做标记
+    if(score[i] >= 90 && score[i] <= 100)//分数段1
+    {
+        scoreband[j]++;
+        pass++;
+    }
+    else if(score[i] >= 80 && score[i] <= 89)//分数段2
+    {
+        j = 1;
+        scoreband[j]++;
+        pass++;
+    }
+    else if(score[i] >= 70 && score[i] <= 79)//分数段3
+    {
+        j = 2;
+        scoreband[j]++;
+        pass++;
+    }
+    else if(score[i] >= 60 && score[i] <= 69)//分数段3
+    {
+        j = 3;
+        scoreband[j]++;
+        pass++;
+    }
+    else//分数段4
+    {
+        j = 4;
+        scoreband[j]++;
+    }
+}
+passrate = (double)pass / (double)num * 100;
+printf("及格率: %.1f",passrate);
+//打印柱状图,题目没说要求,就默认是和之前一样每2%一个#...补充:50人最多,就是一个人一个#,好吧
+printf("分数段分布:\n");
+printf("%d-%d | "90,100);
+for(int i = 1;i <= num;i++)
+{
 
+}
      return 0;
 }
