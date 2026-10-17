@@ -2819,17 +2819,19 @@ int biggest = 0;//记录最高分
 int smallest = 0;//记录最低分
 double variance = 0;//记录方差
 int scoreband[5] = {0};//记录分数段
+int loop = 0;//记录是否输入错误的标志,每轮循环归零
 printf("请输入成绩(0-100,输入 -1 结束,最多 50 个):\n");
 //开始输入成绩
 while(ch != EOF)//输入记录成绩的大循环
 {
     int neg = 0;//记录输入数字是否是负数的标志,每轮循环归零
-    int loop = 0;//记录是否输入错误的标志,每轮循环归零
+    int n = 0;//记录输入成绩,每次循环清零
     //如果输入错误,再次输入时要提示,正常输入时不用提示
 if(loop != 0)
 {
     printf("请输入成绩:\n");
 }
+    loop = 0;//记录是否输入错误的标志,每轮循环归零
     ch = getchar();
 //如果第一次输入EOF
 if(ch == EOF)
@@ -2854,6 +2856,8 @@ if(ch == '+' || ch == '-')
 if(ch < '0' || ch > '9')
 {
     printf("错误,请输入1-100之间的整数!\n");
+    printf("请从错误的地方开始输入成绩!\n");
+    printf("\n");
     loop++;
     //清除缓冲区
     while(ch != '\n' && ch != EOF) ch = getchar();
@@ -2864,7 +2868,7 @@ else
 {
     while(ch >= '0' && ch <= '9')//记录输入的数字
     {
-        score[num] = score[num] * 10 + (ch - '0');
+        n = n * 10 + (ch - '0');
         ch = getchar();
     }
 }
@@ -2876,9 +2880,11 @@ else
 //     ch = getchar();
 // }
 //2输入的是非空格数字换行符
-if((ch < '0' || ch > '9') && ch != '\n')
+if((ch < '0' || ch > '9') && ch != '\n'&& ch != ' ' && ch != '\t')
 {
     printf("错误,请正确输入!\n");
+    printf("请从错误的地方开始输入成绩!\n");
+    printf("\n");
     loop++;
     //清除缓冲区
     while(ch != '\n' && ch != EOF) ch = getchar();
@@ -2887,25 +2893,36 @@ if((ch < '0' || ch > '9') && ch != '\n')
 //验证输入的数字
 if(neg)//输入的是负数
 {
-    if(score[num] == 1)//该结束输入了
+    if(n == 1)//该结束输入了
     {
-        num++;
         break;
     }
     else//输入非-1的负数
     {
         printf("错误,请输入1-100之间的正整数!\n");
+        printf("请从错误的地方开始输入成绩!\n");
+        printf("\n");
         loop++;
         continue;
     }
 }
-if(score[num] > 100)//数字过大
+if(n > 100)//数字过大
 {
     printf("错误,请输入1-100之间的整数!\n");
+    printf("请从错误的地方开始输入成绩!\n");
+    printf("\n");
     loop++;
     continue;
 }
 //到这说明输入的是正确的数字
+//如果数组满了
+if(num >= 50)
+{
+    printf("[提示]已满50个\n");
+    break;
+}
+//将数赋给数组
+score[num] = n;
 num++;//下一轮时score数字记录下一个
 //2)只允许输入一个空格,应该用这版,应该放到验证数字的后面
 if(ch == ' ' || ch == '\t')
@@ -2915,10 +2932,11 @@ if(ch == ' ' || ch == '\t')
 
 }//跳出大循环
 //验证成绩是否成功录入
-for(int i = 0;i <= num;i++)
+printf("\n共录入 %d 个\n", num);
+printf("数据: ");
+for(int i = 0; i < num; i++) 
 {
-    printf("%d ",score[i]);
+    printf("%d ", score[i]); 
 }
-
      return 0;
 }
