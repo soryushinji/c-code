@@ -3341,6 +3341,7 @@ case 3://升序排序并显示(每十个一组显示)
 }
 case 4://查找某个值
 {
+    int cancel  = 0;
     int pin4 = 0;
     int digit4 = 0;
     printf("请输入您要查找的值: ");
@@ -3358,7 +3359,8 @@ case 4://查找某个值
         //EOF,不多说了
         if(ch == EOF)
         {
-            return 0;//直接结束
+            cancel = 1;
+            break;//直接结束
         }
         //允许一开始输入多个空格
         while(ch == ' ' || ch == '\t')
@@ -3448,11 +3450,15 @@ case 4://查找某个值
         {
             if(i == count4 - 1)
             {
+                if(count4 > 1)
+                {
+                    printf("和");
+                }
                 printf("第 %d 个",i4[i] + 1);
             }
             else if(i == count4 - 2)
             {
-                printf("和第 %d 个",i4[i] + 1);
+                printf("第 %d 个",i4[i] + 1);
             }
             else
             {
@@ -3461,6 +3467,11 @@ case 4://查找某个值
         }
     }
     printf("\n");
+    if(cancel == 1)
+    {
+        search++;
+        break;
+    }
     search++;
     break;
 }
