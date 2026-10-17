@@ -3087,6 +3087,7 @@ int button = 0;//记录每轮选择的数字,每轮开始清零
 int neg = 0;//记录输入-1的情况
 printf("请选择 > ");//每一轮选择数字
 ch = getchar();//开始输入选择的数字
+printf("\n");
 //允许一开始输入多个空格
 while(ch == ' ' || ch == '\t')
 {
@@ -3138,21 +3139,35 @@ if(button > 8)
     printf("\n");
     continue;//重新开始选项,不用清理缓冲区
 }
-if((button >= 2 && button <= 8) && num == 0)//没录入数据就选择2-8
+if((button >= 2 && button <= 7) && num == 0)//没录入数据就选择2-7
 {
-    if(button == 8)//退出选项
-    {
-        break;//直接退出大循环
-    }
-    else//没录入数据就选择2-7
-    {
-        printf("[提示] 还没有数据，请先使用选项 1 录入数据。\n");
-        printf("\n");
-        continue;//重新循环
-    }
+    printf("[提示] 还没有数据，请先使用选项 1 录入数据。\n");
+    printf("\n");
+    continue;//重新循环
 }
-//选1录入数据或录入数据后选2-8
-
+//选1录入数据或录入数据后选2-7
+switch(button)//switch小循环
+{
+case 1:
+    break;
+case 2:
+    break;
+case 3:
+    break;
+case 4:
+    break;
+case 5:
+    break;
+case 6:
+    break;
+case 7:
+    break;
+}//switch小循环结束
+//选择8直接退出
+if(button == 8)
+{
+    break;
+}
 }//大循环结束
      return 0;
 }
