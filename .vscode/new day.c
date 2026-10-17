@@ -3327,29 +3327,253 @@ case 3://升序排序并显示(每十个一组显示)
             }
         }
         //再打印
-        //数组位数不一,怎么打印的一致整齐
+        //数组位数不一,怎么打印的一致整齐,算了
         printf("%d ",data[i]);
         if((i + 1) % 10 == 0)//每打印10个换行
         {
             printf("\n");
         }
     }
+    printf("\n");
     break;
 }
-case 4:
+case 4://查找某个值
 {
+    int pin4 = 0;
+    int digit4 = 0;
+    printf("请输入您要查找的值: ");
+    //输入查找的数据,又要考虑那一堆
+    while(1)//还是要循环。。。
+    {
+        digit4 = 0;
+        int neg4 = 0;//+-号,你懂的
+        if(pin4 != 0)
+        {
+            printf("请输入您要查找的值:");
+        }
+        pin4 = 0;
+        ch = getchar();
+        //EOF,不多说了
+        if(ch == EOF)
+        {
+            return 0;//直接结束
+        }
+        //允许一开始输入多个空格
+        while(ch == ' ' || ch == '\t')
+        {
+            int find = 0;//将输入的数据赋给find
+            ch = getchar();
+        }
+        //输入+-号
+        if(ch == '+' || ch == '-')
+        {
+            if(ch == '-')
+            {
+                neg4 = 1;
+            }
+            ch = getchar();
+        }
+        //如果输入非数字
+        if(ch < '0' || ch > '9')
+        {
+            printf("错误,请重新输入!\n");
+            pin4++;
+            //清空缓冲区
+            while(ch != '\n' && ch != EOF) ch = getchar();
+            continue;
+        }
+        //输入数字
+        while(ch >= '0' && ch <= '9')
+        {
+            digit4 = digit4 * 10 + (ch - '0');
+            ch = getchar();
+        }
+        //输入数字之后
+        //可以继续输入空格
+        while(ch == ' ' || ch == '\t')
+        {
+            ch = getchar();
+        }
+        //不能输入其他字符,除了换行符
+        if((ch < '0' || ch > '9') && ch != '\n')
+        {
+            printf("错误,请重新输入!\n");
+            pin4++;
+            //清空缓冲区
+            while(ch != '\n' && ch != EOF) ch = getchar();
+            continue;
+        }
+        //输入\n,结束
+        //是负数
+        if(neg4)
+        {
+            digit4 = -digit4;
+        }
+        //不能超值
+        if(digit4 > 2147483647)
+        {
+            printf("数据超过最大值,请重新输入\n");
+            continue;
+        }
+        if(digit4 < -2147483648)
+        {
+            printf("数据超出最小值,请重新输入\n");
+            continue;
+        }
+        break;//能顺利运行到这说明输入了一个合格的数字
+    }
+    //开始对比查找
+    int count4 = 0;//相同数据出现的次数
+    int i4[100] = {0};
+    int j4 = 0;
+    for(int i = 0;i < num;i++)
+    {
+        if(digit4 == data[i])
+        {
+            count4++;
+            i4[j4] = i;
+            j4++;
+        }
+    }
+    if(count4 == 0)//没有
+    {
+        printf("您要查找的值在录入的数据中不存在\n");
+    }
+    else
+    {
+        printf("找到了 %d 处 ,位置分别是",count4);
+        for(int i = 0;i < count4;i++)
+        {
+            if(i == count4 - 1)
+            {
+                printf("第 %d 个",i4[i]);
+            }
+            else if(i == count4 - 2)
+            {
+                printf("和第 %d 个",i4[i]);
+            }
+            else
+            {
+                printf("第 %d 个,",i4[i]);
+            }
+        }
+    }
+    printf("\n");
     break;
 }
-case 5:
+case 5://去重显示
 {
+    printf("去重后(保持原有顺序):\n");
+    //生成一个影武者数组
+    int data5[100] = {0};
+    //找重复
+    for(int i = 0;i < num;i++)
+    {
+        for(int j = i + 1;j < num;j++)
+        {
+            if(data5[i] == data5[j])
+            {
+                data5[j] = -1;//将所有有重复只保留一项,剩下的都赋值-1(数据中没有-1)
+            }
+        }
+    }
+    //去重显示
+    for(int i = 0;i < num;i++)
+    {
+        if(data5[i] != -1)
+        {
+            printf("%d ",data5[i]);
+        }
+        if((i + 1) % 10 == 0)//每十个换行
+        {
+            printf("\n");
+        }
+    }
+    printf("\n");
     break;
 }
-case 6:
+case 6://显示直方图
 {
+    int binum = 0;//档数
+    //算档数还要先求出最大值和最小值,哎
+    int data6[100] = {0};//设置一个替代数组
+    for(int i = 0;i < num;i++)
+    {
+        data6[i] = data[i];
+    }
+    int max6 = data6[0];
+    for(int i = 0;i < num;i++)
+    {
+        for(int j = i + 1;j < num;j++)
+        {
+            if(data[i] <= data6[j])
+            {
+                max6 = data6[j];
+                data6[j] = data6[i];
+                data6[i] = max6;
+            }
+        }
+    }
+    max6 = data6[0];
+    int min6 = data6[num - 1];
+    //算出了最大值最小值
+    //计算档数
+    if((max6 - min6 + 1) < 10)
+    {
+        binum = max6 - min6 + 1;
+    }
+    else
+    {
+        binum = 10;
+    }
+    int binwidth = (max6 - min6 + binum) / binum;//档宽
+    int bin[10] = {0};//第i档(i从0开始),各档区间: [最小值 + i * 档宽, 最小值 + (i+1) * 档宽 - 1]
+    //将数据计入各档
+    for(int i = 0;i < binum;i++)
+    {
+        int note = 0;//记录data中的数据是否在该档区间
+        for(int j = 0;j < num;j++)
+        {
+            if(data[j] >= (min6 + i * binum) && data[j] <= (min6 + (i + 1) * binum - 1))
+            {
+                note++;
+            }
+        }
+        bin[i] = note;
+    }
+    //计入完毕
+    //开始打印直方图
+    //如果没录入数组,不可能
+    printf("直方图(按数值范围分 %d 档，档宽 %d):\n",binum,binwidth);
+    for(int i = 0;i < binum;i++)
+    {
+        printf("%d-%d | ",min6 + i * binum,min6 + (i + 1) * binum - 1);
+        for(int j = 0;j < bin[i];j++)
+        {
+            printf("#");
+        }
+        for(int k = 0;k < num - bin[i];k++)
+        {
+            printf(" ");
+        }
+        printf("%d 个",bin[i]);
+    }
     break;
 }
-case 7:
+case 7://反转显示
 {
+    printf("反转显示:\n");
+    int i7 = 1;
+    for(int i = num - 1;i >= 0;i++)
+    {
+        printf("%d ",data[i]);
+        if("i7 % 10 == 0")
+        {
+            printf("\n");
+        }
+        i7++;
+    }
+    printf("\n");
     break;
 }
 case 8://按[录入时的顺序]输出当前数组里的内容
