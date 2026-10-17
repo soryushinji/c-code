@@ -3508,7 +3508,7 @@ case 6://显示直方图
     {
         for(int j = i + 1;j < num;j++)
         {
-            if(data[i] <= data6[j])
+            if(data6[i] <= data6[j])
             {
                 max6 = data6[j];
                 data6[j] = data6[i];
@@ -3518,7 +3518,6 @@ case 6://显示直方图
     }
     max6 = data6[0];
     int min6 = data6[num - 1];
-    printf("max%d，min%d",max6,min6);
     //算出了最大值最小值
     //计算档数
     if((max6 - min6 + 1) < 10)
@@ -3537,7 +3536,7 @@ case 6://显示直方图
         int note = 0;//记录data中的数据是否在该档区间
         for(int j = 0;j < num;j++)
         {
-            if(data[j] >= (min6 + i * binum) && data[j] <= (min6 + (i + 1) * binum - 1))
+            if(data[j] >= (min6 + i * binwidth) && data[j] <= (min6 + (i + 1) * binwidth - 1))
             {
                 note++;
             }
@@ -3550,7 +3549,7 @@ case 6://显示直方图
     printf("直方图(按数值范围分 %d 档，档宽 %d):\n",binum,binwidth);
     for(int i = 0;i < binum;i++)
     {
-        printf("%-10d-%-10d | ",min6 + i * binum,min6 + (i + 1) * binum - 1);
+        printf("%-10d-%10d | ",min6 + i * binwidth,min6 + (i + 1) * binwidth - 1);
         for(int j = 0;j < bin[i];j++)
         {
             printf("#");
@@ -3567,7 +3566,7 @@ case 7://反转显示
 {
     printf("反转显示:\n");
     int i7 = 1;
-    for(int i = num - 1;i >= 0;i++)
+    for(int i = num - 1;i >= 0;i--)
     {
         printf("%d ",data[i]);
         if("i7 % 10 == 0")
