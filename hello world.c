@@ -27,15 +27,16 @@ int main()
     // {
     //     printf("num为一但也小于二");
     // }
-    int ch;
-    ch = getchar();
-    while(ch != EOF)
-    {
-        if(ch == ' ')
-        {
-            continue;
-        }
-    }
-    
+    // int ch;
+    // ch = getchar();
+    // while(ch != EOF)
+    // {
+    //     if(ch == ' ')
+    //     {
+    //         continue;
+    //     }
+    // }
+    printf("%-10d",1234567890);
+    printf("%-10d",41234567890);
     return 0;
 }
