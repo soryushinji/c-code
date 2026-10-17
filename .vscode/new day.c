@@ -3074,6 +3074,7 @@ int search = 0;//记录查找数值次数
 int dudup = 0;//记录去重显示次数
 int histogram = 0;//记录显示直方图次数
 int reverse = 0;//记录反转显示次数
+int output = 0;//记录输出录入数据次数
 printf("================= 数字分析工具箱 =================\n");
 printf("\n");
 printf("1) 录入数据      2) 显示统计      3) 升序排序\n");
@@ -3263,6 +3264,7 @@ case 1:
     // {
     //     printf("%d ",data[i]);
     // }//成功录入
+    input++;
     break;
 }
 case 2://显示统计信息（个数、总和、平均分、最大值、最小值）
@@ -3301,6 +3303,7 @@ case 2://显示统计信息（个数、总和、平均分、最大值、最小�
     }
     printf("最大值: %d\n",data2[0]);
     printf("最小值: %d\n",data2[num - 1]);
+    count++;
     break;
 }
 case 3://升序排序并显示(每十个一组显示)
@@ -3333,6 +3336,7 @@ case 3://升序排序并显示(每十个一组显示)
         }
     }
     printf("\n");
+    order++;
     break;
 }
 case 4://查找某个值
@@ -3457,6 +3461,7 @@ case 4://查找某个值
         }
     }
     printf("\n");
+    search++;
     break;
 }
 case 5://去重显示
@@ -3492,6 +3497,7 @@ case 5://去重显示
         }
     }
     printf("\n");
+    dudup++;
     break;
 }
 case 6://显示直方图
@@ -3560,6 +3566,7 @@ case 6://显示直方图
         }
         printf("%d 个\n",bin[i]);
     }
+    histogram++;
     break;
 }
 case 7://反转显示
@@ -3576,6 +3583,7 @@ case 7://反转显示
         i7++;
     }
     printf("\n");
+    reverse++;
     break;
 }
 case 8://按[录入时的顺序]输出当前数组里的内容
@@ -3586,6 +3594,7 @@ case 8://按[录入时的顺序]输出当前数组里的内容
         printf("%d ",data[i]);
     }
     printf("\n");
+    output++;
     break;
 }
 }//switch小循环结束
@@ -3595,5 +3604,9 @@ if(button == 9)
     break;
 }
 }//大循环结束
+printf("本次会话使用情况:\n");
+printf("录入 %d 次,统计 %d 次,排序 %d 次,查找 %d 次,\n",input,count,order,search);
+printf("去重 %d 次,直方图 %d 次,反转 %d 次,显示 %d 次。\n",dudup,histogram,reverse,output);
+printf("再见~~\n");
      return 0;
 }
