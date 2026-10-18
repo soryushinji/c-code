@@ -3243,6 +3243,8 @@ case 1:
         {
             printf("数据超出范围,请重新输入\n");
             printf("请从超值的地方开始输入数据\n");
+            //清空缓冲区
+            while(ch != '\n' && ch != EOF) ch = getchar();
             continue;
         }
         //如果超过数组范围
