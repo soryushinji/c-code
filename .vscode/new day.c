@@ -3155,6 +3155,7 @@ case 1:
     //开始录入数字
     while(1)//录数字循环,条件暂定为1
     { 
+        int num1 = 0;//记录位数,位数过大,报错
         int neg = 0;//记录输入+-的情况
         int digit = 0;//用于记录每次输入的数字
         if(pin != 0)
@@ -3202,6 +3203,7 @@ case 1:
         while(ch >= '0' && ch <= '9')
         {
             digit = digit * 10 + (ch - '0');
+            num1++;//确定位数
             ch = getchar();
         }
         //输入数字之后
@@ -3237,15 +3239,9 @@ case 1:
             break;
         }
         //如果超过int的范围
-        if(digit > 2147483647)
+        if(num1 > 9)
         {
-            printf("数据超过最大值,请重新输入\n");
-            printf("请从超值的地方开始输入数据\n");
-            continue;
-        }
-        if(digit < -2147483648)
-        {
-            printf("数据超出最小值,请重新输入\n");
+            printf("数据超出范围,请重新输入\n");
             printf("请从超值的地方开始输入数据\n");
             continue;
         }
