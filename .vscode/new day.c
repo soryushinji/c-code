@@ -3505,10 +3505,15 @@ case 5://去重显示
             n5 -= 10;//换行时n5清零,重新判断
         }
     }
-    printf("\n");
+    if(n5 != 0)//★ 只有最后一行没满 10 个才补换行，否则会多一个空行
+    {
+        printf("\n");
+    }
     dudup++;
     break;
 }
+/* ===== 下面是原版 case 6（保留备查，已被 #if 0 屏蔽）===== */
+#if 0
 case 6://显示直方图
 {
     int binum = 0;//档数
@@ -3574,6 +3579,133 @@ case 6://显示直方图
             printf(" ");
         }
         printf("  %d 个\n",bin[i]);
+    }
+    histogram++;
+    break;
+}
+#endif
+
+/* ==================== case 6 改进版 ====================
+   两个 bug 的修法：
+     ① 标签宽度改成【动态计算】——用最大值的位数当宽度，
+        既不会因为数字变大而不齐，也不会白占 20 多列
+        （%*d 的用法见原书 4.4.6《printf() 和 scanf() 的 * 修饰符》）
+     ② 柱子上限 maxbar 格，数据超过就按比例缩放，
+        保证一行不超过 80 列，人数不会被挤到下一行
+   ======================================================== */
+case 6://显示直方图（改进版：动态标签宽度 + 柱子按比例缩放）
+{
+    int binum = 0;//档数
+    int i6, j6;
+    int data6[100] = {0};//设置一个替代数组
+
+    for(i6 = 0;i6 < num;i6++)
+    {
+        data6[i6] = data[i6];
+    }
+
+    //求最大值最小值（用副本排序，不动原数组）
+    int max6 = 0;
+    for(i6 = 0;i6 < num;i6++)
+    {
+        for(j6 = i6 + 1;j6 < num;j6++)
+        {
+            if(data6[i6] <= data6[j6])
+            {
+                max6 = data6[j6];
+                data6[j6] = data6[i6];
+                data6[i6] = max6;
+            }
+        }
+    }
+    max6 = data6[0];
+    int min6 = data6[num - 1];
+
+    //计算档数
+    if((max6 - min6 + 1) < 10)
+    {
+        binum = max6 - min6 + 1;
+    }
+    else
+    {
+        binum = 10;
+    }
+
+    int binwidth = (max6 - min6 + binum) / binum;//档宽
+    int bin[10] = {0};
+    //将数据计入各档
+    for(i6 = 0;i6 < binum;i6++)
+    {
+        int note = 0;
+        for(j6 = 0;j6 < num;j6++)
+        {
+            if(data[j6] >= (min6 + i6 * binwidth) && data[j6] <= (min6 + (i6 + 1) * binwidth - 1))
+            {
+                note++;
+            }
+        }
+        bin[i6] = note;
+    }
+
+    // ---------- ★ 新增 1：算标签宽度 = 最大值的位数 ----------
+    int w = 1;
+    {
+        int t = (max6 >= 0) ? max6 : -max6;
+        while(t >= 10)
+        {
+            w++;
+            t /= 10;
+        }
+    }
+    // （负数还要多留一位放负号）
+    if(min6 < 0)
+    {
+        w++;
+    }
+
+    // ---------- ★ 新增 2：柱子上限 + 比例缩放 ----------
+    int maxbar = 45;//柱子最长 45 格（80 列 - 标签 - 人数）
+
+    //缩放基准用【最大的那一档】，不是总数 num —— 否则柱子会很短
+    int maxbin = 0;
+    for(i6 = 0;i6 < binum;i6++)
+    {
+        if(bin[i6] > maxbin)
+        {
+            maxbin = bin[i6];
+        }
+    }
+    int scale = (maxbin + maxbar - 1) / maxbar;//每格代表几个人
+    if(scale < 1)
+    {
+        scale = 1;
+    }
+
+    if(scale > 1)
+    {
+        printf("直方图(按数值范围分 %d 档，档宽 %d，每格 = %d 个):\n", binum, binwidth, scale);
+    }
+    else
+    {
+        printf("直方图(按数值范围分 %d 档，档宽 %d):\n", binum, binwidth);
+    }
+
+    for(i6 = 0;i6 < binum;i6++)
+    {
+        int lo = min6 + i6 * binwidth;
+        int hi = min6 + (i6 + 1) * binwidth - 1;
+        int bars = (bin[i6] + scale - 1) / scale;//向上取整，有数据至少画 1 格
+
+        printf("%*d-%*d | ", w, lo, w, hi);//★ 动态宽度，自动对齐
+        for(j6 = 0;j6 < bars;j6++)
+        {
+            printf("#");
+        }
+        for(j6 = bars;j6 < maxbar;j6++)
+        {
+            printf(" ");
+        }
+        printf(" %d 个\n", bin[i6]);
     }
     histogram++;
     break;
