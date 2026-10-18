@@ -3365,7 +3365,6 @@ case 4://查找某个值
         //允许一开始输入多个空格
         while(ch == ' ' || ch == '\t')
         {
-            int find = 0;//将输入的数据赋给find
             ch = getchar();
         }
         //输入+-号
@@ -3575,7 +3574,7 @@ case 6://显示直方图
         {
             printf(" ");
         }
-        printf("%d 个\n",bin[i]);
+        printf("  %d 个\n",bin[i]);
     }
     histogram++;
     break;
@@ -3619,5 +3618,7 @@ printf("本次会话使用情况:\n");
 printf("录入 %d 次,统计 %d 次,排序 %d 次,查找 %d 次,\n",input,count,order,search);
 printf("去重 %d 次,直方图 %d 次,反转 %d 次,显示 %d 次。\n",dudup,histogram,reverse,output);
 printf("再见~~\n");
+//十道前8章综合题结束~~
+
      return 0;
 }
