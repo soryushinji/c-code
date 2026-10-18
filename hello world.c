@@ -36,7 +36,6 @@ int main()
     //         continue;
     //     }
     // }
-    printf("%-11d",1234567890);
-    printf("%-11d",41234567890);
+    printf("%*d",97,-14);
     return 0;
 }
