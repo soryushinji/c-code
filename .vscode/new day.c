@@ -3331,7 +3331,10 @@ case 3://升序排序并显示(每十个一组显示)
             printf("\n");
         }
     }
-    printf("\n");
+    if(num % 10 != 0)//★ 只有最后一行没满 10 个才补换行，否则会多一个空行
+    {
+        printf("\n");
+    }
     order++;
     break;
 }
@@ -3340,11 +3343,13 @@ case 4://查找某个值
     int cancel  = 0;
     int pin4 = 0;
     int digit4 = 0;
+    int num4 = 0;//★ 数位数，用来判断有没有超出 int 范围
     printf("请输入您要查找的值: ");
     //输入查找的数据,又要考虑那一堆
     while(1)//还是要循环。。。
     {
         digit4 = 0;
+        num4 = 0;//★ 每轮清零
         int neg4 = 0;//+-号,你懂的
         if(pin4 != 0)
         {
@@ -3385,6 +3390,7 @@ case 4://查找某个值
         while(ch >= '0' && ch <= '9')
         {
             digit4 = digit4 * 10 + (ch - '0');
+            num4++;//★ 数位数
             ch = getchar();
         }
         //输入数字之后
@@ -3409,14 +3415,9 @@ case 4://查找某个值
             digit4 = -digit4;
         }
         //不能超值
-        if(digit4 > 2147483647)
+        if(num4 > 9)//★ 10 位数一定超出 int（int 最大 10 位但不超过 2147483647）
         {
-            printf("数据超过最大值,请重新输入\n");
-            continue;
-        }
-        if(digit4 < -2147483648)
-        {
-            printf("数据超出最小值,请重新输入\n");
+            printf("数据超出范围,请重新输入\n");
             continue;
         }
         break;//能顺利运行到这说明输入了一个合格的数字
@@ -3462,9 +3463,8 @@ case 4://查找某个值
         }
     }
     printf("\n");
-    if(cancel == 1)
+    if(cancel == 1)//★ 取消了（EOF）就不算一次查找
     {
-        search++;
         break;
     }
     search++;
@@ -3721,18 +3721,30 @@ case 7://反转显示
         }
         i7++;
     }
-    printf("\n");
+    if(num % 10 != 0)//★ 只有最后一行没满 10 个才补换行
+    {
+        printf("\n");
+    }
     reverse++;
     break;
 }
 case 8://按[录入时的顺序]输出当前数组里的内容
 {
     printf("当前数组(按录入顺序):\n");
+    int n8 = 0;//★ 已打印个数，用来控制每 10 个换行
     for(int i = 0;i < num;i++)
     {
         printf("%d ",data[i]);
+        n8++;
+        if(n8 % 10 == 0)//★ 每 10 个换行，避免 100 个数挤成一行导致折行
+        {
+            printf("\n");
+        }
     }
-    printf("\n");
+    if(n8 % 10 != 0)//★ 最后一行不满 10 个才补换行
+    {
+        printf("\n");
+    }
     output++;
     break;
 }
