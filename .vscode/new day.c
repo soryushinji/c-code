@@ -3683,7 +3683,7 @@ case 6://显示直方图（改进版：动态标签宽度 + 柱子按比例缩�
 
     if(scale > 1)
     {
-        printf("直方图(按数值范围分 %d 档，档宽 %d，每格 = %d 个):\n", binum, binwidth, scale);
+        printf("直方图(按数值范围分 %d 档，档宽 %d,每格 = %d 个):\n", binum, binwidth, scale);
     }
     else
     {
