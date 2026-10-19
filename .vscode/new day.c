@@ -3770,18 +3770,30 @@ printf("再见~~\n");
 //用函数写综合题10
 //函数1：提供菜单栏
 void menu_bar();
-//函数2：录入选项
+//函数2：录入选项并判断是否合格
 void input_option();
-//函数3：判断选项是否合格
-void judge_option();
+
 void input_data();
 //
 
 int main()
 {
+int ch;
+int data[100] = {0};//录入的数据存放在这个数组中
+int num = 0;//记录输入数据的数量
+int input = 0;//记录录入数据次数
+int count = 0;//记录显示统计次数
+int order = 0;//记录升序排序次数
+int search = 0;//记录查找数值次数
+int dudup = 0;//记录去重显示次数
+int histogram = 0;//记录显示直方图次数
+int reverse = 0;//记录反转显示次数
+int output = 0;//记录输出录入数据次数
 menu_bar();//函数1：输出菜单栏
-input_option();//函数2：录入选项
-judge_option()//函数3：判断录入选项是否合格
+input_option();//函数2：录入选项并判断是否合格
+//到这说明录入选项合格
+//开始分九种情况
+
     return 0;
 }
 //开始函数声明
@@ -3802,6 +3814,7 @@ printf("==================================================\n");
 void input_option()//函数2定义
 {
     int ch;
+    int num = 0;
     while(1)//最外层大循环
 {
 int button = 0;//记录每轮选择的数字,每轮开始清零
@@ -3851,11 +3864,6 @@ if(ch != '\n')
     continue;
 }
 //3)输入换行符,输入结束
-}
-}
-
-void judge_option(int button)//函数3定义
-{
 //看输入的选项
 //1)选项>9
 if(button > 9)
@@ -3872,3 +3880,5 @@ if((button >= 2 && button <= 8) && num == 0)//没录入数据就选择2-8
 }
 //选1录入数据或录入数据后选2-8
 }
+}
+
