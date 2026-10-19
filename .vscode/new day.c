@@ -3773,8 +3773,9 @@ void menu_bar();
 //函数2：录入选项并判断是否合格
 int input_option();
 //函数3：选择选项1的情况 
-void input_data();
-
+int input_data();
+//函数4：选择选项2的情况
+void show_stats();
 
 int main()
 {
@@ -3793,7 +3794,7 @@ case 1:
 }
 case 2:
 {
-    
+    show_stats();
     break;
 }
 case 3:
@@ -3922,9 +3923,12 @@ return button;
 }
 }//函数2结束定义
 
-void input_data()//函数3定义
+int input_data()//函数3定义
 {
     int ch;
+    int input = 0;//记录选项1运行的次数
+    int num = 0;//记录输入数据的数量
+    int data[100] = {0};//记录数据的数组
     int pin = 0;//输入错误重新输入时出现提示的记号
     printf("请输入整数(输入 -1 结束,最多 100 个):\n");
     //开始录入数字
@@ -4038,5 +4042,46 @@ void input_data()//函数3定义
     //     printf("%d ",data[i]);
     // }//成功录入
     input++;
-}函数3结束定义
+    return num;
+}//函数3结束定义
 
+void show_stats()//函数4定义
+{
+    int num = input_data();
+    int count = 0;
+    printf("=== 统计信息 ===\n");
+    printf("个数: %d\n",num);
+    //计算输入数据的总和
+    int total = 0;
+    for(int i = 0;i < num;i++)
+    {
+        total += data[i];
+    }
+    printf("总和: %d\n",total);
+    //打印平均数
+    double ave = (double)total / (double)num;
+    printf("平均: %.2f\n",ave);
+    //打印最大值,最小值
+    //先排序,必须输出的是当前的状态,且不能改变原数列的状态
+    int data2[100] = {0};//设置一个替代数组
+    for(int i = 0;i < num;i++)
+    {
+        data2[i] = data[i];
+    }
+    int max = 0;
+    for(int i = 0;i < num;i++)
+    {
+        for(int j = i + 1;j < num;j++)
+        {
+            if(data2[i] <= data2[j])
+            {
+                max = data2[j];
+                data2[j] = data2[i];
+                data2[i] = max;
+            }
+        }
+    }
+    printf("最大值: %d\n",data2[0]);
+    printf("最小值: %d\n",data2[num - 1]);
+    count++;
+}//函数4结束定义
