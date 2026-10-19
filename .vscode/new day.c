@@ -3770,19 +3770,24 @@ printf("再见~~\n");
 //用函数写综合题10
 //函数1：提供菜单栏
 void menu_bar();
-//函数：录入选项
+//函数2：录入选项
 void input_option();
-//函数：录入数据
+//函数3：判断选项是否合格
+void judge_option();
 void input_data();
 //
 
 int main()
 {
-menu_bar();
-
+menu_bar();//函数1：输出菜单栏
+input_option();//函数2：录入选项
+judge_option()//函数3：判断录入选项是否合格
     return 0;
 }
-void menu_bar()
+//开始函数声明
+
+
+void menu_bar()//函数1定义
 {
 printf("================= 数字分析工具箱 =================\n");
 printf("\n");
@@ -3791,4 +3796,79 @@ printf("4) 查找数值      5) 去重显示      6) 显示直方图\n");
 printf("7) 反转显示      8) 显示全部数据  9) 退出\n");
 printf("\n");
 printf("==================================================\n");
+}
+
+
+void input_option()//函数2定义
+{
+    int ch;
+    while(1)//最外层大循环
+{
+int button = 0;//记录每轮选择的数字,每轮开始清零
+printf("请选择 > ");//每一轮选择数字
+ch = getchar();//开始输入选择的数字
+printf("\n");
+//允许一开始输入多个空格
+while(ch == ' ' || ch == '\t')
+{
+    ch = getchar();
+}
+//如果输入EOF
+if(ch == EOF)
+{
+    break;//直接跳出循环
+}
+//不允许输入任何非数字字符,直接输入\n也不行,输入0也不行,01这种也不行
+if(ch < '1' || ch > '9')
+{
+    printf("错误,请输入主菜单提供的选项!\n");
+    printf("\n");
+    //清空缓冲区
+    while(ch != '\n' && ch != EOF) ch = getchar();
+    continue;
+}
+else//输入1-9
+{
+    while(ch >= '1' && ch <= '9')
+    {
+        button = button * 10 + (ch - '0');//记录输入的数字
+        ch = getchar();
+    }
+}
+//如果输入1-9之后输入其他
+//1)输入空格,允许
+while(ch == ' ' || ch == '\t')
+{
+    ch = getchar();
+}
+//2)输入非空格非换行符字符,如1abc
+if(ch != '\n')
+{
+    printf("错误,请输入主菜单提供的选项!\n");
+    printf("\n");
+    //清空缓冲区
+    while(ch != '\n' && ch != EOF) ch = getchar();
+    continue;
+}
+//3)输入换行符,输入结束
+}
+}
+
+void judge_option(int button)//函数3定义
+{
+//看输入的选项
+//1)选项>9
+if(button > 9)
+{
+    printf("错误,请输入主菜单显示的选项!\n");
+    printf("\n");
+    continue;//重新开始选项,不用清理缓冲区
+}
+if((button >= 2 && button <= 8) && num == 0)//没录入数据就选择2-8
+{
+    printf("[提示] 还没有数据，请先使用选项 1 录入数据。\n");
+    printf("\n");
+    continue;//重新循环
+}
+//选1录入数据或录入数据后选2-8
 }
