@@ -4037,51 +4037,51 @@ int input_data()//函数3定义
     }//录数字循环结束
     printf("已录入 %d 个数据\n",num);
     //检查数据是否录入
-    // for(int i = 0;i < num;i++)
-    // {
-    //     printf("%d ",data[i]);
-    // }//成功录入
+    for(int i = 0;i < num;i++)
+    {
+        printf("%d ",data[i]);
+    }//成功录入
     input++;
     return num;
 }//函数3结束定义
 
 void show_stats()//函数4定义
 {
-    int num = input_data();
-    int count = 0;
-    printf("=== 统计信息 ===\n");
-    printf("个数: %d\n",num);
-    //计算输入数据的总和
-    int total = 0;
-    for(int i = 0;i < num;i++)
-    {
-        total += data[i];
-    }
-    printf("总和: %d\n",total);
-    //打印平均数
-    double ave = (double)total / (double)num;
-    printf("平均: %.2f\n",ave);
-    //打印最大值,最小值
-    //先排序,必须输出的是当前的状态,且不能改变原数列的状态
-    int data2[100] = {0};//设置一个替代数组
-    for(int i = 0;i < num;i++)
-    {
-        data2[i] = data[i];
-    }
-    int max = 0;
-    for(int i = 0;i < num;i++)
-    {
-        for(int j = i + 1;j < num;j++)
-        {
-            if(data2[i] <= data2[j])
-            {
-                max = data2[j];
-                data2[j] = data2[i];
-                data2[i] = max;
-            }
-        }
-    }
-    printf("最大值: %d\n",data2[0]);
-    printf("最小值: %d\n",data2[num - 1]);
-    count++;
+    // int num = input_data();
+    // int count = 0;
+    // printf("=== 统计信息 ===\n");
+    // printf("个数: %d\n",num);
+    // //计算输入数据的总和
+    // int total = 0;
+    // for(int i = 0;i < num;i++)
+    // {
+    //     total += data[i];
+    // }
+    // printf("总和: %d\n",total);
+    // //打印平均数
+    // double ave = (double)total / (double)num;
+    // printf("平均: %.2f\n",ave);
+    // //打印最大值,最小值
+    // //先排序,必须输出的是当前的状态,且不能改变原数列的状态
+    // int data2[100] = {0};//设置一个替代数组
+    // for(int i = 0;i < num;i++)
+    // {
+    //     data2[i] = data[i];
+    // }
+    // int max = 0;
+    // for(int i = 0;i < num;i++)
+    // {
+    //     for(int j = i + 1;j < num;j++)
+    //     {
+    //         if(data2[i] <= data2[j])
+    //         {
+    //             max = data2[j];
+    //             data2[j] = data2[i];
+    //             data2[i] = max;
+    //         }
+    //     }
+    // }
+    // printf("最大值: %d\n",data2[0]);
+    // printf("最小值: %d\n",data2[num - 1]);
+    // count++;
 }//函数4结束定义
