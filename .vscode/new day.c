@@ -3923,7 +3923,7 @@ long long fbnq(int n)
 }
 #endif
 //斐波那契循环方式
-
+#if 0 
 int main()
 {
     long long fei[1024] = {0};
@@ -3950,4 +3950,45 @@ int main()
     }
     return 0;
 }
+#endif
+//！！扫雷游戏！！
+void input_menu();//输入游戏菜单
 
+int main()
+{
+int chess[9][9] = {35};
+while(1)
+{
+    int button;
+    input_menu();
+    scanf("%d",&button);
+    if(button == 0)//选择
+    {
+        printf("游戏结束~~\n");
+        break;
+    }
+//打印棋盘
+    printf("     1 2 3 4 5 6 7 8 9\n");
+    printf("    ------------------\n");
+    for(int i = 0;i < 9;i++)
+    {
+        printf("%d | ",i + 1);
+        for(int j = 0;j < 9;j++)
+        {
+            printf("%c ",chess[i][j]);
+        }
+        printf("\n");
+    }
+
+}
+    return 0;
+}
+
+void input_menu()
+{
+    printf("====================== 扫  雷 ======================\n");
+    printf("   9 x 9 格子,10 颗雷\n");
+    printf("   1) 开始游戏\n");
+    printf("   0) 退出\n");
+    printf("====================================================\n");  
+}
