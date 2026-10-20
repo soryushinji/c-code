@@ -3767,6 +3767,7 @@ printf("再见~~\n");
 }
 #endif
 //现在开始函数的学习
+#if 0
 //输入一个整数，顺序打印整数的每一位
 void input(int n);//函数声明
 int main()
@@ -3785,6 +3786,46 @@ void input(int n)//函数定义
         printf("%d ",n % 10);
     }
     else//n < 10
+    {
+        printf("%d ",n);
+    }
+}
+#endif
+//三道递归题测试
+//1正序逆序输入函数
+void print_num(int n);//正序函数
+void print_num_rev(int n);//逆序函数
+int main()
+{
+    int num = 0;
+    scanf("%d",&num);
+    printf("正序输出:\n");
+    print_num(num);
+    printf("\n");
+    printf("逆序输出:\n");
+    print_num_rev(num);
+    return 0;
+}
+void print_num(int n)
+{
+    if(n >= 10)
+    {
+        print_num(n / 10);
+        printf("%d ",n % 10);
+    }
+    else
+    {
+        printf("%d ",n);
+    }
+}
+void print_num_rev(int n)
+{
+    if(n >= 10)
+    {
+        printf("%d ",n % 10);
+        print_num_rev(n / 10);
+    }
+    else
     {
         printf("%d ",n);
     }
