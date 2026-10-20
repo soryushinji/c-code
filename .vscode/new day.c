@@ -3900,25 +3900,25 @@ void to_base(int n, int base)
 }
 #endif
 //求第n个斐波那契数列
-int fbnq(int n);
+
+long long fbnq(int n);
 int main()
 {
     int num = 0;
     scanf("%d",&num);
-    printf("第%d个斐波那契数列为:%d",num,fbnq(num));
+    printf("第%d个斐波那契数列为:%lld",num,fbnq(num));
     return 0;
 }
-fbnq(int n)
+long long fbnq(int n)
 {
-    int i1 = 1;
-    int i2 = 1;
     if(n <= 2)
     {
         return 1;
     }
     else
     {
-        int num = fbnq(n - 1) + fbnq(n - 2);
+        long long num = fbnq(n - 1) + fbnq(n - 2);
         return num;
     }
 }
+
