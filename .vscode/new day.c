@@ -3793,6 +3793,7 @@ void input(int n)//函数定义
 #endif
 //三道递归题测试
 //1正序逆序输入函数
+#if 0
 void print_num(int n);//正序函数
 void print_num_rev(int n);//逆序函数
 int main()
@@ -3829,4 +3830,29 @@ void print_num_rev(int n)
     {
         printf("%d ",n);
     }
+}
+#endif
+//2汉诺塔(返回步数)
+long long hanoi(int n, char from, char to, char via);
+int main()
+{
+    int num = 0;
+    printf("请输入盘子数:");
+    scanf("%d",&num);
+    int n = hanoi(num,'A','B','C');
+    printf("需要%d步",n);
+    return 0;
+}
+long long hanoi(int n,char from,char to,char via)
+{
+    long long s = 0;
+
+    if (n == 0) return 0;
+
+    s += hanoi(n - 1, from, via, to);           /* 1. 上面 n-1 个 -> 中转柱 */
+    printf("盘 %d: %c -> %c\n", n, from, to);   /* 2. 自己这一盘 */
+    s += 1;
+    s += hanoi(n - 1, via, to, from);           /* 3. 上面 n-1 个 -> 目标柱 */
+
+    return s;
 }
