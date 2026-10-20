@@ -3953,10 +3953,16 @@ int main()
 #endif
 //！！扫雷游戏！！
 void input_menu();//输入游戏菜单
-
 int main()
 {
 int chess[9][9] = {35};
+for(int i = 0;i < 9;i++)
+{
+    for(int j = 0;j < 9;j++)
+    {
+        chess[i][j] = '#';
+    }
+}
 while(1)
 {
     int button;
