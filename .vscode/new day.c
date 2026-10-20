@@ -3964,7 +3964,7 @@ for(int i = 0;i < 9;i++)
     }
 }
 //设置里棋盘
-int turechess[9][9] = {1};
+int turechess[9][9] = {0};
 srand((unsigned)time(NULL));//设置种子
 //设置雷的地址
 int area[20] = {0};
@@ -3978,17 +3978,38 @@ for(int i = 0;i < 20;i += 2)
     turechess[area[i]][area[i + 1]] = '*';
 }
 //设置空格子的显示数
+//下面这段我直接复制的AI的
+#define N 9
 
-for(int i = 1;i < 8;i++)
+int mine[N][N];     /* 1 = 雷，0 = 空 */
+int num[N][N];      /* 每格周围雷数 */
+
+/* ---------- 算 num ---------- */
+for (int r = 0; r < N; r++)              /* ★ 0..8，全部 81 格 */
 {
-    for(int j = 1;j < 8;j++)
+    for (int c = 0; c < N; c++)
     {
-        if((turechess[i][j] == '*'))
-        {
+        int cnt = 0;
 
+        for (int dr = -1; dr <= 1; dr++)      /* 行偏移 */
+        {
+            for (int dc = -1; dc <= 1; dc++)  /* 列偏移 */
+            {
+                if (dr == 0 && dc == 0) continue;   /* ★ 自己不算 */
+
+                int nr = r + dr;
+                int nc = c + dc;
+
+                /* ★★ 越界检查 —— 这一行是灵魂 */
+                if (nr < 0 || nr >= N || nc < 0 || nc >= N) continue;
+
+                if (mine[nr][nc] == 1) cnt++;
+            }
         }
+        num[r][c] = cnt;
     }
 }
+//复制到此为止
     for(int i = 0;i < 9;i++)//打印里棋盘
     {
         printf("%d | ",i + 1);
@@ -3998,16 +4019,30 @@ for(int i = 1;i < 8;i++)
         }
         printf("\n");
     }
-while(1)
+do
 {
-    int button;
+    int button = 0;
+    int hang = 0;
+    int lie = 0;
     input_menu();
     scanf("%d",&button);
-    if(button == 0)//选择
+switch(button)
+{
+    case 1:
     {
-        printf("游戏结束~~\n");
+
         break;
     }
+    case 0:
+    {
+        break;
+    }
+    default:
+    {
+        printf("选择错误,请重新选择\n");
+        break;
+    }
+}
 //打印棋盘
     printf("     1 2 3 4 5 6 7 8 9\n");
     printf("    ------------------\n");
@@ -4020,8 +4055,10 @@ while(1)
         }
         printf("\n");
     }
+    printf("请输入您要选择的格子(几行几列):");
+    scanf("%d %d",&hang,&lie);
 
-}
+}while(button);
     return 0;
 }
 
