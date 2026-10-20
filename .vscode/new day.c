@@ -3955,7 +3955,7 @@ int main()
 void input_menu();//输入游戏菜单
 int main()
 {
-int chess[9][9] = {35};
+int chess[9][9];//设置表棋盘
 for(int i = 0;i < 9;i++)
 {
     for(int j = 0;j < 9;j++)
@@ -3963,6 +3963,41 @@ for(int i = 0;i < 9;i++)
         chess[i][j] = '#';
     }
 }
+//设置里棋盘
+int turechess[9][9] = {1};
+srand((unsigned)time(NULL));//设置种子
+//设置雷的地址
+int area[20] = {0};
+for(int i = 0;i < 20;i++)
+{
+    area[i] = rand() % (8 - 0 + 1) + 0;
+}
+//将雷录入到里棋盘中
+for(int i = 0;i < 20;i += 2)
+{
+    turechess[area[i]][area[i + 1]] = '*';
+}
+//设置空格子的显示数
+
+for(int i = 1;i < 8;i++)
+{
+    for(int j = 1;j < 8;j++)
+    {
+        if((turechess[i][j] == '*'))
+        {
+
+        }
+    }
+}
+    for(int i = 0;i < 9;i++)//打印里棋盘
+    {
+        printf("%d | ",i + 1);
+        for(int j = 0;j < 9;j++)
+        {
+            printf("%c ",turechess[i][j]);
+        }
+        printf("\n");
+    }
 while(1)
 {
     int button;
