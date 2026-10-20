@@ -3900,7 +3900,7 @@ void to_base(int n, int base)
 }
 #endif
 //求第n个斐波那契数列
-
+#if 0
 long long fbnq(int n);
 int main()
 {
@@ -3921,4 +3921,31 @@ long long fbnq(int n)
         return num;
     }
 }
-
+#endif
+//斐波那契循环方式
+int main()
+{
+    long long fei[1024] = {0};
+    int num = 0;
+    scanf("%d",&num);
+    if(num <= 2)
+    {
+        printf("第%d个斐波那契数为:%lld",num,1);
+    }
+    else
+    {
+        for(int i = 0;i <= num - 1;i++)
+        {
+            if(i <= 1)
+            {
+                fei[i] = 1;
+            }
+            else
+            {
+                fei[i] = fei[i - 1] + fei[i - 2];
+            }
+        }
+        printf("第%d个斐波那契数为:%lld",num,fei[num - 1]);
+    }
+    return 0;
+}
