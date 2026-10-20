@@ -3781,8 +3781,8 @@ void input(int n)//函数定义
 {
     if(n >= 10)
     {
+        input(n / 10);
         printf("%d ",n % 10);
-        return input(n / 10);
     }
     else//n < 10
     {
