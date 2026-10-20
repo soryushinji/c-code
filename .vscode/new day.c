@@ -3923,7 +3923,7 @@ long long fbnq(int n)
 }
 #endif
 //斐波那契循环方式
-#if 0
+
 int main()
 {
     long long fei[1024] = {0};
@@ -3950,4 +3950,4 @@ int main()
     }
     return 0;
 }
-#endif
+
