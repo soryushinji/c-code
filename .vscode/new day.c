@@ -3832,7 +3832,8 @@ void print_num_rev(int n)
     }
 }
 #endif
-//2汉诺塔(返回步数)
+//2汉诺塔(返回步数)。。。看不懂
+#if 0
 long long hanoi(int n, char from, char to, char via);
 int main()
 {
@@ -3855,4 +3856,44 @@ long long hanoi(int n,char from,char to,char via)
     s += hanoi(n - 1, via, to, from);           /* 3. 上面 n-1 个 -> 目标柱 */
 
     return s;
+}
+#endif
+//十进制数转2~16进制
+void to_base(int n, int base);    /* base 取 2~16 */
+int main()
+{
+    printf("请输入整数和要转换成的进制:");
+    int n = 0;
+    int base = 0;
+    scanf("%d %d",&n,&base);
+    printf("转换后的数为：\n");
+    to_base(n,base);
+    return 0;
+}
+void to_base(int n, int base)
+{
+    if(n >= base)
+    {
+        to_base((n / base),base);
+        if(n % base < 10)
+        {
+            printf("%d",n % base);
+        }
+        else
+        {
+            printf("%c",'A' + ((n % base) - 10));
+        }
+    }
+    else//n < base
+    {
+        if(n < 10)
+        {
+            printf("%d",n);
+        }
+        else//n >= 10
+        {
+            printf("%c",'A' + (n - 10));
+        }
+    }
+
 }
