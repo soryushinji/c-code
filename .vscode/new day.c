@@ -4046,6 +4046,13 @@ void alpha_pos(char arr[1024],int num)
 void show_menu(void);//函数1：打印菜单
 int read_choice(void);//函数2：返回选项
 void do_input(void);//函数3：；录入数据
+void do_stats(void);//函数4：统计显示
+void do_sort(void);//函数5：升序显示
+void do_find(void);//函数6：查找数据
+void do_dedup(void);//函数7：去重显示
+void do_histogram(void);//函数8：显示直方图
+void do_reverse(void);//函数9：反转显示
+void do_show_all(void);//函数10：显示全部
 int ch;
 int data[100] = {0};//录入的数据存放在这个数组中
 int num = 0;//记录输入数据的数量
@@ -4071,13 +4078,54 @@ if((button >= 2 && button <= 8) && num == 0)//没录入数据就选择2-8
 }
 switch(button)
 {
+    case 1:
+    {
+        do_input();
+        break;
+    }
+    case 2:
+    {
+        do_stats();
+        break;
+    }
+    case 3:
+    {
+        
+        break;
+    }
+    case 4:
+    {
 
+        break;
+    }
+    case 5:
+    {
 
+        break;
+    }
+    case 6:
+    {
+        
+        break;
+    }
+    case 7:
+    {
 
+        break;
+    }
+    case 8:
+    {
+
+        break;
+    }
     case 9:
     {
         break;
     }
+}
+if(button == 9)
+{
+    break;
 }
 }
 
@@ -4156,8 +4204,6 @@ return button;
 }
 }//函数2结束
 void do_input(void)//函数3
-{
-case 1:
 {
     int pin = 0;//输入错误重新输入时出现提示的记号
     printf("请输入整数(输入 -1 结束,最多 100 个):\n");
@@ -4272,8 +4318,44 @@ case 1:
     //     printf("%d ",data[i]);
     // }//成功录入
     input++;
-    return 0;
-}
 }//函数3结束
+void do_stats(void)//函数4
+{
+    printf("=== 统计信息 ===\n");
+    printf("个数: %d\n",num);
+    //计算输入数据的总和
+    int total = 0;
+    for(int i = 0;i < num;i++)
+    {
+        total += data[i];
+    }
+    printf("总和: %d\n",total);
+    //打印平均数
+    double ave = (double)total / (double)num;
+    printf("平均: %.2f\n",ave);
+    //打印最大值,最小值
+    //先排序,必须输出的是当前的状态,且不能改变原数列的状态
+    int data2[100] = {0};//设置一个替代数组
+    for(int i = 0;i < num;i++)
+    {
+        data2[i] = data[i];
+    }
+    int max = 0;
+    for(int i = 0;i < num;i++)
+    {
+        for(int j = i + 1;j < num;j++)
+        {
+            if(data2[i] <= data2[j])
+            {
+                max = data2[j];
+                data2[j] = data2[i];
+                data2[i] = max;
+            }
+        }
+    }
+    printf("最大值: %d\n",data2[0]);
+    printf("最小值: %d\n",data2[num - 1]);
+    count++;
+}//函数4结束
 
 //！！战初版扫雷游戏！！10.23
