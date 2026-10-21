@@ -737,8 +737,6 @@ printf("录入 %d 次,统计 %d 次,排序 %d 次,查找 %d 次,\n",input,count,
 printf("去重 %d 次,直方图 %d 次,反转 %d 次,显示 %d 次。\n",dudup,histogram,reverse,output);
 printf("再见~~\n");
 //十道前8章综合题结束~~
-     return 0;
-}
 
 
     return 0;

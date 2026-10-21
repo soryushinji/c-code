@@ -4045,8 +4045,7 @@ void alpha_pos(char arr[1024],int num)
 //综合题10函数版
 void show_menu(void);//函数1：打印菜单
 int read_choice(void);//函数2：返回选项
-int main()
-{
+
 int ch;
 int data[100] = {0};//录入的数据存放在这个数组中
 int num = 0;//记录输入数据的数量
@@ -4058,6 +4057,8 @@ int dudup = 0;//记录去重显示次数
 int histogram = 0;//记录显示直方图次数
 int reverse = 0;//记录反转显示次数
 int output = 0;//记录输出录入数据次数
+int main()
+{
 show_menu();
 while(1)
 {
@@ -4076,7 +4077,9 @@ printf("7) 反转显示      8) 显示全部数据  9) 退出\n");
 printf("\n");
 printf("==================================================\n");
 }//函数1结束
-int read_choice(int ch,int num)//函数2
+int read_choice(void)//函数2
+{
+while(1)
 {
 int button = 0;//记录每轮选择的数字,每轮开始清零
 printf("请选择 > ");//每一轮选择数字
@@ -4090,7 +4093,7 @@ while(ch == ' ' || ch == '\t')
 //如果输入EOF
 if(ch == EOF)
 {
-    return;//直接跳出循环
+    return 0;//直接跳出循环
 }
 //不允许输入任何非数字字符,直接输入\n也不行,输入0也不行,01这种也不行
 if(ch < '1' || ch > '9')
@@ -4140,6 +4143,7 @@ if((button >= 2 && button <= 8) && num == 0)//没录入数据就选择2-8
     continue;//重新循环
 }
 return button;
+}
 }//函数2结束
 
 
