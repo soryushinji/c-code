@@ -4053,6 +4053,7 @@ void do_dedup(void);//函数7：去重显示
 void do_histogram(void);//函数8：显示直方图
 void do_reverse(void);//函数9：反转显示
 void do_show_all(void);//函数10：显示全部
+void result_output(void);//函数11：打印最后统计结果
 int ch;
 int data[100] = {0};//录入的数据存放在这个数组中
 int num = 0;//记录输入数据的数量
@@ -4096,7 +4097,7 @@ switch(button)
     case 4:
     {
         int cancel =  do_find();
-        if(cancel == 0)
+        if(cancel == 1)
         {
             break;
         }
@@ -4105,22 +4106,22 @@ switch(button)
     }
     case 5:
     {
-        void do_dedup();
+        do_dedup();
         break;
     }
     case 6:
     {
-        
+        do_histogram();
         break;
     }
     case 7:
     {
-
+        do_reverse();
         break;
     }
     case 8:
     {
-
+        do_show_all();
         break;
     }
     case 9:
@@ -4133,7 +4134,7 @@ if(button == 9)
     break;
 }
 }
-
+result_output();
     return 0;
 }//main函数结束
 void show_menu(void)//函数1
@@ -4565,4 +4566,163 @@ void do_dedup(void)//函数7
     }
     dudup++;
 }//函数7结束
-//！！战初版扫雷游戏！！10.23
+void do_histogram(void)//函数8
+{
+    int binum = 0;//档数
+    int i6, j6;
+    int data6[100] = {0};//设置一个替代数组
+
+    for(i6 = 0;i6 < num;i6++)
+    {
+        data6[i6] = data[i6];
+    }
+
+    //求最大值最小值（用副本排序，不动原数组）
+    int max6 = 0;
+    for(i6 = 0;i6 < num;i6++)
+    {
+        for(j6 = i6 + 1;j6 < num;j6++)
+        {
+            if(data6[i6] <= data6[j6])
+            {
+                max6 = data6[j6];
+                data6[j6] = data6[i6];
+                data6[i6] = max6;
+            }
+        }
+    }
+    max6 = data6[0];
+    int min6 = data6[num - 1];
+
+    //计算档数
+    if((max6 - min6 + 1) < 10)
+    {
+        binum = max6 - min6 + 1;
+    }
+    else
+    {
+        binum = 10;
+    }
+
+    int binwidth = (max6 - min6 + binum) / binum;//档宽
+    int bin[10] = {0};
+    //将数据计入各档
+    for(i6 = 0;i6 < binum;i6++)
+    {
+        int note = 0;
+        for(j6 = 0;j6 < num;j6++)
+        {
+            if(data[j6] >= (min6 + i6 * binwidth) && data[j6] <= (min6 + (i6 + 1) * binwidth - 1))
+            {
+                note++;
+            }
+        }
+        bin[i6] = note;
+    }
+
+    // ---------- ★ 新增 1：算标签宽度 = 最大值的位数 ----------
+    int w = 1;
+    {
+        int t = (max6 >= 0) ? max6 : -max6;
+        while(t >= 10)
+        {
+            w++;
+            t /= 10;
+        }
+    }
+    // （负数还要多留一位放负号）
+    if(min6 < 0)
+    {
+        w++;
+    }
+
+    // ---------- ★ 新增 2：柱子上限 + 比例缩放 ----------
+    int maxbar = 45;//柱子最长 45 格（80 列 - 标签 - 人数）
+    //缩放基准用【最大的那一档】，不是总数 num —— 否则柱子会很短
+    int maxbin = 0;
+    for(i6 = 0;i6 < binum;i6++)
+    {
+        if(bin[i6] > maxbin)
+        {
+            maxbin = bin[i6];
+        }
+    }
+    int scale = (maxbin + maxbar - 1) / maxbar;//每格代表几个人
+    if(scale < 1)
+    {
+        scale = 1;
+    } 
+    if(scale > 1)
+    {
+        printf("直方图(按数值范围分 %d 档，档宽 %d,每格 = %d 个):\n", binum, binwidth, scale);
+    }
+    else
+    {
+        printf("直方图(按数值范围分 %d 档，档宽 %d):\n", binum, binwidth);
+    }
+
+    for(i6 = 0;i6 < binum;i6++)
+    {
+        int lo = min6 + i6 * binwidth;
+        int hi = min6 + (i6 + 1) * binwidth - 1;
+        int bars = (bin[i6] + scale - 1) / scale;//向上取整，有数据至少画 1 格
+
+        printf("%*d-%*d | ", w, lo, w, hi);//★ 动态宽度，自动对齐
+        for(j6 = 0;j6 < bars;j6++)
+        {
+            printf("#");
+        }
+        for(j6 = bars;j6 < maxbar;j6++)
+        {
+            printf(" ");
+        }
+        printf(" %d 个\n", bin[i6]);
+    }
+    histogram++;
+}//函数8结束
+void do_reverse(void)//函数9
+{
+    printf("反转显示:\n");
+    int i7 = 1;
+    for(int i = num - 1;i >= 0;i--)
+    {
+        printf("%d ",data[i]);
+        if(i7 % 10 == 0)
+        {
+            printf("\n");
+        }
+        i7++;
+    }
+    if(num % 10 != 0)//★ 只有最后一行没满 10 个才补换行
+    {
+        printf("\n");
+    }
+    reverse++;
+}//函数9结束
+void do_show_all(void)//函数10
+{
+    printf("当前数组(按录入顺序):\n");
+    int n8 = 0;//★ 已打印个数，用来控制每 10 个换行
+    for(int i = 0;i < num;i++)
+    {
+        printf("%d ",data[i]);
+        n8++;
+        if(n8 % 10 == 0)//★ 每 10 个换行，避免 100 个数挤成一行导致折行
+        {
+            printf("\n");
+        }
+    }
+    if(n8 % 10 != 0)//★ 最后一行不满 10 个才补换行
+    {
+        printf("\n");
+    }
+    output++;
+}//函数10结束
+void result_output(void)//函数11
+{
+printf("本次会话使用情况:\n");
+printf("录入 %d 次,统计 %d 次,排序 %d 次,查找 %d 次,\n",input,count,order,search);
+printf("去重 %d 次,直方图 %d 次,反转 %d 次,显示 %d 次。\n",dudup,histogram,reverse,output);
+printf("再见~~\n");
+}//函数11结束
+//！！初版扫雷游戏！！10.23
