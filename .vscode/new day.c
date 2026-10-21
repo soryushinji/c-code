@@ -4048,7 +4048,7 @@ int read_choice(void);//函数2：返回选项
 void do_input(void);//函数3：；录入数据
 void do_stats(void);//函数4：统计显示
 void do_sort(void);//函数5：升序显示
-void do_find(void);//函数6：查找数据
+int do_find(void);//函数6：查找数据
 void do_dedup(void);//函数7：去重显示
 void do_histogram(void);//函数8：显示直方图
 void do_reverse(void);//函数9：反转显示
@@ -4095,12 +4095,17 @@ switch(button)
     }
     case 4:
     {
-        void do_find();
+        int cancel =  do_find();
+        if(cancel == 0)
+        {
+            break;
+        }
+        search++;
         break;
     }
     case 5:
     {
-
+        void do_dedup();
         break;
     }
     case 6:
@@ -4392,7 +4397,7 @@ void do_sort(void)//函数5
     }
     order++;
 }//函数5结束
-void do_find(void)//函数6
+int do_find(void)//函数6
 {
     int cancel  = 0;
     int pin4 = 0;
@@ -4517,10 +4522,47 @@ void do_find(void)//函数6
         }
     }
     printf("\n");
-    if(cancel == 1)//★ 取消了（EOF）就不算一次查找
-    {
-        break;
-    }
-    search++;
+    return cancel;
 }//函数6结束
+void do_dedup(void)//函数7
+{
+    printf("去重后(保持原有顺序):\n");
+    //生成一个影武者数组
+    int data5[100] = {0};
+    for(int i = 0;i < num;i++)
+    {
+        data5[i] = data[i];
+    }
+    //找重复
+    for(int i = 0;i < num;i++)
+    {
+        for(int j = i + 1;j < num;j++)
+        {
+            if(data5[i] == data5[j])
+            {
+                data5[j] = -1;//将所有有重复只保留一项,剩下的都赋值-1(数据中没有-1)
+            }
+        }
+    }
+    //去重显示
+    int n5 = 0;//打印时换行的标志
+    for(int i = 0;i < num;i++)
+    {
+        if(data5[i] != -1)
+        {
+            printf("%d ",data5[i]);
+            n5++;
+        }
+        if((n5 % 10 == 0)  && n5 != 0)//每十个换行
+        {
+            printf("\n");
+            n5 -= 10;//换行时n5清零,重新判断
+        }
+    }
+    if(n5 != 0)//★ 只有最后一行没满 10 个才补换行，否则会多一个空行
+    {
+        printf("\n");
+    }
+    dudup++;
+}//函数7结束
 //！！战初版扫雷游戏！！10.23
