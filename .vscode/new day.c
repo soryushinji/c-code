@@ -3951,12 +3951,12 @@ int main()
     return 0;
 }
 #endif
-int main()
-{
-int n = -1 << 1;
-printf("%d",n);
-    return 0;
-}
+// int main()
+// {
+// int n = -1 << 1;
+// printf("%d",n);
+//     return 0;
+// }
 
 //！！战初版扫雷游戏！！10.23
 
