@@ -4045,7 +4045,7 @@ void alpha_pos(char arr[1024],int num)
 //综合题10函数版
 void show_menu(void);//函数1：打印菜单
 int read_choice(void);//函数2：返回选项
-
+void do_input(void);//函数3：；录入数据
 int ch;
 int data[100] = {0};//录入的数据存放在这个数组中
 int num = 0;//记录输入数据的数量
@@ -4060,13 +4060,29 @@ int output = 0;//记录输出录入数据次数
 int main()
 {
 show_menu();
-while(1)
+int button;
+while((button = read_choice()) != 0)
 {
-read_choice();
+if((button >= 2 && button <= 8) && num == 0)//没录入数据就选择2-8
+{
+    printf("[提示] 还没有数据，请先使用选项 1 录入数据。\n");
+    printf("\n");
+    continue;//重新循环
+}
+switch(button)
+{
+
+
+
+    case 9:
+    {
+        break;
+    }
+}
 }
 
     return 0;
-}
+}//main函数结束
 void show_menu(void)//函数1
 {
 printf("================= 数字分析工具箱 =================\n");
@@ -4136,15 +4152,128 @@ if(button > 9)
     printf("\n");
     continue;//重新开始选项,不用清理缓冲区
 }
-if((button >= 2 && button <= 8) && num == 0)//没录入数据就选择2-8
-{
-    printf("[提示] 还没有数据，请先使用选项 1 录入数据。\n");
-    printf("\n");
-    continue;//重新循环
-}
 return button;
 }
 }//函数2结束
-
+void do_input(void)//函数3
+{
+case 1:
+{
+    int pin = 0;//输入错误重新输入时出现提示的记号
+    printf("请输入整数(输入 -1 结束,最多 100 个):\n");
+    //开始录入数字
+    while(1)//录数字循环,条件暂定为1
+    { 
+        int num1 = 0;//记录位数,位数过大,报错
+        int neg = 0;//记录输入+-的情况
+        int digit = 0;//用于记录每次输入的数字
+        if(pin != 0)
+        {
+            printf("请输入整数:\n");
+        }
+        pin = 0;//每轮在输入这段话之后清零,防止对后面造成影响
+        ch = getchar();
+        //经典每轮都要清理EOF,这个不能忘
+        if(ch == EOF)
+        {
+            break;//直接跳出循环
+        }
+        //允许输入多个空格
+        while(ch == ' ' || ch == '\t')
+        {
+            ch = getchar();
+        }
+        //如果一开始输入\n或是输入数字+\n,将\n从缓冲区里清除
+        while(ch == '\n')//不需要清除,这样在输入整数时可随意空格,换行,直到输入-1或是非整数
+        {
+            ch = getchar();
+        }//如果清除换行的放在清空格的前面,当输入数字+空格+换行时,读完数字下轮循环时因为是空格在前就会跳过
+         //清除换行的代码,清除了空格之后还剩换行被当作非数字字符（虽然它也确实是）报错
+        //输入+-号的情况
+        if(ch == '+' || ch == '-')
+        {
+            if(ch == '-')
+            {
+                neg = 1;
+            }
+            ch = getchar();
+        }
+        //输入非数字字符的情况
+        if(ch < '0' || ch > '9')
+        {
+            printf("错误,请输入整数!\n");
+            printf("请从错误的地方开始输入数据\n");
+            pin++;
+            //清理缓冲区
+            while(ch != '\n' && ch != EOF) ch = getchar();
+            continue;
+        }
+        //输入数字
+        while(ch >= '0' && ch <= '9')
+        {
+            digit = digit * 10 + (ch - '0');
+            num1++;//确定位数
+            ch = getchar();
+        }
+        //输入数字之后
+        //因为是类似:12 23 23 32 42这样输入数字+空格+数字...的形式
+        //所以数字之后读到空格就重新开始循环
+        //如果数字后面是非空非换行格字符
+        if((ch < '0' || ch > '9') && ch != ' ' && ch != '\t' && ch != '\n')
+        {
+            printf("错误,请输入整数!\n");
+            printf("请从错误的地方开始输入数据\n");
+            pin++;
+            //清空缓冲区
+            while(ch != '\n' && ch != EOF) ch = getchar();
+            continue;
+        }
+        //如果输入空格
+        //重新循环,是要重新循环,但要先把后面的运行一遍
+        // if(ch == ' ' || ch == '\t')//这样会导致数据的丢失
+        // {
+        //     continue;
+        // }
+        //如果输入\n
+        //所有输入的东西到了缓冲区里,在循环里运行
+        //现在所有的问题均排场,到这说明成功输入了数字
+        //如果是负数,要给digit转负
+        if(neg)
+        {
+            digit = -digit;
+        }
+        //如果是-1,退出
+        if(digit == -1)
+        {
+            break;
+        }
+        //如果超过int的范围
+        if(num1 > 9)
+        {
+            printf("数据超出范围,请重新输入\n");
+            printf("请从超值的地方开始输入数据\n");
+            //清空缓冲区
+            while(ch != '\n' && ch != EOF) ch = getchar();
+            continue;
+        }
+        //如果超过数组范围
+        if(num >=100)
+        {
+            printf("[提示]已满100个\n");
+            break;//跳出循环
+        }
+        data[num] = digit;//将输入的数字录给数组,先看超没超,再给数组赋值
+        num++;//能运行到这说明成功录入了一个数据,数组的下标+1
+    }//录数字循环结束
+    printf("已录入 %d 个数据\n",num);
+    //检查数据是否录入
+    // for(int i = 0;i < num;i++)
+    // {
+    //     printf("%d ",data[i]);
+    // }//成功录入
+    input++;
+    return 0;
+}
+}//函数3结束
 
 //！！战初版扫雷游戏！！10.23
