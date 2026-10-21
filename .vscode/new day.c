@@ -3957,8 +3957,27 @@ int main()
 // printf("%d",n);
 //     return 0;
 // }
+//9.11 1
+double minnum(double x,double y);
+int main()
+{
+    double x,y;
+    printf("请输入两个数:");
+    scanf("%lf %lf",&x,&y);
+    printf("%f",minnum(x,y));
+    return 0;
+}
+double minnum(double x,double y)
+{
+    if(x > y)
+    {
+        return y;
+    }
+    else
+    {
+        return x;
+    }
+}
+//综合题10函数版
 
 //！！战初版扫雷游戏！！10.23
-
-//综合题10函数版 10.23
-
