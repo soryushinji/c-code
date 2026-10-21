@@ -3980,6 +3980,8 @@ double minnum(double x,double y)
     }
 }
 #endif
+//9.11 10
+#if 0
 int to_binary(int num,int n);
 int main()
 {
@@ -4000,6 +4002,42 @@ int to_binary(int num,int n)
     else//num < n
     {
         printf("%d",num);
+    }
+}
+#endif
+//9.11 7
+void output(char arr[1024],int num);
+int main()
+{
+    int ch;
+    char arr[1024];
+    int i = 0;
+    while(ch != '\n')
+    {
+        ch = getchar();
+        arr[i] = ch;
+        i++;
+    }
+    output(arr[1024],i);
+    return 0;
+}
+void output(char arr[1024],int num)
+{
+    for(int i = 0;i < num - 1;i++)
+    {
+        if(arr[i] < 'A' || (arr[i] > 'Z' && arr[i] < 'a') || arr[i] > 'z')
+        {
+            printf("不是所有字符都是字母\n");
+            break;
+        }
+        else if(arr[i] >= 'A' && arr[i] <= 'Z')
+        {
+            printf("%c在字母表中的位置为:%d",'ch',('ch' - 'A' + 1));
+        }
+        else
+        {
+            printf("%c在字母表中的位置为:%d",'ch',('ch' - 'a' + 1));
+        }
     }
 }
 //综合题10函数版
