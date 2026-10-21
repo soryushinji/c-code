@@ -4012,18 +4012,22 @@ int main()
     int ch;
     char arr[1024];
     int i = 0;
-    while(ch != '\n')
+    while(ch != EOF)
     {
+        if(ch == EOF)
+        {
+            break;
+        }
         ch = getchar();
         arr[i] = ch;
         i++;
     }
-    output(arr[1024],i);
+    output(arr,i);
     return 0;
 }
 void output(char arr[1024],int num)
 {
-    for(int i = 0;i < num - 1;i++)
+    for(int i = 0;i < num;i++)
     {
         if(arr[i] < 'A' || (arr[i] > 'Z' && arr[i] < 'a') || arr[i] > 'z')
         {
@@ -4032,11 +4036,11 @@ void output(char arr[1024],int num)
         }
         else if(arr[i] >= 'A' && arr[i] <= 'Z')
         {
-            printf("%c在字母表中的位置为:%d",'ch',('ch' - 'A' + 1));
+            printf("%c在字母表中的位置为:%d\n",arr[i],(arr[i] - 'A' + 1));
         }
         else
         {
-            printf("%c在字母表中的位置为:%d",'ch',('ch' - 'a' + 1));
+            printf("%c在字母表中的位置为:%d\n",arr[i],(arr[i] - 'a' + 1));
         }
     }
 }
