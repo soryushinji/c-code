@@ -4006,58 +4006,37 @@ int to_binary(int num,int n)
 }
 #endif
 //9.11 7
-void output(char arr[1024],int num);
-void alpha_put(char arr[1024],int num);
+void alpha_pos(char arr[1024],int num);
 int main()
 {
     int ch;
     char arr[1024];
     int i = 0;
-    while(ch != EOF)
+    while((ch = getchar()) != EOF)
     {
-        if(ch == EOF)
-        {
-            break;
-        }
-        ch = getchar();
         arr[i] = ch;
         i++;
         //跳过换行
-        while(ch == '\n')
-        {
-            ch = getchar();
-        }
     }
-    output(arr,i);
-    alpha_put(arr,i);
+    alpha_pos(arr,i);
     return 0;
 }
-void output(char arr[1024],int num)
+void alpha_pos(char arr[1024],int num)
 {
     for(int i = 0;i < num;i++)
     {
-        if(arr[i] < 'A' || (arr[i] > 'Z' && arr[i] < 'a') || arr[i] > 'z')
-        {
-            printf("不是所有字符都是字母\n");
-            break;
-        }
+    if(arr[i] < 'A' || (arr[i] > 'Z' && arr[i] < 'a') || arr[i] > 'z')
+    {
+        printf("不是所有字符都是字母\n");
+        printf("%d\n",-1);
     }
-}
-void alpha_put(char arr[1024],int num)
-{
-    for(int i = 0;i < num;i++)
-    {
-    if(arr[i] >= 'A' && arr[i] <= 'Z')
+    else if(arr[i] >= 'A' && arr[i] <= 'Z')
     {
         printf("%c在字母表中的位置为:%d\n",arr[i],(arr[i] - 'A' + 1));
     }
-    else if(arr[i] > 'a' && arr[i] < 'z')
+    else if(arr[i] >= 'a' && arr[i] <= 'z')
     {
         printf("%c在字母表中的位置为:%d\n",arr[i],(arr[i] - 'a' + 1));
-    }
-    else
-    {
-        printf("%d\n",-1);
     }
     }
 }
