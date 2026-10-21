@@ -4090,12 +4090,12 @@ switch(button)
     }
     case 3:
     {
-        
+        do_sort();
         break;
     }
     case 4:
     {
-
+        void do_find();
         break;
     }
     case 5:
@@ -4357,5 +4357,170 @@ void do_stats(void)//函数4
     printf("最小值: %d\n",data2[num - 1]);
     count++;
 }//函数4结束
-
+void do_sort(void)//函数5
+{
+    printf("升序后的数据显示为:\n");
+    int data3[100] = {0};//设置一个替代数组
+    for(int i = 0;i < num;i++)
+    {
+        data3[i] = data[i];
+    }
+    //先升序
+    int min = 0;
+    for(int i = 0;i < num;i++)
+    {
+        for(int j = i + 1;j < num;j++)
+        {
+            if(data3[i] >= data3[j])
+            {
+                min = data3[j];
+                data3[j] = data3[i];
+                data3[i] = min;
+            }
+        }
+        //再打印
+        //数组位数不一,怎么打印的一致整齐,算了
+        printf("%d ",data3[i]);
+        if((i + 1) % 10 == 0)//每打印10个换行
+        {
+            printf("\n");
+        }
+    }
+    if(num % 10 != 0)//★ 只有最后一行没满 10 个才补换行，否则会多一个空行
+    {
+        printf("\n");
+    }
+    order++;
+}//函数5结束
+void do_find(void)//函数6
+{
+    int cancel  = 0;
+    int pin4 = 0;
+    int digit4 = 0;
+    int num4 = 0;//★ 数位数，用来判断有没有超出 int 范围
+    printf("请输入您要查找的值: ");
+    //输入查找的数据,又要考虑那一堆
+    while(1)//还是要循环。。。
+    {
+        digit4 = 0;
+        num4 = 0;//★ 每轮清零
+        int neg4 = 0;//+-号,你懂的
+        if(pin4 != 0)
+        {
+            printf("请输入您要查找的值:");
+        }
+        pin4 = 0;
+        ch = getchar();
+        //EOF,不多说了
+        if(ch == EOF)
+        {
+            cancel = 1;
+            break;//直接结束
+        }
+        //允许一开始输入多个空格
+        while(ch == ' ' || ch == '\t')
+        {
+            ch = getchar();
+        }
+        //输入+-号
+        if(ch == '+' || ch == '-')
+        {
+            if(ch == '-')
+            {
+                neg4 = 1;
+            }
+            ch = getchar();
+        }
+        //如果输入非数字
+        if(ch < '0' || ch > '9')
+        {
+            printf("错误,请重新输入!\n");
+            pin4++;
+            //清空缓冲区
+            while(ch != '\n' && ch != EOF) ch = getchar();
+            continue;
+        }
+        //输入数字
+        while(ch >= '0' && ch <= '9')
+        {
+            digit4 = digit4 * 10 + (ch - '0');
+            num4++;//★ 数位数
+            ch = getchar();
+        }
+        //输入数字之后
+        //可以继续输入空格
+        while(ch == ' ' || ch == '\t')
+        {
+            ch = getchar();
+        }
+        //不能输入其他字符,除了换行符
+        if((ch < '0' || ch > '9') && ch != '\n')
+        {
+            printf("错误,请重新输入!\n");
+            pin4++;
+            //清空缓冲区
+            while(ch != '\n' && ch != EOF) ch = getchar();
+            continue;
+        }
+        //输入\n,结束
+        //是负数
+        if(neg4)
+        {
+            digit4 = -digit4;
+        }
+        //不能超值
+        if(num4 > 9)//★ 10 位数一定超出 int（int 最大 10 位但不超过 2147483647）
+        {
+            printf("数据超出范围,请重新输入\n");
+            continue;
+        }
+        break;//能顺利运行到这说明输入了一个合格的数字
+    }
+    //开始对比查找
+    int count4 = 0;//相同数据出现的次数
+    int i4[100] = {0};
+    int j4 = 0;
+    for(int i = 0;i < num;i++)
+    {
+        if(digit4 == data[i])
+        {
+            count4++;
+            i4[j4] = i;
+            j4++;
+        }
+    }
+    if(count4 == 0)//没有
+    {
+        printf("您要查找的值在录入的数据中不存在\n");
+    }
+    else
+    {
+        printf("找到了 %d 处 ,位置分别是",count4);
+        for(int i = 0;i < count4;i++)
+        {
+            if(i == count4 - 1)
+            {
+                if(count4 > 1)
+                {
+                    printf("和");
+                }
+                printf("第 %d 个",i4[i] + 1);
+            }
+            else if(i == count4 - 2)
+            {
+                printf("第 %d 个",i4[i] + 1);
+            }
+            else
+            {
+                printf("第 %d 个,",i4[i] + 1);
+            }
+        }
+    }
+    printf("\n");
+    if(cancel == 1)//★ 取消了（EOF）就不算一次查找
+    {
+        break;
+    }
+    search++;
+}//函数6结束
 //！！战初版扫雷游戏！！10.23
