@@ -3958,6 +3958,7 @@ int main()
 //     return 0;
 // }
 //9.11 1
+#if 0
 double minnum(double x,double y);
 int main()
 {
@@ -3976,6 +3977,29 @@ double minnum(double x,double y)
     else
     {
         return x;
+    }
+}
+#endif
+int to_binary(int num,int n);
+int main()
+{
+    printf("请输入十进制数和转换进制:");
+    int num,n;
+    scanf("%d %d",&num,&n);
+    printf("转换后的数为:");
+    to_binary(num,n);
+    return 0;
+}
+int to_binary(int num,int n)
+{
+    if(num >= n)
+    {
+        to_binary(num / n,n);
+        printf("%d",num % n);
+    }
+    else//num < n
+    {
+        printf("%d",num);
     }
 }
 //综合题10函数版
