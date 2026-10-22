@@ -4739,7 +4739,7 @@ void game(void);//游戏函数
 void mine_set(void);//布雷函数(顺便设置表棋盘)
 void inner_set(void);//里盘布置
 void chess_print(void);//表棋盘输出
-void select_cell(void);//选择格子
+void select_cell(int num);//选择格子
 int main()
 {
     srand((unsigned)time(NULL));
@@ -4875,21 +4875,34 @@ void chess_print(void)
     //     printf("\n");
     // }//验证完毕
 }
-void game(void)//游戏函数
+void select_cell(int num)//检查格子函数
 {
-    chess_print();//输出棋盘
-}//游戏函数结束
-void select_cell(void)
+while(1)
 {
     int row,col;
     printf("请选择您要检查的格子( 行 列):");
     scanf("%d %d",&row,&col);
     //用里棋盘对应的格子替换表棋盘
     outer[row][col] = inner[row][col];
+    num++;
     if(outer[row][col] == '*')
     {
         printf("*******************boom!!!~~~~~*****************\n");
         printf("******************你被炸死了!!*******************\n");
-
+        chess_print();
+        break;//跳出循环
+    }
+    chess_print();//输出棋盘
+    if(num >= 71)
+    {
+        printf("恭喜您找出了所有的雷！\n");
+        break;
     }
 }
+}//查格子函数结束
+void game(void)//游戏函数
+{
+    int num = 0;//记录每局查的格子数量
+    chess_print();//输出棋盘
+    select_cell(num);
+}//游戏函数结束
