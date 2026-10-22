@@ -4942,7 +4942,9 @@ void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项
 int read_people(int num);//录入人数
 void read_list(int num);//录入名单
-void show_lisr(int sum);
+void show_lisr(int sum);//显示名单
+void choice_N(int n);//抽N人（抽一人可看作特殊情况）
+srand((unsigned int)time(NULL));
 int main()
 {
     print_menu();//输出菜单
@@ -4965,12 +4967,43 @@ int main()
                 show_lisr(sum);
                 break;
             }
-            case 3:
+            case 3://抽一人
             {
+                choice_N(1);
                 break;
             }
-            case 4:
+            case 4://抽N人
             {
+                int N;
+                //录入输入的数字
+                while(1)
+                {
+                    int ret;
+                    printf("请输入人数 > ");
+                    ret = scanf("%d",&N);
+                    if(ret == EOF)//输入EOF的情况
+                    {
+                        printf("错误\n");
+                        return -1;
+                    }
+                    //输入非数字的情况
+                    if(ret == 0)
+                    {
+                        printf("错误,一个合适的正整数!\n");
+                        //清空缓冲区
+                        while((ch = getchar()) != '\n'&& ch != EOF);
+                        continue;
+                    }
+                    //输入数字但不是选项提供的
+                    if(num > sum || num < 1)
+                    {
+                        printf("错误,请输入范围内的数字!\n");
+                        continue;
+                    }
+                    //能到这说明是个合格的选项
+                    break;
+                }
+                choice_N(N);
                 break;
             }
             case 5:
@@ -5139,3 +5172,7 @@ void show_lisr(int sum)//显示名单函数
         }
     }
 }//显示名单函数
+void choice_N(int n)//抽N人函数
+{
+
+}//抽N人函数结束
