@@ -4930,3 +4930,59 @@ void game(void)//游戏函数
     select_cell();
 }//游戏函数结束
 #endif
+//函数题1（过度题）
+//随机点名器
+int button = 0;//录入选项
+int ch;//清空缓冲区，排除非法输入情况
+void print_menu(void);//输出菜单函数
+int reak_chosen(void);//录入选项
+int main()
+{
+    print_menu();//输出菜单
+    do//开始循环
+    {
+        button = reak_chosen();//录入选项
+    }while(button != 0);
+    return 0;
+}
+void print_menu(void)//输出菜单函数
+{
+    printf("========== 随 机 点 名 器 ==========\n");
+    printf("  1) 录入名单\n");
+    printf("  2) 显示名单\n");
+    printf("  3) 抽 1 人\n");
+    printf("  4) 抽 N 人（不重复）\n");
+    printf("  5) 重置（清空已抽记录）\n");
+    printf("  6) 统计\n");
+    printf("  0) 退出\n");
+    printf("====================================\n");
+}//输出菜单函数结束
+int reak_chosen(void)//录入选项函数
+{
+while(1)//循环
+{
+    int button = 0;
+    printf("请选择 >> ");
+    //输入非数字的情况
+    if((scanf("%d",&button)) == 0)
+    {
+        printf("错误,请输入选项提供的数字!\n");
+        //清空缓冲区
+        // while(ch != '\n'&& ch != EOF) ch = getchar();
+        continue;
+    }
+    if(ch == EOF)//输入EOF的情况
+    {
+        printf("错误\n");
+        return 0;
+    }
+    //输入数字但不是选项提供的
+    if(button > 6)
+    {
+        printf("错误,请输入选项提供的数字!\n");
+        continue;
+    }
+    //能到这说明是个合格的选项
+    return button;
+}
+}//录入选项函数结束
