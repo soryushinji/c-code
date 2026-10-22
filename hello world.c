@@ -37,7 +37,6 @@ int main()
     //     }
     // }
     // printf("%*d",97,-14);
-
-
+printf("%c",41);
     return 0;
 }

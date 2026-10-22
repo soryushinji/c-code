@@ -4814,7 +4814,7 @@ void mine_set(void)//布雷函数
     //将雷输入里棋盘中
     for(int i = 0;i < 20;i += 2)
     {
-        inner[mine[i]][mine[i + 1]] = '1';//方便设置里棋盘时显示非雷格的数字,实际玩时则显示为'*'
+        inner[mine[i]][mine[i + 1]] = '1';
     }
     //开始设置表棋盘
     for(int i = 1;i <= 9;i++)
@@ -4832,7 +4832,9 @@ void inner_set(void)//里棋盘的非雷格要显示周围8格的雷数
         int k = 0;
         for(int j = 1;j <= 9;j++)
         {
-            inner[i][j] = (inner[i - 1][j - 1] + inner[i][j - 1] + inner[i + 1][j - 1] + inner[i + 1][j] + inner[i + 1][j + 1] + inner[i][j + 1] + inner[i - 1][j + 1] + inner[i - 1][j]) - 8 * '0';
+            
+            k = (int)(inner[i - 1][j - 1] + inner[i][j - 1] + inner[i + 1][j - 1] + inner[i + 1][j] + inner[i + 1][j + 1] + inner[i][j + 1] + inner[i - 1][j + 1] + inner[i - 1][j]) - 8 * '0';
+            inner[i][j] = (char)('0' + k);
         }
     }//里棋盘布置完成
 }
