@@ -5111,7 +5111,9 @@ void show_lisr(int sum)//显示名单函数
     printf("  ----     ---------     ----------\n");
     for(int i = 0;i < sum;i++)
     {
-        printf(" %d     %d           ",i + 1,ID[i]);
+        if(i + 1 < 10)
+        {
+        printf("  %d         %d              ",i + 1,ID[i]);
         if(ID[i] == picked_ID[i])//检查是否被选中
         {
             printf("已选中");
@@ -5121,5 +5123,19 @@ void show_lisr(int sum)//显示名单函数
             printf("未选中");
         }
         printf("\n");
+        }
+        else
+        {
+        printf("  %d        %d              ",i + 1,ID[i]);
+        if(ID[i] == picked_ID[i])//检查是否被选中
+        {
+            printf("已选中");
+        }
+        else
+        {
+            printf("未选中");
+        }
+        printf("\n");
+        }
     }
 }//显示名单函数
