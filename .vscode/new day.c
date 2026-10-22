@@ -4739,6 +4739,7 @@ void game(void);//游戏函数
 void mine_set(void);//布雷函数(顺便设置表棋盘)
 void inner_set(void);//里盘布置
 void chess_print(void);//表棋盘输出
+void select_cell(void);//选择格子
 int main()
 {
     srand((unsigned)time(NULL));
@@ -4791,10 +4792,6 @@ while(1)
     }
 }
 }//函数2结束
-void game(void)//游戏函数
-{
-    chess_print();//输出棋盘
-}//游戏函数结束
 void mine_set(void)//布雷函数
 {
     int mine[20] = {0};
@@ -4864,16 +4861,35 @@ void chess_print(void)
         }
         printf("\n");
     }
-    //输出里棋盘(验证)
-    printf("  1 2 3 4 5 6 7 8 9\n");
-    printf("  _ _ _ _ _ _ _ _ _\n");
-    for(int i = 1;i <= 9;i++)//输出里棋盘(验证)
+    printf("\n");
+    // //输出里棋盘(验证)
+    // printf("  1 2 3 4 5 6 7 8 9\n");
+    // printf("  _ _ _ _ _ _ _ _ _\n");
+    // for(int i = 1;i <= 9;i++)//输出里棋盘(验证)
+    // {
+    //     printf("%d|",i);
+    //     for(int j = 1;j <= 9;j++)
+    //     {
+    //         printf("%c ",inner[i][j]);
+    //     }
+    //     printf("\n");
+    // }//验证完毕
+}
+void game(void)//游戏函数
+{
+    chess_print();//输出棋盘
+}//游戏函数结束
+void select_cell(void)
+{
+    int row,col;
+    printf("请选择您要检查的格子( 行 列):");
+    scanf("%d %d",&row,&col);
+    //用里棋盘对应的格子替换表棋盘
+    outer[row][col] = inner[row][col];
+    if(outer[row][col] == '*')
     {
-        printf("%d|",i);
-        for(int j = 1;j <= 9;j++)
-        {
-            printf("%c ",inner[i][j]);
-        }
-        printf("\n");
+        printf("*******************boom!!!~~~~~*****************\n");
+        printf("******************你被炸死了!!*******************\n");
+
     }
 }
