@@ -4942,6 +4942,7 @@ void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项
 int read_people(int num);//录入人数
 void read_list(int num);//录入名单
+void show_lisr(int sum);
 int main()
 {
     print_menu();//输出菜单
@@ -4959,8 +4960,9 @@ int main()
                 read_list(num);
                 break;
             }
-            case 2:
+            case 2://显示名单
             {
+                show_lisr(sum);
                 break;
             }
             case 3:
@@ -5068,7 +5070,7 @@ while(1)
 void read_list(int num)//录入名单函数
 {
     printf("请依次输入 %d 个学号\n",num);
-    for(int i = 0;i < num;i++)
+    for(int i = sum - num;i < sum;i++)
     {
         int stunum = 0;//记录每个学生的学号
         printf("第 %d 个 > ",i + 1);
@@ -5103,3 +5105,21 @@ void read_list(int num)//录入名单函数
     }    
     printf("已录入 %d 人\n",num);
 }//录入名单函数结束
+void show_lisr(int sum)//显示名单函数
+{
+    printf("  序号        学号          状态\n");
+    printf("  ----     ---------     ----------\n");
+    for(int i = 0;i < sum;i++)
+    {
+        printf(" %d     %d           ",i + 1,ID[i]);
+        if(ID[i] == picked_ID[i])//检查是否被选中
+        {
+            printf("已选中");
+        }
+        else
+        {
+            printf("未选中");
+        }
+        printf("\n");
+    }
+}//显示名单函数
