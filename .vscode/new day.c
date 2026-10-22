@@ -4731,22 +4731,30 @@ printf("再见~~\n");
 #endif
 //!!初版扫雷游戏!!
 int button = 0;//判断是否开始游戏的条件
+char outer[11][11];//表层棋盘
+char inner[11][11];//里层棋盘
 void menu_print(void);//函数1：菜单输出
 int choice_print(void);//函数2：输入选项
+void game(void);//游戏函数
+void mine_set(void);//布雷函数(顺便设置表棋盘)
+void inner_set(void);//里盘布置
+void chess_print(void);//表棋盘输出
 int main()
 {
     while(1)
     {
+        mine_set();//每局开始雷随机
+        inner_set();//里棋盘布置
         button = 0;
-        menu_print();
+        menu_print();//菜单输出
         button = choice_print();
         if(button == 0)
         {
             break;
         }
-        else
+        else//选择1
         {
-
+            game();
         }
     }
     return 0;
@@ -4782,3 +4790,74 @@ while(button == 0)
     }
 }
 }//函数2结束
+void game(void)//游戏函数
+{
+    chess_print();//输出棋盘
+}//游戏函数结束
+void mine_set(void)//布雷函数
+{
+    srand((unsigned)time(NULL));
+    int mine[20] = {0};
+    //设置雷的种子
+    for(int i = 0;i < 20;i++)
+    {
+        mine[i] = rand() % (9 - 1 + 1) + 1;
+    }
+    //先给里棋盘所有的格子都赋值0
+    for(int i = 0;i < 11;i++)
+    {
+        for(int j = 0;j < 11;j++)
+        {
+            inner[i][j] = '0';//防止雷格的干扰
+        }
+    }
+    //将雷输入里棋盘中
+    for(int i = 0;i < 10;i += 2)
+    {
+        inner[mine[i]][mine[i + 1]] = '1';//方便设置里棋盘时显示非雷格的数字,实际玩时则显示为'*'
+    }
+    //开始设置表棋盘
+    for(int i = 1;i <= 9;i++)
+    {
+        for(int j = 1;j <= 9;j++)
+        {
+            outer[i][j] = '#';
+        }
+    }
+}//布雷函数结束
+void inner_set(void)//里棋盘的非雷格要显示周围8格的雷数
+{
+    for(int i = 1;i <= 9;i++)
+    {
+        for(int j = 1;j <= 9;j++)
+        {
+            inner[i][j] = (inner[i - 1][j - 1] + inner[i][j - 1] + inner[i + 1][j - 1] + inner[i + 1][j] + inner[i + 1][j + 1] + inner[i][j + 1] + inner[i - 1][j + 1] + inner[i - 1][j]) - '0';
+        }
+    }//里棋盘布置完成
+}
+void chess_print(void)
+{
+    printf("  1 2 3 4 5 6 7 8 9\n");
+    printf("  _ _ _ _ _ _ _ _ _\n");
+    for(int i = 1;i <= 9;i++)//输出表棋盘
+    {
+        printf("%d|",i);
+        for(int j = 1;j <= 9;j++)
+        {
+            printf("%c ",outer[i][j]);
+        }
+        printf("\n");
+    }
+    //输出里棋盘(验证)
+    printf("  1 2 3 4 5 6 7 8 9\n");
+    printf("  _ _ _ _ _ _ _ _ _\n");
+    for(int i = 1;i <= 9;i++)//输出里棋盘(验证)
+    {
+        printf("%d|",i);
+        for(int j = 1;j <= 9;j++)
+        {
+            printf("%c",inner[i][j]);
+        }
+        printf("\n");
+    }
+}
