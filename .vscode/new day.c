@@ -5068,5 +5068,38 @@ while(1)
 void read_list(int num)//录入名单函数
 {
     printf("请依次输入 %d 个学号\n",num);
-    
+    for(int i = 0;i < num;i++)
+    {
+        int stunum = 0;//记录每个学生的学号
+        printf("第 %d 个 > ",i + 1);
+        while(1)
+        {
+            int ret;
+            ret = scanf("%d",&stunum);
+            if(ret == EOF)//输入EOF的情况
+            {
+            printf("错误\n");
+            return 0;
+            }
+            //输入非数字的情况
+            if(ret == 0)
+            {
+            printf("错误,请输入选项提供的数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n'&& ch != EOF);
+            continue;
+            }
+            //输入数字
+            if(stunum < 1)
+            {
+            printf("错误,请输入选项提供的数字!\n");
+            continue;
+            }
+            //能到这说明是个合格的学号
+            break;
+        }
+        ID[i] = stunum;//将学号录入
+        printf("\n");
+    }    
+    printf("已录入 %d 人\n",num);
 }//录入名单函数结束
