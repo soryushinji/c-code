@@ -4945,6 +4945,8 @@ void read_list(int num);//录入名单
 void show_lisr(int sum);//显示名单
 void choice_N(int n);//抽N人（抽一人可看作特殊情况）
 int total = 0;//记录抽中的人数
+void clear_choice(void);//重置抽中人数
+void print_num(void);//统计各项数据
 int main()
 {
     srand((unsigned)time(NULL));//设置随机数种子
@@ -5007,12 +5009,14 @@ int main()
                 choice_N(N);
                 break;
             }
-            case 5:
+            case 5://重置
             {
+                clear_choice();
                 break;
             }
             case 6:
             {
+                print_num();
                 break;
             }
             case 0:
@@ -5200,3 +5204,28 @@ void choice_N(int n)//抽N人函数
     }
 
 }//抽N人函数结束
+void clear_choice(void)//重置函数
+{
+    for(int i = 0;i < sum;i++)
+    {
+        picked_ID[i] = -1;
+    }
+    printf("重置完成\n");
+}//重置函数结束
+void print_num(void)//统计函数
+{
+    int picked_num = 0;
+    double picked_rate = 0.0;
+    for(int i = 0;i < sum;i++)
+    {
+        if(picked_ID[i] != -1)
+        {
+            picked_num++;
+        }
+    }
+    printf("总人数: %d\n",sum);
+    printf("抽中人数: %d\n",picked_num);
+    printf("未抽中人数: %d\n",sum - picked_num);
+    picked_rate = (double)picked_num /(double)sum * 100;
+    printf("完成度: %.2f\n",picked_rate);
+}//统计函数结束
