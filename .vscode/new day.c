@@ -4944,6 +4944,7 @@ int read_people(int num);//录入人数
 void read_list(int num);//录入名单
 void show_lisr(int sum);//显示名单
 void choice_N(int n);//抽N人（抽一人可看作特殊情况）
+int total = 0;//记录抽中的人数
 int main()
 {
     srand((unsigned)time(NULL));//设置随机数种子
@@ -5174,8 +5175,14 @@ void show_lisr(int sum)//显示名单函数
 }//显示名单函数
 void choice_N(int n)//抽N人函数
 {
+    total += n;
+    int i = 0;
+    // if(total > sum)
+    // {
+    //     printf("[提示] 所有人都抽过了，请先选 5 重置\n");
+    // }
     printf("***** 抽签结果 *****\n");
-    for(int i = 0;i < n;)
+    while(i < n)
     {
         int j = rand() % ((sum - 1) - 0 + 1) + 0;
         if(picked_ID[j] == ID[j])//已经被抽中了
@@ -5185,7 +5192,7 @@ void choice_N(int n)//抽N人函数
         picked_ID[j] = ID[j];
         printf("第 %d 个: %d 号\n",i + 1,ID[j]);
         i++;
-        if(i >= sum)//全部抽过了
+        if((i >= total - sum) && (total - sum) > 0)//全部抽过了
         {
             printf("[提示] 所有人都抽过了，请先选 5 重置\n");
             break;
