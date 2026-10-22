@@ -4936,8 +4936,8 @@ int button = 0;//录入选项
 int sum = 0;//录入的总人数
 int num = 0;//每次录入的人数
 int ch;//清空缓冲区，排除非法输入情况
-int ID[50] = {-1};//录入学号
-int picked_ID[50] = {-1};//记录抽中的学号
+int ID[50] = {0};//录入学号
+int picked_ID[50] = {0};//记录抽中的学号
 void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项
 int read_people(int num);//录入人数
@@ -4946,6 +4946,7 @@ void show_lisr(int sum);//显示名单
 void choice_N(int n);//抽N人（抽一人可看作特殊情况）
 int total = 0;//记录抽中的人数
 void clear_choice(void);//重置抽中人数
+int picked_note = 0;//重置的标志
 void print_num(void);//统计各项数据
 int main()
 {
@@ -4954,7 +4955,7 @@ int main()
     do//开始循环
     {
         num = 0;
-        button = reak_chosen();//录入选项
+        button = read_chosen();//录入选项
         switch(button)
         {
             case 1://录入名单
@@ -5044,7 +5045,7 @@ void print_menu(void)//输出菜单函数
     printf("  0) 退出\n");
     printf("====================================\n");
 }//输出菜单函数结束
-int reak_chosen(void)//录入选项函数
+int read_chosen(void)//录入选项函数
 {
 while(1)//循环
 {
@@ -5181,10 +5182,10 @@ void choice_N(int n)//抽N人函数
 {
     total += n;
     int i = 0;
-    // if(total > sum)
-    // {
-    //     printf("[提示] 所有人都抽过了，请先选 5 重置\n");
-    // }
+    if(picked_note != 0)//说明重置了
+    {
+        total = 0;
+    }
     printf("***** 抽签结果 *****\n");
     while(i < n)
     {
@@ -5210,6 +5211,7 @@ void clear_choice(void)//重置函数
     {
         picked_ID[i] = -1;
     }
+    picked_note++;
     printf("重置完成\n");
 }//重置函数结束
 void print_num(void)//统计函数
@@ -5218,14 +5220,15 @@ void print_num(void)//统计函数
     double picked_rate = 0.0;
     for(int i = 0;i < sum;i++)
     {
-        if(picked_ID[i] != -1)
+        if(picked_ID[i] != 0)
         {
             picked_num++;
+            printf("%d ",picked_num);
         }
     }
     printf("总人数: %d\n",sum);
     printf("抽中人数: %d\n",picked_num);
     printf("未抽中人数: %d\n",sum - picked_num);
     picked_rate = (double)picked_num /(double)sum * 100;
-    printf("完成度: %.2f\n",picked_rate);
+    printf("完成度: %.2f%%\n",picked_rate);
 }//统计函数结束
