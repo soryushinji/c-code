@@ -4962,22 +4962,24 @@ int reak_chosen(void)//录入选项函数
 while(1)//循环
 {
     int button = 0;
+    int ret;
     printf("请选择 >> ");
-    //输入非数字的情况
-    if((scanf("%d",&button)) == 0)
-    {
-        printf("错误,请输入选项提供的数字!\n");
-        //清空缓冲区
-        // while(ch != '\n'&& ch != EOF) ch = getchar();
-        continue;
-    }
-    if(ch == EOF)//输入EOF的情况
+    ret = scanf("%d",&button);
+    if(button == EOF)//输入EOF的情况
     {
         printf("错误\n");
         return 0;
     }
+    //输入非数字的情况
+    if(ret == 0)
+    {
+        printf("错误,请输入选项提供的数字!\n");
+        //清空缓冲区
+        while((ch = getchar()) != '\n'&& ch != EOF);
+        continue;
+    }
     //输入数字但不是选项提供的
-    if(button > 6)
+    if(button > 6 || button < 0)
     {
         printf("错误,请输入选项提供的数字!\n");
         continue;
