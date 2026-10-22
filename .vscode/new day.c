@@ -4944,9 +4944,9 @@ int read_people(int num);//录入人数
 void read_list(int num);//录入名单
 void show_lisr(int sum);//显示名单
 void choice_N(int n);//抽N人（抽一人可看作特殊情况）
-srand((unsigned int)time(NULL));
 int main()
 {
+    srand((unsigned)time(NULL));//设置随机数种子
     print_menu();//输出菜单
     do//开始循环
     {
@@ -4995,7 +4995,7 @@ int main()
                         continue;
                     }
                     //输入数字但不是选项提供的
-                    if(num > sum || num < 1)
+                    if(N > sum || N < 1)
                     {
                         printf("错误,请输入范围内的数字!\n");
                         continue;
@@ -5174,5 +5174,22 @@ void show_lisr(int sum)//显示名单函数
 }//显示名单函数
 void choice_N(int n)//抽N人函数
 {
+    printf("***** 抽签结果 *****\n");
+    for(int i = 0;i < n;)
+    {
+        int j = rand() % ((sum - 1) - 0 + 1) + 0;
+        if(picked_ID[j] == ID[j])//已经被抽中了
+        {
+            continue;
+        }
+        picked_ID[j] = ID[j];
+        printf("第 %d 个: %d 号\n",i + 1,ID[j]);
+        i++;
+        if(i >= sum)//全部抽过了
+        {
+            printf("[提示] 所有人都抽过了，请先选 5 重置\n");
+            break;
+        }
+    }
 
 }//抽N人函数结束
