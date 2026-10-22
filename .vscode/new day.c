@@ -4739,7 +4739,7 @@ void game(void);//游戏函数
 void mine_set(void);//布雷函数(顺便设置表棋盘)
 void inner_set(void);//里盘布置
 void chess_print(void);//表棋盘输出
-void select_cell(int num);//选择格子
+void select_cell(void);//选择格子
 int main()
 {
     srand((unsigned)time(NULL));
@@ -4794,12 +4794,7 @@ while(1)
 }//函数2结束
 void mine_set(void)//布雷函数
 {
-    int mine[20] = {0};
-    //设置雷的种子
-    for(int i = 0;i < 20;i++)
-    {
-        mine[i] = rand() % (9 - 1 + 1) + 1;
-    }
+    int placed = 0;
     //先给里棋盘所有的格子都赋值0
     for(int i = 0;i < 11;i++)
     {
@@ -4809,9 +4804,14 @@ void mine_set(void)//布雷函数
         }
     }
     //将雷输入里棋盘中
-    for(int i = 0;i < 20;i += 2)
+    /* ② 放 10 颗，不重复 */
+    while (placed < 10)
     {
-        inner[mine[i]][mine[i + 1]] = '1';
+        int r = rand() % 9 + 1;      /* 1..9 ✓ */
+        int c = rand() % 9 + 1;
+        if (inner[r][c] == '1') continue;   /* ★ 已经有雷就重抽 */
+        inner[r][c] = '1';
+        placed++;
     }
     //开始设置表棋盘
     for(int i = 1;i <= 9;i++)
@@ -4875,16 +4875,39 @@ void chess_print(void)
     //     printf("\n");
     // }//验证完毕
 }
-void select_cell(int num)//检查格子函数
+void select_cell(void)//检查格子函数
 {
 while(1)
 {
     int row,col;
     printf("请选择您要检查的格子( 行 列):");
-    scanf("%d %d",&row,&col);
     //用里棋盘对应的格子替换表棋盘
+    if (scanf("%d %d", &row, &col) != 2)
+    {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+    printf("输入有误\n");
+    continue;
+    }
+    if (row < 1 || row > 9 || col < 1 || col > 9)
+    {
+    printf("坐标非法！请输入 1~9\n");
+    continue;
+    }
     outer[row][col] = inner[row][col];
-    num++;
+    int opened = 0;
+    for (int i = 1; i <= 9; i++)
+    {
+        for (int j = 1; j <= 9; j++)
+        {
+            if (outer[i][j] != '#') 
+            {
+                opened++;
+            }
+        }
+    }
+
+if (opened >= 71) { printf("恭喜您找出了所有的雷！\n"); break; }
     if(outer[row][col] == '*')
     {
         printf("*******************boom!!!~~~~~*****************\n");
@@ -4893,7 +4916,7 @@ while(1)
         break;//跳出循环
     }
     chess_print();//输出棋盘
-    if(num >= 71)
+    if(opened >= 71)
     {
         printf("恭喜您找出了所有的雷！\n");
         break;
@@ -4902,7 +4925,6 @@ while(1)
 }//查格子函数结束
 void game(void)//游戏函数
 {
-    int num = 0;//记录每局查的格子数量
     chess_print();//输出棋盘
-    select_cell(num);
+    select_cell();
 }//游戏函数结束
