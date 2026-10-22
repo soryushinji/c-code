@@ -4741,6 +4741,7 @@ void inner_set(void);//里盘布置
 void chess_print(void);//表棋盘输出
 int main()
 {
+    srand((unsigned)time(NULL));
     while(1)
     {
         mine_set();//每局开始雷随机
@@ -4769,7 +4770,7 @@ void menu_print(void)//函数1
 }//函数1结束
 int choice_print(void)//函数2
 {
-while(button == 0)
+while(1)
 {
     int button = 0;//选项
     printf("请选择>>");
@@ -4781,7 +4782,7 @@ while(button == 0)
     else if(button == 0)
     {
         printf("退出游戏\n");
-        break;
+        return 0;
     }
     else
     {
@@ -4796,7 +4797,6 @@ void game(void)//游戏函数
 }//游戏函数结束
 void mine_set(void)//布雷函数
 {
-    srand((unsigned)time(NULL));
     int mine[20] = {0};
     //设置雷的种子
     for(int i = 0;i < 20;i++)
@@ -4812,7 +4812,7 @@ void mine_set(void)//布雷函数
         }
     }
     //将雷输入里棋盘中
-    for(int i = 0;i < 10;i += 2)
+    for(int i = 0;i < 20;i += 2)
     {
         inner[mine[i]][mine[i + 1]] = '1';//方便设置里棋盘时显示非雷格的数字,实际玩时则显示为'*'
     }
@@ -4829,9 +4829,10 @@ void inner_set(void)//里棋盘的非雷格要显示周围8格的雷数
 {
     for(int i = 1;i <= 9;i++)
     {
+        int k = 0;
         for(int j = 1;j <= 9;j++)
         {
-            inner[i][j] = (inner[i - 1][j - 1] + inner[i][j - 1] + inner[i + 1][j - 1] + inner[i + 1][j] + inner[i + 1][j + 1] + inner[i][j + 1] + inner[i - 1][j + 1] + inner[i - 1][j]) - '0';
+            inner[i][j] = (inner[i - 1][j - 1] + inner[i][j - 1] + inner[i + 1][j - 1] + inner[i + 1][j] + inner[i + 1][j + 1] + inner[i][j + 1] + inner[i - 1][j + 1] + inner[i - 1][j]) - 8 * '0';
         }
     }//里棋盘布置完成
 }
@@ -4856,7 +4857,7 @@ void chess_print(void)
         printf("%d|",i);
         for(int j = 1;j <= 9;j++)
         {
-            printf("%c",inner[i][j]);
+            printf("%c ",inner[i][j]);
         }
         printf("\n");
     }
