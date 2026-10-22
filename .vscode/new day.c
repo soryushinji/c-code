@@ -4730,6 +4730,7 @@ printf("再见~~\n");
 }//函数11结束
 #endif
 //!!初版扫雷游戏!!
+#if 0
 int button = 0;//判断是否开始游戏的条件
 char outer[11][11];//表层棋盘
 char inner[11][11];//里层棋盘
@@ -4928,3 +4929,4 @@ void game(void)//游戏函数
     chess_print();//输出棋盘
     select_cell();
 }//游戏函数结束
+#endif
