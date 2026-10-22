@@ -4827,13 +4827,26 @@ void mine_set(void)//布雷函数
 }//布雷函数结束
 void inner_set(void)//里棋盘的非雷格要显示周围8格的雷数
 {
+    //设置影武者数组
+    char copy[11][11];
+    for(int i = 0;i < 11;i++)
+    {
+        for(int j = 0;j < 11;j++)
+        {
+            copy[i][j] = inner[i][j];
+        }
+    }
     for(int i = 1;i <= 9;i++)
     {
         int k = 0;
         for(int j = 1;j <= 9;j++)
         {
-            
-            k = (int)(inner[i - 1][j - 1] + inner[i][j - 1] + inner[i + 1][j - 1] + inner[i + 1][j] + inner[i + 1][j + 1] + inner[i][j + 1] + inner[i - 1][j + 1] + inner[i - 1][j]) - 8 * '0';
+            if(inner[i][j] == '1')
+            {
+                inner[i][j] = '*';
+                continue;
+            }
+            k = (int)((copy[i - 1][j - 1] - '0')+ (copy[i][j - 1] - '0') + (copy[i + 1][j - 1] - '0') + (copy[i + 1][j] - '0') + (copy[i + 1][j + 1] - '0')+ (copy[i][j + 1] - '0') + (copy[i - 1][j + 1] - '0') + (copy[i - 1][j] - '0'));
             inner[i][j] = (char)('0' + k);
         }
     }//里棋盘布置完成
