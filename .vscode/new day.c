@@ -4,6 +4,7 @@
 #include<string.h>
 #include<windows.h>
 #include<ctype.h>
+#include<math.h>
 // int main()
 // {
     // float salary;
@@ -4043,7 +4044,7 @@ void alpha_pos(char arr[1024],int num)
 }
 #endif
 //综合题10函数版
-
+#if 0
 void show_menu(void);//函数1：打印菜单
 int read_choice(void);//函数2：返回选项
 void do_input(void);//函数3：；录入数据
@@ -4070,7 +4071,7 @@ int main()
 {
 show_menu();
 int button;
-while((button = read_choice()) != 9)
+while((button = read_choice()) != 0)
 {
 if((button >= 2 && button <= 8) && num == 0)//没录入数据就选择2-8
 {
@@ -4727,5 +4728,57 @@ printf("录入 %d 次,统计 %d 次,排序 %d 次,查找 %d 次,\n",input,count,
 printf("去重 %d 次,直方图 %d 次,反转 %d 次,显示 %d 次。\n",dudup,histogram,reverse,output);
 printf("再见~~\n");
 }//函数11结束
+#endif
+//!!初版扫雷游戏!!
+int button = 0;//判断是否开始游戏的条件
+void menu_print(void);//函数1：菜单输出
+int choice_print(void);//函数2：输入选项
+int main()
+{
+    while(1)
+    {
+        button = 0;
+        menu_print();
+        button = choice_print();
+        if(button == 0)
+        {
+            break;
+        }
+        else
+        {
 
-//!!初版扫雷游戏!!10.23
+        }
+    }
+    return 0;
+}
+void menu_print(void)//函数1
+{
+    printf("============ 初 等 扫 雷 ============\n");
+    printf("   9 x 9 棋盘,10 颗雷\n");
+    printf("   1) 开始游戏\n");
+    printf("   0) 退出\n");
+    printf("=====================================\n");
+}//函数1结束
+int choice_print(void)//函数2
+{
+while(button == 0)
+{
+    int button = 0;//选项
+    printf("请选择>>");
+    scanf("%d",&button);
+    if(button == 1)
+    {
+        return button;
+    }
+    else if(button == 0)
+    {
+        printf("退出游戏\n");
+        break;
+    }
+    else
+    {
+        printf("错误,请输入正确的选项\n");
+        continue;
+    }
+}
+}//函数2结束
