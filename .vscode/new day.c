@@ -4043,7 +4043,7 @@ void alpha_pos(char arr[1024],int num)
 }
 #endif
 //综合题10函数版
-#if 0
+
 void show_menu(void);//函数1：打印菜单
 int read_choice(void);//函数2：返回选项
 void do_input(void);//函数3：；录入数据
@@ -4070,7 +4070,7 @@ int main()
 {
 show_menu();
 int button;
-while((button = read_choice()) != 0)
+while((button = read_choice()) != 9)
 {
 if((button >= 2 && button <= 8) && num == 0)//没录入数据就选择2-8
 {
@@ -4207,6 +4207,7 @@ if(button > 9)
     printf("\n");
     continue;//重新开始选项,不用清理缓冲区
 }
+//能到这说明button = 1-9
 return button;
 }
 }//函数2结束
@@ -4726,5 +4727,5 @@ printf("录入 %d 次,统计 %d 次,排序 %d 次,查找 %d 次,\n",input,count,
 printf("去重 %d 次,直方图 %d 次,反转 %d 次,显示 %d 次。\n",dudup,histogram,reverse,output);
 printf("再见~~\n");
 }//函数11结束
-#endif
-//！！初版扫雷游戏！！10.23
+
+//!!初版扫雷游戏!!10.23
