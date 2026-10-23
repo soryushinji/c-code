@@ -5308,6 +5308,7 @@ void read_move(int move,int row,int col);//读入落子
 int g_row = 0;
 int g_col = 0;//作为全局变量,在悔棋时重置棋盘
 int read_undo(int g_row,int g_col);//悔棋
+int is_win(int move);//判断是黑赢还是白赢
 
 int main()
 {
@@ -5508,18 +5509,25 @@ int read_undo(int g_row,int g_col)//悔棋函数
         return n + 1;
     }
 }//悔棋函数结束
-
+int is_win(int move)//判赢函数
+{
+    return 0;
+}//判赢函数结束
 
 void Gobang(void)//五子棋游戏函数
 {
+    move = 0;//每局重新开始时步数清零
     while(1)//游戏需要不断循环,直至游戏结束,这样开启下轮大循环
     {
+        int draw = 0;//判断是否平局
         show_chess();//显示棋盘
         //开始下棋
         int row,col;//每轮决定下的位置
         int note = 0;//判断每轮是否悔棋,作为步数是否增加的标准
+        //开始下棋
         if(move % 2 == 0)//黑下
         {
+            prinf("黑棋第 %d 步\n",black_move + 1);
             printf("轮到 黑棋,请输入 行 列 >> ");
             read_move(move,row,col);//落子
             //落子完了后再确定结果,是否悔棋
@@ -5533,6 +5541,7 @@ void Gobang(void)//五子棋游戏函数
         }
         else//白下
         {
+            printf("白棋第 %d 步\n",move - black_move + 1);
             printf("轮到 白棋,请输入 行 列 >> ");
             read_move(move,row,col);
             //落子完了后再结果,是否悔棋
@@ -5542,5 +5551,35 @@ void Gobang(void)//五子棋游戏函数
                 move++;
             }
         }
+        //下棋结束,开始判断
+        //先判断平局
+        for(int i = 0;i < 19;i++)
+        {
+            for(int j = 0;j < 19;j++)
+            {
+                if(chess[i][j] == '.')//判断是否平局,只需判断是否所有的格子都有棋子
+                {
+                    draw++;
+                }
+            }
+        }
+        if(draw == 0)//说明格子全是棋子了
+        {
+            printf("平局\n");
+            break;
+        }
+        //再判断是黑胜还是白胜
+        draw = is_win(move);//
+        if(draw == -1)
+        {
+            printf("黑方获胜!\n");
+            break;
+        }
+        else if(draw == -2)
+        {
+            printf("白方获胜!\n");
+            break;
+        }
+
     }
 }//游戏函数结束
