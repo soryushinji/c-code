@@ -4932,6 +4932,7 @@ void game(void)//游戏函数
 #endif
 //函数题1（过度题）
 //随机点名器
+#if 0
 int button = 0;//录入选项
 int sum = 0;//录入的总人数
 int num = 0;//每次录入的人数
@@ -4942,7 +4943,7 @@ void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项
 int read_people(int num);//录入人数
 void read_list(int num);//录入名单
-void show_lisr(int sum);//显示名单
+void show_list(int sum);//显示名单
 void choice_N(int n);//抽N人（抽一人可看作特殊情况）
 int total = 0;//记录抽中的人数
 void clear_choice(void);//重置抽中人数
@@ -5180,6 +5181,12 @@ void show_lisr(int sum)//显示名单函数
 }//显示名单函数
 void choice_N(int n)//抽N人函数
 {
+#if 0//原函数
+    if(sum == 0)
+    {
+        printf("[提示] 名单是空的，请先选 1\n");
+        return; 
+    }
     total += n;
     int i = 0;
     if(picked_note != 0)//说明重置了
@@ -5203,13 +5210,56 @@ void choice_N(int n)//抽N人函数
             break;
         }
     }
+#endif
+    int left = 0;
+    int i, j;
+
+    /* ① 名单为空 */
+    if (sum == 0)
+    {
+        printf("[提示] 名单是空的，请先选 1\n");
+        return;
+    }
+    /* ② 先数还剩几个没抽 */
+    for (i = 0; i < sum; i++)
+    {
+        if (!picked_ID[i]) 
+        {
+            left++;
+        }
+    }
+        /* ③ 全抽过了 */
+    if (left == 0)
+    {
+        printf("[提示] 所有人都抽过了，请先选 5 重置\n");
+        return;
+    }
+
+    /* ④ 要抽的比剩下的多 → 改成抽剩下的 */
+    if (n > left)
+    {
+        printf("[提示] 只剩 %d 人，改为抽 %d 人\n", left, left);
+        n = left;
+    }
+
+    /* ⑤ 抽 n 个 */
+    printf("***** 抽签结果 *****\n");
+    for (i = 0; i < n; i++)
+    {
+        do {
+            j = rand() % sum;
+        } while (picked_ID[j]);          /* ★ 抽到"没抽过的"为止 */
+
+        picked_ID[j] = ID[j];
+        printf("第 %d 个: %d 号\n", i + 1, ID[j]);
+    }
 
 }//抽N人函数结束
 void clear_choice(void)//重置函数
 {
     for(int i = 0;i < sum;i++)
     {
-        picked_ID[i] = -1;
+        picked_ID[i] = 0;
     }
     picked_note++;
     printf("重置完成\n");
@@ -5232,3 +5282,12 @@ void print_num(void)//统计函数
     picked_rate = (double)picked_num /(double)sum * 100;
     printf("完成度: %.2f%%\n",picked_rate);
 }//统计函数结束
+#endif
+//~~噩梦开始~~
+//~~或许最终结局是放弃~~
+//~~也许你坚持了下来~~
+//~~但不论结局如何~~
+//~~等待你的只有绝望~~
+//~~无非是程度的大小~~
+
+//函数题2 五子棋
