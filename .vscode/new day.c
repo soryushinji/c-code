@@ -5304,7 +5304,7 @@ int read_chosen(void);//录入选项函数
 void Gobang(void);//五子棋游戏函数
 void print_chess(void);//录入棋盘函数
 void show_chess(void);//输出棋盘
-void read_move(int move,int row,int col);//读入落子
+int read_move(int move,int row,int col);//读入落子
 int g_row = 0;
 int g_col = 0;//作为全局变量,在悔棋时重置棋盘
 int read_undo(int g_row,int g_col);//悔棋
@@ -5345,7 +5345,7 @@ int read_chosen(void)//录入选项函数
         //如果输入EOF
         if(ret == EOF)
         {
-            return 1;//直接结束
+            return -1;//直接结束
         }
         //如果输入非数字
         if(ret == 0)
@@ -5410,7 +5410,7 @@ void show_chess(void)//输出棋盘函数
     }
     printf("\n  . 空   * 黑   O 白   \n\n");
 }//输出棋盘函数结束
-void read_move(int move,int row,int col)//读入落子函数
+int read_move(int move,int row,int col)//读入落子函数
 {
     while(1)//小循环,输入正确的位置才能退出
     {
@@ -5419,7 +5419,7 @@ void read_move(int move,int row,int col)//读入落子函数
         //判断输入的落子位置是否合法
         if(ret == EOF)//老朋友EOF
         {
-            return;//直接退出
+            return -1;//直接退出
         }
         if(ret == 0)//输入非数字字符
         {
@@ -5475,7 +5475,7 @@ int read_undo(int g_row,int g_col)//悔棋函数
         //老朋友EOF
         if(ret == EOF)
         {
-            return 1;//直接退出
+            return -1;//直接退出
         }
         //输入非数字
         if(ret == 0)
