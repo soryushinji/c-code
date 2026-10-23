@@ -5296,17 +5296,22 @@ void print_num(void)//统计函数
 #define COL 19//列
 int button = 0;//录入选项,选项为0退出大循环
 int ch;
+char chess[ROW][COL];//棋盘
 void print_menu(void);//菜单输出函数
 int read_chosen(void);//录入选项函数
-
+void Gobang(void);//五子棋游戏函数
+void print_chess(void);//录入棋盘函数
+void show_chess(void);//输出棋盘
 
 int main()
 {
     do
     {
+        print_chess();//每局开始前先录好空棋盘
         print_menu();//输出菜单
         button = read_chosen();//录入选项
-
+        //录入0直接退出,不需要分情况讨论
+        Gobang();//开始五子棋游戏
     } while (button != 0);//大循环
     
     return 0;
@@ -5356,9 +5361,44 @@ int read_chosen(void)//录入选项函数
             while(ch != '\n' && ch != EOF) ch = getchar();
             continue;
         }
-        //检验录入的选项
-        printf("%d\n",chosen);
+        // //检验录入的选项
+        // printf("%d\n",chosen);
+        //合格
         //至此,是个合格的选项了
         return chosen;
     }
 }//录入选项函数结束
+void print_chess(void)//录入棋盘函数
+{
+    for(int i = 0;i < ROW;i++)
+    {
+        for(int j = 0;j < COL;j++)
+        {
+            chess[i][j] = '.';
+        }
+    }
+}//录入棋盘函数结束
+void show_chess(void)//输出棋盘函数
+{
+    printf("    1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19\n ");
+    printf("  ---------------------------------------------------------\n");
+    for(int i = 0;i < ROW;i++)
+    {
+        printf("%d |",i + 1);
+        for(int j = 0;j < COL;j++)
+        {
+            printf(" %c",chess[i][j]);
+        }
+        printf("\n");
+    }
+}//输出棋盘函数结束
+
+
+void Gobang(void)//五子棋游戏函数
+{
+    while(1)//游戏需要不断循环,直至游戏结束,这样开启下轮大循环
+    {
+        show_chess();//游戏开始，显示棋盘
+        break;//先退出,方便调试函数
+    }
+}//游戏函数结束
