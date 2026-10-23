@@ -6517,13 +6517,29 @@ int print_test(void)//测验函数
 }//测验函数结束
 void print_count(void)//统计函数
 {
+    if (wordnum <= 0) 
+    { 
+        printf("词库是空的\n"); 
+        return; 
+    }
+    printf("\n=========================================\n");
     printf("录入单词的总数为:%d\n",wordnum);
     //输赢的局数,正确率
-    printf("总共答对 %d 次,答错 %d 次,正确率 %.2f%%\n",right,wrong,(double)right / (double)(right + wrong) * 100);
+    if(right + wrong == 0)//一次也没做
+    {
+        printf("总共答对 %d 次,答错 %d 次,正确率 %.2f%%\n",0,0,0.0);
+    }
+    else
+    {
+        printf("总共答对 %d 次,答错 %d 次,正确率 %.2f%%\n",right,wrong,(double)right / (double)(right + wrong) * 100);
+    }
     for(int i = 0;i < wordnum;i++)
     {
         aveword += (double)strlen(wordbook[i]);
     }
     aveword /= (double)wordnum;
-    printf("单词平均长度: %.1f",aveword);
+    printf("单词平均长度: %.1f\n\n",aveword);
+    printf("=========================================\n");
+    //调用完后数据归零
+    aveword = 0;
 }//统计函数结束
