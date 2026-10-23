@@ -5969,6 +5969,52 @@ int main()
         button = 0;
         print_menu();//输出菜单
         button = read_chosen();//录入选项
+        switch(button)
+        {
+            case 1:
+            {
+
+                break;
+            }
+            case 2:
+            {
+
+                break;
+            }
+            case 3:
+            {
+
+                break;
+            }
+            case 4:
+            {
+
+                break;
+            }
+            case 5:
+            {
+
+                break;
+            }
+            case 6:
+            {
+
+                break;
+            }
+            case 7:
+            {
+
+                break;
+            }
+            case 0:
+            {
+                break;
+            }
+        }
+        if(button == 0)
+        {
+            break;
+        }
     }while(button != 0);
     return 0;
 }
