@@ -5957,6 +5957,10 @@ void Gobang(void)//五子棋游戏函数
 int button = 0;//记录选项的
 int ch;
 int wordnum = 10;//统计录入的单词数量(默认有十个单词)
+int right = 0;//答对的次数
+int wrong = 0;//答错的次数
+double rightrate = 0.0;//正确率
+double aveword = 0;//平均单词长
 char wordbook[1024][100] = {"apple","orange","banana","pencil","cherry","ice","fire","winter","autumn","jungle"};//录入单词的数组
 char Chinesebook[1024][100] = {"苹果","橙子","香蕉","铅笔","樱桃","冰","火","冬天","秋天","丛林"};//录入单词对应中文的数组
 void print_menu(void);//输出菜单函数
@@ -5967,6 +5971,7 @@ int find_word(void);//查找单词函数
 void set_word(int n);//排序函数
 int delete_word(void);//删除函数
 int print_test(void);//测验函数
+void print_count(void);//统计函数
 int main()
 {
     srand((unsigned)time(NULL));//设置种子
@@ -6011,7 +6016,7 @@ int main()
             }
             case 7:
             {
-
+                print_count();//统计函数
                 break;
             }
             case 0:
@@ -6490,16 +6495,18 @@ int print_test(void)//测验函数
         if((pin == -1) && (wordbook[random[k]][num] == '\0') && (eng[n] == '\0'))
         {
             printf("完美！\n\n");
+            right++;
             //清空缓冲区
             while((ch = getchar()) != '\n' && ch != EOF) ;
         }
         else
         {
             printf("错误,请再想一次吧\n\n");
+            wrong++;
             while((ch = getchar()) != '\n' && ch != EOF) ;
             continue;
         }
-        //到这一轮测试结束
+        //到这一轮测试结束,说明答对了
         k++;
         if(k >= 5)
         {
@@ -6508,3 +6515,15 @@ int print_test(void)//测验函数
     }
     return 1;
 }//测验函数结束
+void print_count(void)//统计函数
+{
+    printf("录入单词的总数为:%d\n",wordnum);
+    //输赢的局数,正确率
+    printf("总共答对 %d 次,答错 %d 次,正确率 %.2f%%\n",right,wrong,(double)right / (double)(right + wrong) * 100);
+    for(int i = 0;i < wordnum;i++)
+    {
+        aveword += (double)strlen(wordbook[i]);
+    }
+    aveword /= (double)wordnum;
+    printf("单词平均长度: %.1f",aveword);
+}//统计函数结束
