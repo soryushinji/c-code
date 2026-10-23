@@ -40,7 +40,8 @@ int main()
     // }
  printf("%-*d",97,14);
 printf("anb\n");
-char arr[1][1024] = {"apple"};
-printf("%zu",strlen(arr[0]));
+char arr[30][1024] = {"apple","orange"};
+printf("%zu\n",strlen(arr[0]));
+printf("%zu\n",strlen(arr[1]));
     return 0;
 }
