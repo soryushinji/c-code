@@ -5313,8 +5313,11 @@ int main()
         print_chess();//每局开始前先录好空棋盘
         print_menu();//输出菜单
         button = read_chosen();//录入选项
-        //录入0直接退出,不需要分情况讨论
-        Gobang();//开始五子棋游戏
+        //录入0直接退出小函数,还是需要分情况讨论
+        if(button == 1)
+        {
+            Gobang();//开始五子棋游戏
+        }
     } while (button != 0);//大循环
     
     return 0;
@@ -5420,7 +5423,17 @@ void read_move(void)//读入落子函数
             printf("错误,请输入正确的位置\n");
             //清空缓冲区
             while((ch = getchar()) != '\n' && ch != EOF)  ;
+            continue;
         }
+        //输入的行列不在范围
+        if(row > 18 || row < 0 || col > 18 || col < 0)
+        {
+            printf("错误,请输入棋盘范围内的行列\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF)  ;
+            continue;
+        }
+        
     }
 }//读入落子函数结束
 
