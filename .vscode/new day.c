@@ -5965,7 +5965,7 @@ void print_list(int wordnum);//列表显示函数
 int read_word(void);//录入单词函数
 int find_word(void);//查找单词函数
 void set_word(int n);//排序函数
-void delete_word(void);//删除函数
+int delete_word(void);//删除函数
 int main()
 {
     do
@@ -5999,7 +5999,7 @@ int main()
             }
             case 5:
             {
-                delete_word();//删除函数
+                note = delete_word();//删除函数
                 break;
             }
             case 6:
@@ -6299,10 +6299,88 @@ void set_word(int n)//排序函数
         }
     }
 }//排序函数结束
-void delete_word(void)//删除函数
+int delete_word(void)//删除函数
 {
     while(1)
     {
-        
+        printf("请输入您要删除的单词 >> ");
+        //又是输入,好烦
+        char eng[100];
+        int pin = 0;//排查非法输入情况的针
+        int ret = scanf("%99s",eng);
+        //继续排除非法输入情况
+        if(ret == EOF)
+        {
+            return -1;//返回-1
+        }
+        int num = strlen(eng);
+        //输入非字母
+        for(int i = 0;i < num;i++)
+        {
+            if((eng[i] < 'A') || ((eng[i] > 'Z') && (eng[i] < 'a')) || (eng[i] > 'z'))
+            {
+                pin++;
+            }
+        }
+        if(pin != 0)
+        {
+            printf("\n请输入正确的单词,不要输入非字母!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        pin = 0;
+        //到这就差不多了吧
+        int note = 0;//记录查找单词的顺序
+        //开始对比
+        for(int i = 0;i < wordnum;i++)
+        {
+            pin = 0;
+            int max = 0;
+            if(strlen(wordbook[i]) > num)//防止出现单词前面一样,只对比前面的现象
+            {
+                max = strlen(wordbook[i]);
+            }
+            else
+            {
+                max = num;
+            }
+            for(int j = 0;j < max;j++)
+            {
+                if(eng[j] == wordbook[i][j])
+                {
+                    pin++;
+                }
+            }
+            if(pin == max)//说明单词完全一样
+            {
+                pin = -1;
+                note = i;
+                break;
+            }
+        }
+        if(pin == -1)//到这里说明找到要删去的单词,是第noto个
+        {
+            //将第note个删去——将第note个之后的向前挪一格
+            for(int i = note;i < wordnum;i++)
+            {
+                for(int j = 0;j < 100;j++)//开始往前挪
+                {
+                    wordbook[i][j] = wordbook[i + 1][j];
+                    Chinesebook[i][j] = Chinesebook[i + 1][j];
+                }
+            }//挪完了
+            //录入的单词数量-1
+            wordnum--;
+            //结束循环
+            break;
+        }
+        else
+        {
+            printf("\n很抱歉,没有您要删除的单词\n\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            return 1;
+        }
     }
 }//删除函数结束
