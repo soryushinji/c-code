@@ -5962,19 +5962,20 @@ char Chinesebook[1024][100] = {"苹果","橙子","香蕉","铅笔","樱桃","冰
 void print_menu(void);//输出菜单函数
 int read_chosen(void);//读入选项函数
 void print_list(int wordnum);//列表显示函数
-
+int read_word(void);//录入单词函数
 int main()
 {
     do
     {
         button = 0;
+        int note = 0;//记录录入时输入EOF的情况(直接退出)
         print_menu();//输出菜单
         button = read_chosen();//录入选项
         switch(button)
         {
             case 1:
             {
-
+                note = read_word();
                 break;
             }
             case 2:
@@ -6013,6 +6014,10 @@ int main()
             }
         }
         if(button == 0)
+        {
+            break;
+        }
+        if(note == -1)
         {
             break;
         }
@@ -6094,3 +6099,89 @@ void print_list(int wordnum)//列表显示函数
         printf("%-*d      %-*s                 %s\n",k,i + 1,max,wordbook[i],Chinesebook[i]);
     }
 }//列表显示函数结束
+int read_word(void)//录入单词函数(一次录入一个单词)
+{
+    while(1)
+    {
+        char eng[100];//记录英文的数组
+        char che[100];//记录中文的数组
+        int pin = 0;//用来排除非法输入情况的针
+        printf("请输入(单词+中文) >> ");
+        int ret = scanf("%s %s",&eng,&che);
+        //又是判断不同的情况
+        if(ret == EOF)
+        {
+            return -1;//返回-1
+        }
+        //输入非字母
+        int num = strlen(eng);
+        for(int i = 0;i < num;i++)
+        {
+            if((eng[i] < 'A') || (eng[i] > 'Z' && eng[i] < 'a') || (eng[i] > 'z'))
+            {
+                pin++;
+            }
+        }
+        if(pin != 0)
+        {
+            printf("错误,请输入正确的英文或中文\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        pin = 0;//针归零,为下次判断做好准备
+        //拒绝重名
+        for(int i = 0;i < wordnum;i++)
+        {
+            pin = 0;
+            int max = 0;
+            if(strlen(wordbook[i]) > strlen(eng))//防止出现单词前面一样,只对比前面的现象
+            {
+                max = strlen(wordbook[i]);
+            }
+            else
+            {
+                max = strlen(eng);
+            }
+            for(int j = 0;j < max;j++)
+            {
+                if(eng[j] == wordbook[i][j])
+                {
+                    pin++;
+                }
+            }
+            if(pin == strlen(wordbook[i]))//说明单词完全一样
+            {
+                break;
+            }
+        }
+        if(pin != 0)
+        {
+            printf("有重复的单词,请输入别的单词\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //拒绝过长单词
+        if(strlen(eng) > 99)
+        {
+            printf("过长,请输入范围内的单词\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //到这就差不多了吧,应该
+        //将输入的单词中文录入数组中
+        wordnum++;
+        for(int i = 0;i < strlen(eng);i++)
+        {
+            wordbook[wordnum - 1][i] = eng[i];
+        }
+        for(int i = 0;i < strlen(che);i++)
+        {
+            Chinesebook[wordnum - 1][i] = che[i];
+        }
+        //能到这说明成功录入
+        return 1;
+    }
+}//录入单词函数结束
