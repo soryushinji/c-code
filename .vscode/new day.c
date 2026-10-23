@@ -6398,12 +6398,15 @@ int print_test(void)//测验函数
         //开始排除重复的情况
         for(int i = 0;i <= m;i++)
         {
-            for(int j = i + 1;j >= 0;j--)
+            if(i > 0)
             {
-                if(random[i] == random[j])//相等
+                for(int j = i - 1;j >= 0;j--)
                 {
-                    pan++;
-                }
+                    if(random[i] == random[j])//相等
+                    {
+                        pan++;
+                    }
+                }   
             }
         }
         if(pan == 0)//说明暂时没有相同的数字
@@ -6414,7 +6417,7 @@ int print_test(void)//测验函数
         {
             continue;
         }
-    }
+    }//五个不同的随机数生成完成
     int k = 0;
     while(1)
     {
@@ -6469,7 +6472,7 @@ int print_test(void)//测验函数
                 break;//跳出循环,后面的不必比较
             }
         }
-        if(pin == -1)
+        if((pin == -1) && (wordbook[random[k]][n - 1] == '\0') && (eng[num - 1] == '\0'))
         {
             printf("完美！\n\n");
             //清空缓冲区
