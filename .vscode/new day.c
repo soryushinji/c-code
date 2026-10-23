@@ -5283,6 +5283,7 @@ void print_num(void)//统计函数
     printf("完成度: %.2f%%\n",picked_rate);
 }//统计函数结束
 #endif
+
 //~~噩梦开始~~
 //~~或许最终结局是放弃~~
 //~~也许你坚持了下来~~
@@ -5291,3 +5292,67 @@ void print_num(void)//统计函数
 //~~无非是程度的大小~~
 
 //函数题2 五子棋
+#define ROW 19//行
+#define COL 19//列
+int button = 0;//录入选项,选项为0退出大循环
+int ch;
+void print_menu(void);//菜单输出函数
+int read_chosen(void);//录入选项函数
+
+
+int main()
+{
+    do
+    {
+        print_menu();//输出菜单
+        button = read_chosen();//录入选项
+
+    } while (button != 0);//大循环
+    
+    return 0;
+}
+
+void print_menu(void)//菜单输出函数
+{
+    printf("================ 五 子 棋 ================\n");
+    printf("  1) 开始新局\n");
+    printf("  0) 退出\n");
+    printf("==========================================\n");
+}//菜单输出函数结束
+int read_chosen(void)//录入选项函数
+{
+    while(1)
+    {
+        int chosen;
+        int ret;
+        printf("请选择 >> ");
+        ret = scanf("%d",&chosen);
+        //如果输入EOF
+        if(ret == EOF)
+        {
+            return;//直接结束
+        }
+        //如果输入非数字
+        if(ret == 0)
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ch = getchar();
+            continue;
+        }
+        //如果输入数字
+        if(chosen >= 2 || chosen < 0)//非选项提供的数字
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ch = getchar();
+            continue;
+        }
+        //检验录入的选项
+        printf("%d\n",chosen);
+        //再清空缓冲区,防止输入1.1之类的非法输入使.1留在缓冲区干扰下轮循环
+        while((ch = getchar()) != '\n' && ch != EOF) ch = getchar();
+        //至此,是个合格的选项了
+        return chosen;
+    }
+}//录入选项函数结束
