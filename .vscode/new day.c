@@ -5292,6 +5292,7 @@ void print_num(void)//统计函数
 //~~无非是程度的大小~~
 
 //函数题2 五子棋
+#if 0
 #define ROW 19//行
 #define COL 19//列
 int button = 0;//录入选项,选项为0退出大循环
@@ -5951,3 +5952,11 @@ void Gobang(void)//五子棋游戏函数
     }
     return ;
 }//游戏函数结束
+#endif
+//单词本+小测验
+
+int main()
+{
+
+    return 0;
+}

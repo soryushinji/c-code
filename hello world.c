@@ -37,33 +37,7 @@ int main()
     //     }
     // }
     // printf("%*d",97,-14);
-    int ch;
-    while(1)//小循环,输入正确的位置才能退出
-    {
-        int row,col;
-        int ret;
-        ret = scanf("%d %d",&row,&col);//读入落子位置
-        //判断输入的落子位置是否合法
-        if(ret == EOF)//老朋友EOF
-        {
-            return;//直接退出
-        }
-        if(ret == 0)//输入非数字字符
-        {
-            printf("错误,请输入正确的位置\n");
-            //清空缓冲区
-            while((ch = getchar()) != '\n' && ch != EOF)  ;
-            continue;
-        }
-        //输入的行列不在范围
-        if(row > 18 || row < 0 || col > 18 || col < 0)
-        {
-            printf("错误,请输入棋盘范围内的行列\n");
-            //清空缓冲区
-            while((ch = getchar()) != '\n' && ch != EOF)  ;
-            continue;
-        }
-        
-    }
+   char arr[10] = {"中文"};
+   printf("%s",arr);
     return 0;
 }
