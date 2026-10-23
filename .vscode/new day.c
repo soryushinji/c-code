@@ -5348,10 +5348,16 @@ int read_chosen(void)//录入选项函数
             while((ch = getchar()) != '\n' && ch != EOF) ch = getchar();
             continue;
         }
+        //如果输入的是1.1之类的非法输入
+        if(((ch = getchar()) < '0' || ch > '9') && ch != '\n')
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //再清空缓冲区,防止输入1.1之类的非法输入使.1留在缓冲区干扰下轮循环
+            while(ch != '\n' && ch != EOF) ch = getchar();
+            continue;
+        }
         //检验录入的选项
         printf("%d\n",chosen);
-        //再清空缓冲区,防止输入1.1之类的非法输入使.1留在缓冲区干扰下轮循环
-        while((ch = getchar()) != '\n' && ch != EOF) ch = getchar();
         //至此,是个合格的选项了
         return chosen;
     }
