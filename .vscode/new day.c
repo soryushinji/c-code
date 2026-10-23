@@ -5956,14 +5956,17 @@ void Gobang(void)//五子棋游戏函数
 //单词本+小测验
 int button = 0;//记录选项的
 int ch;
+int wordnum = 10;//统计录入的单词数量(默认有十个单词)
 char wordbook[1024][1024];//录入单词的数组
 char Chinesebook[1024][1024];//录入单词对应中文的数组
-
 void print_menu(void);//输出菜单函数
 int read_chosen(void);//读入选项函数
+void pre_read(void);//读入默认的十个单词
+void print_list(int wordnum);//列表显示函数
 
 int main()
 {
+    pre_read();//读入默认的十个单词
     do
     {
         button = 0;
@@ -6068,3 +6071,47 @@ int read_chosen(void)//读入选项函数
         return button;
     }
 }//读入选项函数
+void pre_read(void)//默认读入函数
+{
+    wordbook[0][1024] = "apple";
+    Chinesebook[0][1024] = "苹果";
+    wordbook[1][1024] = "orange";
+    Chinesebook[1][1024] = "橙子";
+    wordbook[2][1024] = "banana";
+    Chinesebook[2][1024] = "香蕉";
+    wordbook[3][1024] = "pencil";
+    Chinesebook[3][1024] = "铅笔";
+    wordbook[4][1024] = "cherry";
+    Chinesebook[4][1024] = "樱桃";
+    wordbook[5][1024] = "ice";
+    Chinesebook[5][1024] = "冰";
+    wordbook[6][1024] = "fire";
+    Chinesebook[6][1024] = "火";
+    wordbook[7][1024] = "winter";
+    Chinesebook[7][1024] = "冬天";
+    wordbook[8][1024] = "autumn";
+    Chinesebook[8][1024] = "秋天";
+    wordbook[9][1024] = "jungle";
+    Chinesebook[9][1024] = "丛林";
+}//默认读入函数结束
+void print_list(int wordnum)//列表显示函数
+{
+    printf("  序号         英文               中文\n");
+    printf("  ----  -----------------  ----------------\n");
+    int k = 0;//记录录入单词数量的位数
+    int j = wordnum;//影武者
+    while(j < 1)
+    {
+        j /= 10;
+        k++;
+    }
+    //再记录最长位的单词
+    for(int i = 0;i < wordnum;i++)
+    {
+
+    }
+    for(int i = 0;i < wordnum;i++)
+    {
+        printf("%-*d    %-*s%s",k,i + 1,6,wordbook[i],Chinesebook[i]);
+    }
+}//列表显示函数结束

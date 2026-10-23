@@ -1,4 +1,6 @@
 #include<stdio.h>
+#include<stdlib.h>
+
 int main()
 {
     // int age;
@@ -36,8 +38,9 @@ int main()
     //         continue;
     //     }
     // }
-    // printf("%*d",97,-14);
-   char arr[10] = {"中文"};
-   printf("%s",arr);
+ printf("%-*d",97,14);
+printf("anb\n");
+char arr[1][1024] = "apple";
+printf("%d",strlen(arr[1]));
     return 0;
 }
