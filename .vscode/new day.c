@@ -5304,7 +5304,7 @@ int read_chosen(void);//录入选项函数
 void Gobang(void);//五子棋游戏函数
 void print_chess(void);//录入棋盘函数
 void show_chess(void);//输出棋盘
-int read_move(int move,int row,int col);//读入落子
+int read_move(int move);//读入落子
 int g_row = 0;
 int g_col = 0;//作为全局变量,在悔棋时重置棋盘
 int read_undo(int g_row,int g_col);//悔棋
@@ -5410,11 +5410,12 @@ void show_chess(void)//输出棋盘函数
     }
     printf("\n  . 空   * 黑   O 白   \n\n");
 }//输出棋盘函数结束
-int read_move(int move,int row,int col)//读入落子函数
+int read_move(int move)//读入落子函数
 {
     while(1)//小循环,输入正确的位置才能退出
     {
         int ret;
+        int row,col;
         ret = scanf("%d %d",&row,&col);//读入落子位置
         //判断输入的落子位置是否合法
         if(ret == EOF)//老朋友EOF
@@ -5459,6 +5460,7 @@ int read_move(int move,int row,int col)//读入落子函数
         //到这所有的任务结束,循环也该结束了
         break;
     }
+    return 0;
 }//读入落子函数结束
 int read_undo(int g_row,int g_col)//悔棋函数
 {
@@ -5517,6 +5519,7 @@ int is_win(int move)//判赢函数
 void Gobang(void)//五子棋游戏函数
 {
     move = 0;//每局重新开始时步数清零
+    black_move = 0;
     while(1)//游戏需要不断循环,直至游戏结束,这样开启下轮大循环
     {
         int draw = 0;//判断是否平局
@@ -5527,9 +5530,9 @@ void Gobang(void)//五子棋游戏函数
         //开始下棋
         if(move % 2 == 0)//黑下
         {
-            prinf("黑棋第 %d 步\n",black_move + 1);
+            printf("黑棋第 %d 步\n",black_move + 1);
             printf("轮到 黑棋,请输入 行 列 >> ");
-            read_move(move,row,col);//落子
+            read_move(move);//落子
             //落子完了后再确定结果,是否悔棋
             note = read_undo(g_row,g_col);
             //悔棋步数不增加
@@ -5543,9 +5546,20 @@ void Gobang(void)//五子棋游戏函数
         {
             printf("白棋第 %d 步\n",move - black_move + 1);
             printf("轮到 白棋,请输入 行 列 >> ");
-            read_move(move,row,col);
+            read_move(move);
             //落子完了后再结果,是否悔棋
+            //判断EOF的情况,该死的EOF
+            if(read_move(move) == -1)
+            {
+                printf("\n输入结束,退出\n");
+                return ;
+            }
             note = read_undo(g_row,g_col);
+            if(note == -1)
+            {
+                printf("\n输入结束,退出\n");
+                return ;
+            }
             if(note == 2)
             {
                 move++;
@@ -5582,4 +5596,5 @@ void Gobang(void)//五子棋游戏函数
         }
 
     }
+    return ;
 }//游戏函数结束
