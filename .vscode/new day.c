@@ -5297,11 +5297,14 @@ void print_num(void)//统计函数
 int button = 0;//录入选项,选项为0退出大循环
 int ch;
 char chess[ROW][COL];//棋盘
+int move = 0;//作为黑白的标志,note为偶数黑下,同时记录下棋步数
+int black_move= 0;//记录黑棋步数
 void print_menu(void);//菜单输出函数
 int read_chosen(void);//录入选项函数
 void Gobang(void);//五子棋游戏函数
 void print_chess(void);//录入棋盘函数
 void show_chess(void);//输出棋盘
+void read_move(void);//读入落子
 
 int main()
 {
@@ -5342,7 +5345,7 @@ int read_chosen(void)//录入选项函数
         {
             printf("错误,请输入选项提供的数字\n");
             //清空缓冲区
-            while((ch = getchar()) != '\n' && ch != EOF) ch = getchar();
+            while((ch = getchar()) != '\n' && ch != EOF) ;
             continue;
         }
         //如果输入数字
@@ -5350,7 +5353,7 @@ int read_chosen(void)//录入选项函数
         {
             printf("错误,请输入选项提供的数字\n");
             //清空缓冲区
-            while((ch = getchar()) != '\n' && ch != EOF) ch = getchar();
+            while((ch = getchar()) != '\n' && ch != EOF) ;
             continue;
         }
         //如果输入的是1.1之类的非法输入
@@ -5398,7 +5401,29 @@ void show_chess(void)//输出棋盘函数
         }
         printf("\n");
     }
+    printf("\n  . 空   * 黑   O 白   U 悔棋\n\n");
 }//输出棋盘函数结束
+void read_move(void)//读入落子函数
+{
+    while(1)//小循环,输入正确的位置才能退出
+    {
+        int row,col;
+        int ret;
+        ret = scanf("%d %d",&row,&col);//读入落子位置
+        //判断输入的落子位置是否合法
+        if(ret == EOF)//老朋友EOF
+        {
+            return;//直接退出
+        }
+        if(ret == 0)//输入非数字字符
+        {
+            printf("错误,请输入正确的位置\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF)  ;
+        }
+    }
+}//读入落子函数结束
+
 
 
 void Gobang(void)//五子棋游戏函数
@@ -5407,5 +5432,19 @@ void Gobang(void)//五子棋游戏函数
     {
         show_chess();//游戏开始，显示棋盘
         break;//先退出,方便调试函数
+        //开始下棋
+        if(move % 2 == 0)//黑下
+        {
+            printf("轮到 黑棋,请输入 行 列 >> ");
+
+            move++;
+            black_move++;
+        }
+        else//白下
+        {
+            printf("轮到 白棋,请输入 行 列 >> ");
+
+            move++;
+        }
     }
 }//游戏函数结束
