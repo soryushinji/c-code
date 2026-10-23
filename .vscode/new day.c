@@ -5963,6 +5963,7 @@ void print_menu(void);//输出菜单函数
 int read_chosen(void);//读入选项函数
 void print_list(int wordnum);//列表显示函数
 int read_word(void);//录入单词函数
+int find_word(void);//查找单词函数
 int main()
 {
     do
@@ -5985,7 +5986,7 @@ int main()
             }
             case 3:
             {
-
+                note = find_word();//查找单词函数
                 break;
             }
             case 4:
@@ -6189,3 +6190,35 @@ int read_word(void)//录入单词函数(一次录入一个单词)
         return 1;
     }
 }//录入单词函数结束
+int find_word(void)//查找单词函数
+{
+    while(1)
+    {
+        //又是输入,好烦
+        char eng[100];
+        int pin = 0;//排查非法输入情况的针
+        int ret = scanf("%99s",eng);
+        int num = strlen(eng);
+        //继续排除非法输入情况
+        if(ret == EOF)
+        {
+            return -1;//返回-1
+        }
+        //输入非字母
+        for(int i = 0;i < num;i++)
+        {
+            if((eng[i] < 'A') || ((eng[i] > 'Z') && (eng[i] < 'a')) || (eng[i] > 'z'))
+            {
+                pin++;
+            }
+        }
+        if(pin != 0)
+        {
+            printf("请输入正确的单词,不要输入非字母!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        
+    }
+}//查找单词函数结束
