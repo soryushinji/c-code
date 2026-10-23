@@ -6115,6 +6115,7 @@ int read_word(void)//录入单词函数(一次录入一个单词)
         }
         //输入非字母
         int num = strlen(eng);
+        int chnum = strlen(che);
         for(int i = 0;i < num;i++)
         {
             if((eng[i] < 'A') || (eng[i] > 'Z' && eng[i] < 'a') || (eng[i] > 'z'))
@@ -6135,13 +6136,13 @@ int read_word(void)//录入单词函数(一次录入一个单词)
         {
             pin = 0;
             int max = 0;
-            if(strlen(wordbook[i]) > strlen(eng))//防止出现单词前面一样,只对比前面的现象
+            if(strlen(wordbook[i]) > num)//防止出现单词前面一样,只对比前面的现象
             {
                 max = strlen(wordbook[i]);
             }
             else
             {
-                max = strlen(eng);
+                max = num;
             }
             for(int j = 0;j < max;j++)
             {
@@ -6164,7 +6165,7 @@ int read_word(void)//录入单词函数(一次录入一个单词)
             continue;
         }
         //拒绝过长单词
-        if(strlen(eng) > 99)
+        if(num > 99)
         {
             printf("过长,请输入范围内的单词\n");
             //清空缓冲区
@@ -6174,16 +6175,16 @@ int read_word(void)//录入单词函数(一次录入一个单词)
         //到这就差不多了吧,应该
         //将输入的单词中文录入数组中
         wordnum++;
-        for(int i = 0;i < strlen(eng);i++)
+        for(int i = 0;i < num;i++)
         {
             wordbook[wordnum - 1][i] = eng[i];
         }
-        wordbook[wordnum][strlen(eng) - 1] = '\0';  
-        for(int i = 0;i < strlen(che);i++)
+        wordbook[wordnum - 1][num] = '\0';  
+        for(int i = 0;i < chnum;i++)
         {
             Chinesebook[wordnum - 1][i] = che[i];
         }
-        Chinesebook[wordnum][strlen(che) - 1] = '\0'; 
+        Chinesebook[wordnum - 1][chnum] = '\0'; 
         //能到这说明成功录入
         return 1;
     }
