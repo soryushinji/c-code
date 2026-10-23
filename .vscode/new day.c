@@ -6192,8 +6192,10 @@ int read_word(void)//录入单词函数(一次录入一个单词)
 }//录入单词函数结束
 int find_word(void)//查找单词函数
 {
+    printf("请输入您要查找的单词 >> ");
     while(1)
     {
+        printf("\n");
         //又是输入,好烦
         char eng[100];
         int pin = 0;//排查非法输入情况的针
@@ -6219,6 +6221,49 @@ int find_word(void)//查找单词函数
             while((ch = getchar()) != '\n' && ch != EOF) ;
             continue;
         }
-        
+        pin = 0;
+        //到这就差不多了吧
+        int note = 0;//记录查找单词的顺序
+        //开始对比
+        for(int i = 0;i < wordnum;i++)
+        {
+            pin = 0;
+            int max = 0;
+            if(strlen(wordbook[i]) > num)//防止出现单词前面一样,只对比前面的现象
+            {
+                max = strlen(wordbook[i]);
+            }
+            else
+            {
+                max = num;
+            }
+            for(int j = 0;j < max;j++)
+            {
+                if(eng[j] == wordbook[i][j])
+                {
+                    pin++;
+                }
+            }
+            if(pin == max)//说明单词完全一样
+            {
+                pin = -1;
+                note = i;
+                break;
+            }
+        }
+        if(pin == -1)
+        {
+            printf("找到了!是第 %d 个,翻译为 %s\n\n",note + 1,Chinesebook[note]);
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            return 1;
+        }
+        else
+        {
+            printf("很抱歉,没有您要找的单词\n\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            return 1;
+        }
     }
 }//查找单词函数结束
