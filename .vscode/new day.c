@@ -5955,7 +5955,12 @@ void Gobang(void)//五子棋游戏函数
 #endif
 //单词本+小测验
 int button = 0;//记录选项的
+int ch;
+char wordbook[1024][1024];//录入单词的数组
+char Chinesebook[1024][1024];//录入单词对应中文的数组
+
 void print_menu(void);//输出菜单函数
+int read_chosen(void);//读入选项函数
 
 int main()
 {
@@ -5963,6 +5968,7 @@ int main()
     {
         button = 0;
         print_menu();//输出菜单
+        button = read_chosen();//录入选项
     }while(button != 0);
     return 0;
 }
@@ -5976,3 +5982,43 @@ void print_menu(void)//输出菜单函数
     printf("  7) 统计          0) 退出\n");
     printf("==================================\n");
 }//输出菜单函数结束
+int read_chosen(void)//读入选项函数
+{
+    while(1)
+    {
+        button = 0;
+        printf("请选择 >> ");
+        int ret = scanf("%d",&button);
+        //如果输入EOF
+        if(ret == EOF)
+        {
+            return 0;//返回0直接退出
+        }
+        //如果输入非数字
+        if(ret == 0)
+        {
+            printf("错误,请输入选项提供的数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //如果输入数字过大
+        if(button > 7 || button < 0)
+        {
+            printf("错误,请选择选项范围内的数字!\n");
+            //防止过大数字后再输些奇奇怪怪的东西,还是清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //防止输入数字后输入非字符
+        if(((ch = getchar()) < '0' || ch > '7') && ch != '\n')
+        {
+            printf("错误,请输入正确的选项!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //到这说明是个合格的选项了
+        return button;
+    }
+}//读入选项函数
