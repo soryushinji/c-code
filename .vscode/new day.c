@@ -6389,7 +6389,7 @@ int delete_word(void)//删除函数
 int print_test(void)//测验函数
 {
     printf("================测验开始=================\n\n");
-    int random[5] = 0;//储存随机数
+    int random[5] = {0};//储存随机数
     for(int i = 0;i < 5;i++)
     {
         random[i] = rand() % ((wordnum - 1) - 0 + 1) + 0;
@@ -6450,11 +6450,14 @@ int print_test(void)//测验函数
         }
         if(pin == -1)
         {
-            printf("完美！\n");
+            printf("完美！\n\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
         }
         else
         {
-            printf("错误,请再想一次吧\n");
+            printf("错误,请再想一次吧\n\n");
+            while((ch = getchar()) != '\n' && ch != EOF) ;
             continue;
         }
         //到这一轮测试结束
@@ -6464,4 +6467,5 @@ int print_test(void)//测验函数
             break;
         }
     }
+    return 1;
 }//测验函数结束
