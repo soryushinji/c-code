@@ -5306,7 +5306,7 @@ void print_chess(void);//录入棋盘函数
 void show_chess(void);//输出棋盘
 int read_move(int move,int row,int col);//读入落子
 int g_row = 0;
-int g_col = 0;//作为全局变量,在悔棋时重置棋盘
+int g_col = 0;//作为全局变量,在悔棋时重置棋盘,同时存储了最后下的位置
 int read_undo(int g_row,int g_col);//悔棋
 int is_win(int move);//判断是黑赢还是白赢
 
