@@ -6107,7 +6107,7 @@ int read_word(void)//录入单词函数(一次录入一个单词)
         char che[100];//记录中文的数组
         int pin = 0;//用来排除非法输入情况的针
         printf("请输入(单词+中文) >> ");
-        int ret = scanf("%s %s",&eng,&che);
+        int ret = scanf("%99s %99s",eng,che);
         //又是判断不同的情况
         if(ret == EOF)
         {
@@ -6150,12 +6150,13 @@ int read_word(void)//录入单词函数(一次录入一个单词)
                     pin++;
                 }
             }
-            if(pin == strlen(wordbook[i]))//说明单词完全一样
+            if(pin == max)//说明单词完全一样
             {
+                pin = -1;
                 break;
             }
         }
-        if(pin != 0)
+        if(pin == -1)
         {
             printf("有重复的单词,请输入别的单词\n");
             //清空缓冲区
@@ -6177,10 +6178,12 @@ int read_word(void)//录入单词函数(一次录入一个单词)
         {
             wordbook[wordnum - 1][i] = eng[i];
         }
+        wordbook[wordnum][strlen(eng) - 1] = '\0';  
         for(int i = 0;i < strlen(che);i++)
         {
             Chinesebook[wordnum - 1][i] = che[i];
         }
+        Chinesebook[wordnum][strlen(che) - 1] = '\0'; 
         //能到这说明成功录入
         return 1;
     }
