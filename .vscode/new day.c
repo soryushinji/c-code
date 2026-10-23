@@ -5304,7 +5304,7 @@ int read_chosen(void);//录入选项函数
 void Gobang(void);//五子棋游戏函数
 void print_chess(void);//录入棋盘函数
 void show_chess(void);//输出棋盘
-void read_move(void);//读入落子
+void read_move(int move);//读入落子
 
 int main()
 {
@@ -5406,7 +5406,7 @@ void show_chess(void)//输出棋盘函数
     }
     printf("\n  . 空   * 黑   O 白   U 悔棋\n\n");
 }//输出棋盘函数结束
-void read_move(void)//读入落子函数
+void read_move(int move)//读入落子函数
 {
     while(1)//小循环,输入正确的位置才能退出
     {
@@ -5426,14 +5426,33 @@ void read_move(void)//读入落子函数
             continue;
         }
         //输入的行列不在范围
-        if(row > 18 || row < 0 || col > 18 || col < 0)
+        if(row > 19 || row < 1 || col > 19 || col < 1)
         {
             printf("错误,请输入棋盘范围内的行列\n");
             //清空缓冲区
             while((ch = getchar()) != '\n' && ch != EOF)  ;
             continue;
         }
-        
+        //到这就合格了。。。应该
+        //如果落子的地方已经有子了
+        if(chess[row][col] == '*' || chess[row][col] == 'O')//有子
+        {
+            printf("错误,请在无子的地方落子\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF)  ;
+            continue;
+        }
+        //开始将选择的地方录入棋盘
+        if(move % 2 == 0)//是黑子
+        {
+            chess[row - 1][col - 1] = '*';
+        }
+        else//白字
+        {
+            chess[row - 1][col - 1] = 'O';
+        }
+        //到这所有的任务结束,循环也该结束了
+        break;
     }
 }//读入落子函数结束
 
@@ -5443,20 +5462,19 @@ void Gobang(void)//五子棋游戏函数
 {
     while(1)//游戏需要不断循环,直至游戏结束,这样开启下轮大循环
     {
-        show_chess();//游戏开始，显示棋盘
-        break;//先退出,方便调试函数
+        show_chess();//显示棋盘
         //开始下棋
         if(move % 2 == 0)//黑下
         {
             printf("轮到 黑棋,请输入 行 列 >> ");
-
+            read_move(move);
             move++;
             black_move++;
         }
         else//白下
         {
             printf("轮到 白棋,请输入 行 列 >> ");
-
+            read_move(move);
             move++;
         }
     }
