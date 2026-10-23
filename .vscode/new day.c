@@ -5304,7 +5304,8 @@ int read_chosen(void);//录入选项函数
 void Gobang(void);//五子棋游戏函数
 void print_chess(void);//录入棋盘函数
 void show_chess(void);//输出棋盘
-void read_move(int move);//读入落子
+void read_move(int move,int row,int col);//读入落子
+int read_undo(int row,int col);//悔棋
 
 int main()
 {
@@ -5404,13 +5405,12 @@ void show_chess(void)//输出棋盘函数
         }
         printf("\n");
     }
-    printf("\n  . 空   * 黑   O 白   U 悔棋\n\n");
+    printf("\n  . 空   * 黑   O 白   \n\n");
 }//输出棋盘函数结束
-void read_move(int move)//读入落子函数
+void read_move(int move,int row,int col)//读入落子函数
 {
     while(1)//小循环,输入正确的位置才能退出
     {
-        int row,col;
         int ret;
         ret = scanf("%d %d",&row,&col);//读入落子位置
         //判断输入的落子位置是否合法
@@ -5455,7 +5455,55 @@ void read_move(int move)//读入落子函数
         break;
     }
 }//读入落子函数结束
-
+int read_undo(int row,int col)//悔棋函数
+{
+    printf("\n========是否确定结束这轮=======\n");
+    printf("========    1) 结束    ========\n");
+    printf("========    0) 重下    ========\n");
+    printf("===============================\n\n");
+    while(1)//开始选择
+    {
+        int n = 0;//录入选择
+        int ret;
+        printf("请选择 >> ");
+        ret = scanf("%d",&n);
+        //老朋友EOF
+        if(ret == EOF)
+        {
+            return;//直接退出
+        }
+        //输入非数字
+        if(ret == 0)
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //输入非01数字
+        if(n > 1 || n < 0)
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //输入1.1或1abc这样的
+        if(((ch = getchar()) < '0' || ch > '9') && ch != '\n')
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while(ch != '\n' && ch != EOF) ch = getchar();
+            continue;  
+        }
+        //到这说明是个合格的选项了
+        if(n == 0)//要悔棋
+        {
+            chess[row - 1][col - 1] = '.';//怎么将前一个函数的row和col放到这个函数中
+        }
+        return n + 1;
+    }
+}//悔棋函数结束
 
 
 void Gobang(void)//五子棋游戏函数
@@ -5464,18 +5512,31 @@ void Gobang(void)//五子棋游戏函数
     {
         show_chess();//显示棋盘
         //开始下棋
+        int row,col;//每轮决定下的位置
+        int note = 0;//判断每轮是否悔棋,作为步数是否增加的标准
         if(move % 2 == 0)//黑下
         {
             printf("轮到 黑棋,请输入 行 列 >> ");
-            read_move(move);
-            move++;
-            black_move++;
+            read_move(move,row,col);//落子
+            //落子完了后再确定结果,是否悔棋
+            note = read_undo(row,col);
+            //悔棋步数不增加
+            if(note == 2)
+            {
+                move++;
+                black_move++;
+            }
         }
         else//白下
         {
             printf("轮到 白棋,请输入 行 列 >> ");
-            read_move(move);
-            move++;
+            read_move(move,row,col);
+            //落子完了后再结果,是否悔棋
+            note = read_undo(row,col);
+            if(note == 2)
+            {
+                move++;
+            }
         }
     }
 }//游戏函数结束
