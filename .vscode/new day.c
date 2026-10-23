@@ -5964,6 +5964,8 @@ int read_chosen(void);//读入选项函数
 void print_list(int wordnum);//列表显示函数
 int read_word(void);//录入单词函数
 int find_word(void);//查找单词函数
+void set_word(int n);//排序函数
+void delete_word(void);//删除函数
 int main()
 {
     do
@@ -5991,12 +5993,13 @@ int main()
             }
             case 4:
             {
-
+                int n = 0;
+                set_word(n);//排序函数
                 break;
             }
             case 5:
             {
-
+                delete_word();//删除函数
                 break;
             }
             case 6:
@@ -6192,20 +6195,19 @@ int read_word(void)//录入单词函数(一次录入一个单词)
 }//录入单词函数结束
 int find_word(void)//查找单词函数
 {
-    printf("请输入您要查找的单词 >> ");
     while(1)
     {
-        printf("\n");
+        printf("请输入您要查找的单词 >> ");
         //又是输入,好烦
         char eng[100];
         int pin = 0;//排查非法输入情况的针
         int ret = scanf("%99s",eng);
-        int num = strlen(eng);
         //继续排除非法输入情况
         if(ret == EOF)
         {
             return -1;//返回-1
         }
+        int num = strlen(eng);
         //输入非字母
         for(int i = 0;i < num;i++)
         {
@@ -6216,7 +6218,7 @@ int find_word(void)//查找单词函数
         }
         if(pin != 0)
         {
-            printf("请输入正确的单词,不要输入非字母!\n");
+            printf("\n请输入正确的单词,不要输入非字母!\n");
             //清空缓冲区
             while((ch = getchar()) != '\n' && ch != EOF) ;
             continue;
@@ -6253,17 +6255,54 @@ int find_word(void)//查找单词函数
         }
         if(pin == -1)
         {
-            printf("找到了!是第 %d 个,翻译为 %s\n\n",note + 1,Chinesebook[note]);
+            printf("\n找到了!是第 %d 个,翻译为 %s\n\n",note + 1,Chinesebook[note]);
             //清空缓冲区
             while((ch = getchar()) != '\n' && ch != EOF) ;
             return 1;
         }
         else
         {
-            printf("很抱歉,没有您要找的单词\n\n");
+            printf("\n很抱歉,没有您要找的单词\n\n");
             //清空缓冲区
             while((ch = getchar()) != '\n' && ch != EOF) ;
             return 1;
         }
     }
 }//查找单词函数结束
+void set_word(int n)//排序函数
+{
+    char replace_word[100];
+    char replace_Chinese[100];//影武者数组
+    for(int i = 0;i < wordnum;i++)
+    {
+        for(int j = i + 1;j < wordnum;j++)
+        {
+            n = 0;//交换完n清零
+            while(wordbook[i][0 + n] == wordbook[j][0 + n] && wordbook[i][n] != '\0')
+            {
+                n++;
+            }
+            if(wordbook[i][0 + n] > wordbook[j][0 + n])
+            {
+                for(int k = 0;k < 100;k++)//交换
+                {
+                    //交换英文(全部交换)
+                    replace_word[k] = wordbook[i][k];
+                    wordbook[i][k] = wordbook[j][k];
+                    wordbook[j][k] = replace_word[k];
+                    //交换中文(也是全部交换)
+                    replace_Chinese[k] = Chinesebook[i][k];
+                    Chinesebook[i][k] = Chinesebook[j][k];
+                    Chinesebook[j][k] = replace_Chinese[k];
+                }
+            }
+        }
+    }
+}//排序函数结束
+void delete_word(void)//删除函数
+{
+    while(1)
+    {
+        
+    }
+}//删除函数结束
