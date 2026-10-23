@@ -6463,10 +6463,15 @@ int print_test(void)//测验函数
             continue;
         }
         //到这就差不多了吧,应该
-        if (eng[0] == 'q' && eng[1] == '\0')//放弃测验
+        if (eng[0] == 'q' && eng[1] == '\0')//放弃该单词
         {
-            printf("已放弃测验\n");
-            return 1;
+            printf("放弃该单词\n\n");
+            k++;
+            if(k >= 5)
+            {
+                break;
+            }
+            continue;
         }       
         //将输入的单词与目标单词对比
         int n = strlen(wordbook[random[k]]);
