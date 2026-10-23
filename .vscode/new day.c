@@ -6361,7 +6361,7 @@ int delete_word(void)//删除函数
                 break;
             }
         }
-        if(pin == -1)//到这里说明找到要删去的单词,是第noto个
+        if(pin == -1)//到这里说明找到要删去的单词,是第note个
         {
             //将第note个删去——将第note个之后的向前挪一格
             for(int i = note;i < wordnum - 1;i++)
@@ -6398,7 +6398,7 @@ int print_test(void)//测验函数
         //开始排除重复的情况
         for(int i = 0;i <= m;i++)
         {
-            for(int j = i + 1;j < m;j++)
+            for(int j = i + 1;j >= 0;j--)
             {
                 if(random[i] == random[j])//相等
                 {
@@ -6409,6 +6409,10 @@ int print_test(void)//测验函数
         if(pan == 0)//说明暂时没有相同的数字
         {
             m++;
+        }
+        else//说明有相同的数字
+        {
+            continue;
         }
     }
     int k = 0;
@@ -6452,10 +6456,10 @@ int print_test(void)//测验函数
         }
         //到这就差不多了吧,应该
         //将输入的单词与目标单词对比
-        int n = strlen(wordbook[k]);
+        int n = strlen(wordbook[random[k]]);
         for(int i = 0;i < num;i++)
         {
-            if(eng[i] == wordbook[k][i]);
+            if(eng[i] == wordbook[random[k]][i])
             {
                 pin++;
             }
