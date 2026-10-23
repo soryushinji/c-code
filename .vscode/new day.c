@@ -5512,6 +5512,352 @@ int read_undo(int g_row,int g_col)//悔棋函数
 }//悔棋函数结束
 int is_win(int move)//判赢函数
 {
+    //g_row - 1,g_col - 1存储了最后一次下的位置
+    //如果悔棋了,这一轮最后一次下的地方就是空的
+    //返回0：都没赢
+    //返回-1：黑赢
+    //返回-2：白赢
+    int num = 0;//记录连子的个数
+    if(chess[g_row - 1][g_col - 1] == '.')
+    {
+        return 0;//谁都没赢,重新开始
+    }
+    else//不是空的
+    {
+        if(move % 2 == 1)//最后一次下的是黑
+        {
+            //横竖斜四种情况
+            //情况1:横
+            for(int i = 1;i <= 4;i++)
+            {
+                if((g_row - 1 + i) > 18)//到边界了
+                {
+                    break;
+                }
+                if(chess[g_row - 1 + i][g_col - 1] == '*')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            for(int i = 1;i <= 4;i++)
+            {
+                if((g_row - 1 - i) < 0)
+                {
+                    break;
+                }
+                if(chess[g_row - 1 - i][g_col - 1] == '*')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //判断横的是否有5个,没有清零
+            if(num == 4)
+            {
+                return -1;
+            }
+            else
+            {
+                num = 0;//将num清零
+            }
+            //情况2：竖
+            for(int i = 1;i <= 4;i++)
+            {
+                if((g_col - 1 + i) > 18)//到边界了
+                {
+                    break;
+                }
+                if(chess[g_row - 1][g_col - 1 + i] == '*')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            for(int i = 1;i <= 4;i++)
+            {
+                if((g_col - 1 - i) < 0)
+                {
+                    break;
+                }
+                if(chess[g_row - 1][g_col - 1 - i] == '*')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //判断竖的是否有5个,没有清零
+            if(num == 4)
+            {
+                return -1;
+            }
+            else
+            {
+                num = 0;//将num清零
+            }
+            //情况3：右下斜
+            for(int i = 1;i <= 4;i++)
+            {
+                if(((g_row - 1 + i) > 18) ||((g_col - 1 + i) > 18))//到边界了
+                {
+                    break;
+                }
+                if(chess[g_row - 1 + i][g_col - 1 + i] == '*')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            for(int i = 1;i <= 4;i++)
+            {
+                if(((g_row - 1 - i) < 0) || ((g_col - 1 - i) < 0))
+                {
+                    break;
+                }
+                if(chess[g_row - 1 - i][g_col - 1 - i] == '*')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //判断右下斜的是否有5个,没有清零
+            if(num == 4)
+            {
+                return -1;
+            }
+            else
+            {
+                num = 0;//将num清零
+            }
+            //情况4：左下斜
+            for(int i = 1;i <= 4;i++)
+            {
+                if(((g_row - 1 + i) > 18) ||((g_col - 1 - i) < 0))//到边界了
+                {
+                    break;
+                }
+                if(chess[g_row - 1 + i][g_col - 1 - i] == '*')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            for(int i = 1;i <= 4;i++)
+            {
+                if(((g_row - 1 - i) < 0) || ((g_col - 1 + i) > 18))
+                {
+                    break;
+                }
+                if(chess[g_row - 1 - i][g_col - 1 + i] == '*')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //判断左下斜的是否有5个,没有清零
+            if(num == 4)
+            {
+                return -1;
+            }
+            else
+            {
+                num = 0;//将num清零
+            }
+            //到这里四个方向都判断完了
+            return 0;
+        }
+        else if(move % 2 == 0)//最后一次下的是白
+        {
+            //横竖斜四种情况
+            //情况1:横
+            for(int i = 1;i <= 4;i++)
+            {
+                if((g_row - 1 + i) > 18)//到边界了
+                {
+                    break;
+                }
+                if(chess[g_row - 1 + i][g_col - 1] == 'O')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            for(int i = 1;i <= 4;i++)
+            {
+                if((g_row - 1 - i) < 0)
+                {
+                    break;
+                }
+                if(chess[g_row - 1 - i][g_col - 1] == 'O')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //判断横的是否有5个,没有清零
+            if(num >= 4)
+            {
+                return -2;
+            }
+            else
+            {
+                num = 0;//将num清零
+            }
+            //情况2：竖
+            for(int i = 1;i <= 4;i++)
+            {
+                if((g_col - 1 + i) > 18)//到边界了
+                {
+                    break;
+                }
+                if(chess[g_row - 1][g_col - 1 + i] == 'O')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            for(int i = 1;i <= 4;i++)
+            {
+                if((g_col - 1 - i) < 0)
+                {
+                    break;
+                }
+                if(chess[g_row - 1][g_col - 1 - i] == 'O')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //判断竖的是否有5个,没有清零
+            if(num >= 4)
+            {
+                return -2;
+            }
+            else
+            {
+                num = 0;//将num清零
+            }
+            //情况3：右下斜
+            for(int i = 1;i <= 4;i++)
+            {
+                if(((g_row - 1 + i) > 18) ||((g_col - 1 + i) > 18))//到边界了
+                {
+                    break;
+                }
+                if(chess[g_row - 1 + i][g_col - 1 + i] == 'O')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            for(int i = 1;i <= 4;i++)
+            {
+                if(((g_row - 1 - i) < 0) || ((g_col - 1 - i) < 0))
+                {
+                    break;
+                }
+                if(chess[g_row - 1 - i][g_col - 1 - i] == 'O')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //判断右下斜的是否有5个,没有清零
+            if(num >= 4)
+            {
+                return -2;
+            }
+            else
+            {
+                num = 0;//将num清零
+            }
+            //情况4：左下斜
+            for(int i = 1;i <= 4;i++)
+            {
+                if(((g_row - 1 + i) > 18) ||((g_col - 1 - i) < 0))//到边界了
+                {
+                    break;
+                }
+                if(chess[g_row - 1 + i][g_col - 1 - i] == 'O')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            for(int i = 1;i <= 4;i++)
+            {
+                if(((g_row - 1 - i) < 0) || ((g_col - 1 + i) > 18))
+                {
+                    break;
+                }
+                if(chess[g_row - 1 - i][g_col - 1 + i] == 'O')
+                {
+                    num++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            //判断左下斜的是否有5个,没有清零
+            if(num >= 4)
+            {
+                return -2;
+            }
+            else
+            {
+                num = 0;//将num清零
+            }
+            //到这里四个方向都判断完了
+            return 0;
+        }
+    }
+
     return 0;
 }//判赢函数结束
 
