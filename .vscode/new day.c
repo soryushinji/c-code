@@ -6390,9 +6390,26 @@ int print_test(void)//测验函数
 {
     printf("================测验开始=================\n\n");
     int random[5] = {0};//储存随机数
-    for(int i = 0;i < 5;i++)
+    int m = 0;
+    while(m < 5)//录入随机数,还要排除重复的情况
     {
-        random[i] = rand() % ((wordnum - 1) - 0 + 1) + 0;
+        int pan = 0;//判断随机数是否重复的标志
+        random[m] = rand() % ((wordnum - 1) - 0 + 1) + 0;
+        //开始排除重复的情况
+        for(int i = 0;i <= m;i++)
+        {
+            for(int j = i + 1;j < m;j++)
+            {
+                if(random[i] == random[j])//相等
+                {
+                    pan++;
+                }
+            }
+        }
+        if(pan == 0)//说明暂时没有相同的数字
+        {
+            m++;
+        }
     }
     int k = 0;
     while(1)
