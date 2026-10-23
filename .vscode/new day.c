@@ -5966,8 +5966,10 @@ int read_word(void);//录入单词函数
 int find_word(void);//查找单词函数
 void set_word(int n);//排序函数
 int delete_word(void);//删除函数
+int print_test(void);//测验函数
 int main()
 {
+    srand((unsigned)time(NULL));//设置种子
     do
     {
         button = 0;
@@ -6004,7 +6006,7 @@ int main()
             }
             case 6:
             {
-
+                note = print_test();//测验函数
                 break;
             }
             case 7:
@@ -6362,7 +6364,7 @@ int delete_word(void)//删除函数
         if(pin == -1)//到这里说明找到要删去的单词,是第noto个
         {
             //将第note个删去——将第note个之后的向前挪一格
-            for(int i = note;i < wordnum;i++)
+            for(int i = note;i < wordnum - 1;i++)
             {
                 for(int j = 0;j < 100;j++)//开始往前挪
                 {
@@ -6384,3 +6386,82 @@ int delete_word(void)//删除函数
         }
     }
 }//删除函数结束
+int print_test(void)//测验函数
+{
+    printf("================测验开始=================\n\n");
+    int random[5] = 0;//储存随机数
+    for(int i = 0;i < 5;i++)
+    {
+        random[i] = rand() % ((wordnum - 1) - 0 + 1) + 0;
+    }
+    int k = 0;
+    while(1)
+    {
+        char eng[100];//记录英文的数组
+        int pin = 0;//用来排除非法输入情况的针
+        printf("%s\n",Chinesebook[random[k]]);
+        printf("请输入英文 >> ");
+        //又要开始输入了
+        int ret = scanf("%99s",eng);
+        //又是判断不同的情况
+        if(ret == EOF)
+        {
+            return -1;//返回-1
+        }
+        //输入非字母
+        int num = strlen(eng);
+        for(int i = 0;i < num;i++)
+        {
+            if((eng[i] < 'A') || (eng[i] > 'Z' && eng[i] < 'a') || (eng[i] > 'z'))
+            {
+                pin++;
+            }
+        }
+        if(pin != 0)
+        {
+            printf("错误,请输入正确的英文\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        pin = 0;//针归零,为下次判断做好准备
+        //拒绝过长单词
+        if(num > 99)
+        {
+            printf("过长,请输入范围内的单词\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //到这就差不多了吧,应该
+        //将输入的单词与目标单词对比
+        int n = strlen(wordbook[k]);
+        for(int i = 0;i < num;i++)
+        {
+            if(eng[i] == wordbook[k][i]);
+            {
+                pin++;
+            }
+            if(pin == n)//说明完全一样
+            {
+                pin = -1;
+                break;//跳出循环,后面的不必比较
+            }
+        }
+        if(pin == -1)
+        {
+            printf("完美！\n");
+        }
+        else
+        {
+            printf("错误,请再想一次吧\n");
+            continue;
+        }
+        //到这一轮测试结束
+        k++;
+        if(k >= 5)
+        {
+            break;
+        }
+    }
+}//测验函数结束
