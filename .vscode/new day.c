@@ -5954,9 +5954,25 @@ void Gobang(void)//五子棋游戏函数
 }//游戏函数结束
 #endif
 //单词本+小测验
+int button = 0;//记录选项的
+void print_menu(void);//输出菜单函数
 
 int main()
 {
-
+    do
+    {
+        button = 0;
+        print_menu();//输出菜单
+    }while(button != 0);
     return 0;
 }
+
+void print_menu(void)//输出菜单函数
+{
+    printf("============ 单 词 本 ============\n");
+    printf("  1) 添加单词      2) 列表显示\n");
+    printf("  3) 查找单词      4) 按字母排序\n");
+    printf("  5) 删除单词      6) 小测验\n");
+    printf("  7) 统计          0) 退出\n");
+    printf("==================================\n");
+}//输出菜单函数结束
