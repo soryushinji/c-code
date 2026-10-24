@@ -6549,7 +6549,7 @@ void print_count(void)//统计函数
 #define MAXN 100
 int ch;
 int button = 0;//录入选项
-int round = 0;//记录玩扫雷游戏的局数
+int rounds = 0;//记录玩扫雷游戏的局数
 int as_usual = 0;//记录是否沿用上局
 char outer[MAXN][MAXN];//表棋盘
 char inner[MAXN][MAXN];//里棋盘
@@ -6564,7 +6564,7 @@ int main()
     {
         button = read_chosen();//录入选项函数
         printf("\n");
-        if(round > 0)
+        if(rounds > 0)
         {
             as_usual = read_usual();//询问是否沿用上局的函数
             printf("\n");
@@ -6602,7 +6602,7 @@ int main()
             }
         }
 
-    } while ((button == 0) || (button == -1));
+    } while ((button != 0) && (button != -1));
     
     return 0;
 }
