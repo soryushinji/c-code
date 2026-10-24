@@ -6721,9 +6721,9 @@ int read_usual(void)//询问是否沿用上局的函数
 }//沿用函数结束
 void read_outer(int row,int col)//录入表棋盘
 {
-    for(int i = 0;i < row;i++)
+    for(int i = 0;i < row + 2;i++)
     {
-        for(int j = 0;j < col;j++)
+        for(int j = 0;j < col + 2;j++)
         {
             outer[i][j] = '#';
         }
@@ -6744,8 +6744,8 @@ void read_inner(int row,int col,int mine,int as_usual)//录入里棋盘函数
     {
         for(int i = 0;i < mine;i++)
         {
-            rmine[i] = rand() % (row - 0 + 1) + 0;
-            cmine[i] = rand() % (col - 0 + 1) + 0;
+            rmine[i] = rand() % (row - 1 + 1) + 1;
+            cmine[i] = rand() % (col - 1 + 1) + 1;
         }
         //好了,到万恶的查重
         int k = 0;
@@ -6758,8 +6758,8 @@ void read_inner(int row,int col,int mine,int as_usual)//录入里棋盘函数
                 if((rmine[k] == rmine[m]) && (cmine[k] == cmine[m]))//出现相同坐标
                 {
                     //重新赋值
-                    rmine[m] = rand() % (row - 0 + 1) + 0;
-                    cmine[m] = rand() % (col - 0 + 1) + 0;
+                    rmine[m] = rand() % (row - 1 + 1) + 1;
+                    cmine[m] = rand() % (col - 1 + 1) + 1;
                     continue;//重新循环,m值不变
                 }
                 m++;
@@ -6798,15 +6798,15 @@ void read_inner(int row,int col,int mine,int as_usual)//录入里棋盘函数
         }
     }
     //里棋盘布置完成
-    //输出里棋盘测验
-    for(int i = 1;i < row + 1;i++)
-    {
-        for(int j = 1;j < col + 1;j++)
-        {
-            printf("%c ",inner[i][j]);
-        }
-        printf("\n");
-    }
+    // //输出里棋盘测验
+    // for(int i = 1;i < row + 1;i++)
+    // {
+    //     for(int j = 1;j < col + 1;j++)
+    //     {
+    //         printf("%c ",inner[i][j]);
+    //     }
+    //     printf("\n");
+    // }
 }//录入里棋盘函数结束
 void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一圈)
 {
