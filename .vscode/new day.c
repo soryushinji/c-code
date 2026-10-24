@@ -6957,7 +6957,7 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
 {
     row += 2;
     col += 2;//将棋盘扩大一圈
-    printf("    ");
+    printf("   ");
     //计算col的位数,确保打印一个等距的棋盘
     int re_col = col - 2;
     int ccount = 0;//计算col位数
@@ -6965,6 +6965,10 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
     {
         ccount++;
         re_col /= 10;
+    }
+    if(ccount >= 2)
+    {
+        printf(" ");
     }
     for(int i = 1;i < col - 1;i++)
     {
@@ -7065,7 +7069,7 @@ int read_find(int row,int col)//扫雷函数
         char way;
         int rows,cols;
         printf("请选择(如O 3 4) >> ");
-        int ret = scanf("%c %d %d",&way,&rows,&cols);
+        int ret = scanf(" %c %d %d",&way,&rows,&cols);
         //接着排除非法输入
         if(ret == EOF)
         {
@@ -7091,6 +7095,19 @@ int read_find(int row,int col)//扫雷函数
         if((rows < 0) || (rows > row + 1) || (cols < 0) || (cols > col + 1))
         {
             printf("错误,超出棋盘范围!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //如果后面输入空格
+        if((ch = getchar()) == ' ' || ch == '\t')
+        {
+            while(ch == ' ' || ch == '\t') ch = getchar();//跳过空格
+        }
+        //如果后面输入非数字
+        if(((ch = getchar()) < '0' || ch > '9') && ch != '\n' && ch != ' ' && ch != '\t')
+        {
+            printf("错误,请按照规定的格式输入!\n");
             //清空缓冲区
             while((ch = getchar()) != '\n' && ch != EOF) ;
             continue;
