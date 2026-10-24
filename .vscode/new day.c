@@ -6546,7 +6546,7 @@ void print_count(void)//统计函数
 }//统计函数结束
 #endif
 //扫雷进阶版
-#if 0
+//#if 0
 #define RMAXN 27
 #define CMAXN 40
 int ch;
@@ -7216,5 +7216,5 @@ void game(int row,int col,int mine,int button)//游戏函数
         }
     }
 }//游戏函数结束
-#endif
+//#endif
 //开始指针的学习
