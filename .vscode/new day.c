@@ -6558,6 +6558,7 @@ char inner[RMAXN][CMAXN];//里棋盘
 int rmine[500] = {0};//行储雷数组
 int cmine[500] = {0};//列储雷数组
 int mintime = 0;//记录最少时间
+int recurse = 0;//递归中用的
 void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项函数
 int read_usual(void);//询问是否沿用上局的函数
@@ -6568,7 +6569,10 @@ int read_ccustom(void);//列自定义函数
 int read_mcustom(int row,int col);//雷自定义函数
 void game(int row,int col,int mine);//游戏函数
 void print_outchess(int row,int col);//打印表棋盘函数
-int read_find(void);//扫雷函数
+int read_find(int row,int col);//扫雷函数
+void reveal(int rows,int cols,int m,int n,int recurse);//翻开函数
+void flag(int rows,int cols);//标记函数
+void cancel(int rows,int cols);//取消函数
 
 int main()
 {
@@ -6999,7 +7003,48 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
     }
     printf("O 翻开     F 标记      q 取消标记\n\n");
 }//打印表棋盘函数结束
-int read_find(void)//扫雷函数
+void reveal(int rows,int cols,int m,int n,int recurse)//翻开函数(如果翻开的格子是0,周围8个格子都要翻开)
+{
+    //将里棋盘对应的格子放到表棋盘上
+    outer[rows][cols] = inner[rows][cols];
+    outer[m][n] = inner[m][n];
+    //再进行判断
+    if(inner[rows][cols] == '0')
+    {
+        int r[8] = {-1,0,1,1,1,0,-1,-1};
+        int c[8] = {-1,-1,-1,0,1,1,1,0};
+        while(recurse < 8)
+        {
+            reveal(rows,cols,rows + r[recurse],cols + c[recurse],recurse++);
+        }
+    }
+    if(outer[rows][cols] == '*')
+    {
+        printf("\n****************boom~~!!!!***********************\n");
+        printf("******************你被炸死了************************\n\n");
+    }
+    //然后,好像没了
+}//翻开函数结束
+void flag(int rows,int cols)//标记函数
+{
+    //将表棋盘对应的格子换成F
+    outer[rows][cols] = 'F';
+    //好像就完了,这函数好像没必要。。。
+    //算了,就放这吧
+}//标记函数结束
+void cancel(int rows,int cols)//取消函数
+{
+    //如果表棋盘对应格子不是F
+    if(outer[rows][cols] != 'F')
+    {
+        printf("错误,请选择标记过的格子!\n");
+    }
+    else
+    {
+        outer[rows][cols] = '#';
+    }
+}//取消函数结束
+int read_find(int row,int col)//扫雷函数
 {
     while(1)
     {
@@ -7012,9 +7057,51 @@ int read_find(void)//扫雷函数
         {
             return -1;
         }
-        //如果一开始输入非O或F或q
-        
-
+        //如果一开始输入不符合要求
+        if(ret != 3)
+        {
+            printf("错误,请按照规定的格式输入!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //如果way不是O,F或q
+        if(way != 'O' && way != 'F' && way != 'q')
+        {
+            printf("错误,请输入O,F或q\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //如果数字超出范围
+        if((rows < 0) || (rows > row + 1) || (cols < 0) || (cols > col + 1))
+        {
+            printf("错误,超出棋盘范围!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //到这就差不多了
+        //分三种情况讨论
+        switch(way)
+        {
+            case 'O':
+            {
+                reveal(rows,cols,0,0,recurse);//翻开函数
+                break;
+            }
+            case 'F':
+            {
+                flag(rows,cols);//标记函数
+                break;
+            }
+            case 'q':
+            {
+                cancel(rows,cols);//取消函数
+                break;
+            }
+        }
+        return 1;
     }
 }//扫雷函数结束
 
@@ -7027,13 +7114,12 @@ void game(int row,int col,int mine)//游戏函数
         // ---- 每次打印棋盘时（实时显示）---- 
         int elapsed = (int)((clock() - t_start) / CLOCKS_PER_SEC);
         printf("已用时: %02d:%02d\n", elapsed / 60, elapsed % 60);
-        int note = read_find();//开始扫雷
+        int note = read_find(row,col);//开始扫雷
 
         if(note = -1)
         {
             break;
         }
-        break;//用于中途检验代码,最后删去
     }
 }//游戏函数结束
 // // ---- 结束时 ---- 
