@@ -6557,6 +6557,7 @@ char inner[RMAXN][CMAXN];//里棋盘
 void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项函数
 int read_usual(void);//询问是否沿用上局的函数
+void read_outer(int row,int col);//录入表棋盘
 void print_outchess(int row,int col);//打印表棋盘函数
 
 int main()
@@ -6575,8 +6576,9 @@ int main()
         {
             case 1:
             {
-                int row = 38;
+                int row = 9;
                 int col = 9;
+                read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 10;
                 print_outchess(row,col);//打印表棋盘函数
                 break;
@@ -6585,6 +6587,7 @@ int main()
             {
                 int row = 12;
                 int col = 12;
+                read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 25;
                 print_outchess(row,col);//打印表棋盘函数
                 break;
@@ -6593,6 +6596,7 @@ int main()
             {
                 int row = 16;
                 int col = 16;
+                read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 50;
                 print_outchess(row,col);//打印表棋盘函数
                 break;
@@ -6600,6 +6604,7 @@ int main()
             case 4:
             {
 
+                //read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 //print_outchess(row,col);//打印表棋盘函数
                 break;
             }
@@ -6703,20 +6708,30 @@ int read_usual(void)//询问是否沿用上局的函数
         return chosen;
     }
 }//沿用函数结束
+void read_outer(int row,int col)//录入表棋盘
+{
+    for(int i = 0;i < row;i++)
+    {
+        for(int j = 0;j < col;j++)
+        {
+            outer[i][j] = '#';
+        }
+    }
+}//录入表棋盘函数结束
 void print_outchess(int row,int col)//打印表棋盘函数
 {
-    printf("     ");
+    printf("    ");
     //计算row的位数,确保打印一个等距的棋盘
     int re_row = row;
-    int count = 0;//计算row位数
+    int rcount = 0;//计算row位数
     while(re_row >= 1)
     {
-        count++;
+        rcount++;
         re_row /= 10;
     }
     for(int i = 1;i <= row;i++)
     {
-        printf("%-*d ",count,i);
+        printf("%-*d ",rcount,i);
     }
     printf("\n");
     printf("    ");
@@ -6725,5 +6740,21 @@ void print_outchess(int row,int col)//打印表棋盘函数
         printf("---");
     }
     printf("\n");
-
+    //在计算col的位数
+    int re_col = col;
+    int ccount = 0;//记录col的位数
+    while(re_col >= 1)
+    {
+        ccount++;
+        re_col /= 10;
+    }
+    for(int i = 1;i <= col;i++)
+    {
+        printf("%-*d| ",ccount,i);
+        for(int j = 1;j <= row;j++)
+        {
+            printf("%-*c ",rcount,outer[i][j]);
+        }
+        printf("\n");
+    }
 }//打印表棋盘函数结束
