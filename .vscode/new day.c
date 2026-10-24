@@ -6546,16 +6546,18 @@ void print_count(void)//统计函数
 }//统计函数结束
 #endif
 //扫雷进阶版
-#define MAXN 100
+#define RMAXN 38
+#define CMAXN 100
 int ch;
 int button = 0;//录入选项
 int rounds = 0;//记录玩扫雷游戏的局数
 int as_usual = 0;//记录是否沿用上局
-char outer[MAXN][MAXN];//表棋盘
-char inner[MAXN][MAXN];//里棋盘
+char outer[RMAXN][CMAXN];//表棋盘
+char inner[RMAXN][CMAXN];//里棋盘
 void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项函数
 int read_usual(void);//询问是否沿用上局的函数
+void print_outchess(int row,int col);//打印表棋盘函数
 
 int main()
 {
@@ -6573,9 +6575,10 @@ int main()
         {
             case 1:
             {
-                int row = 9;
+                int row = 38;
                 int col = 9;
                 int mine = 10;
+                print_outchess(row,col);//打印表棋盘函数
                 break;
             }
             case 2:
@@ -6583,6 +6586,7 @@ int main()
                 int row = 12;
                 int col = 12;
                 int mine = 25;
+                print_outchess(row,col);//打印表棋盘函数
                 break;
             }
             case 3:
@@ -6590,10 +6594,13 @@ int main()
                 int row = 16;
                 int col = 16;
                 int mine = 50;
+                print_outchess(row,col);//打印表棋盘函数
                 break;
             }
             case 4:
             {
+
+                //print_outchess(row,col);//打印表棋盘函数
                 break;
             }
             case 0:
@@ -6696,3 +6703,27 @@ int read_usual(void)//询问是否沿用上局的函数
         return chosen;
     }
 }//沿用函数结束
+void print_outchess(int row,int col)//打印表棋盘函数
+{
+    printf("     ");
+    //计算row的位数,确保打印一个等距的棋盘
+    int re_row = row;
+    int count = 0;//计算row位数
+    while(re_row >= 1)
+    {
+        count++;
+        re_row /= 10;
+    }
+    for(int i = 1;i <= row;i++)
+    {
+        printf("%-*d ",count,i);
+    }
+    printf("\n");
+    printf("    ");
+    for(int i = 1;i <= row;i++)
+    {
+        printf("---");
+    }
+    printf("\n");
+
+}//打印表棋盘函数结束
