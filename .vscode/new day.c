@@ -6971,7 +6971,7 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
         printf("%-*d ",ccount,i);
     }
     printf("\n");
-    printf("    ");
+    printf("   ");
     for(int i = 1;i < col - 1;i++)
     {
         if(col - 2 < 10)
@@ -7005,6 +7005,11 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
 }//打印表棋盘函数结束
 int reveal(int rows,int cols,int row,int col)//翻开函数(如果翻开的格子是0,周围8个格子都要翻开)
 {
+    //讨论递归的情况
+    if (outer[rows][cols] != '#') //已开过检查
+    {
+        return 1;
+    }
     //将里棋盘对应的格子放到表棋盘上
     outer[rows][cols] = inner[rows][cols];
     if(outer[rows][cols] == '*')//翻到雷
@@ -7019,7 +7024,7 @@ int reveal(int rows,int cols,int row,int col)//翻开函数(如果翻开的格�
     {
         return 1;
     }
-    //所有的情况都排查了,到这里说明翻到了0
+    //所有的情况都排查了
     int dr,dc;
     for(dr = -1;dr <= 1;dr++)
     {
