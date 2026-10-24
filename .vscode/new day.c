@@ -6546,7 +6546,7 @@ void print_count(void)//统计函数
 }//统计函数结束
 #endif
 //扫雷进阶版
-#define RMAXN 28
+#define RMAXN 27
 #define CMAXN 40
 int ch;
 int button = 0;//录入选项
@@ -6788,7 +6788,7 @@ void read_inner(int row,int col,int mine,int as_usual)//录入里棋盘函数
     }
     //雷填进去了
     //设置影武者数组
-    char copy[28][40];
+    char copy[27][40];
     for(int i = 0;i < row + 2;i++)
     {
         for(int j = 0;j < col + 2;j++)
@@ -6828,7 +6828,7 @@ int read_rcustom(void)//行自定义函数
     while(1)
     {
         int row;
-        printf("请输入棋盘的行数(9-26) >> ");
+        printf("请输入棋盘的行数(9-25) >> ");
         int ret = scanf("%d",&row);
         //EOF
         if(ret == EOF)
@@ -6844,7 +6844,7 @@ int read_rcustom(void)//行自定义函数
             continue;
         }
         //超出范围
-        if(row > 26 || row < 9)
+        if(row > 25 || row < 9)
         {
             printf("超出范围,请输入范围内的数字!\n");
             //清空缓冲区
@@ -6995,7 +6995,7 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
         }
         printf("\n");
     }
-    printf("       O 翻开     F 标记      q 取消标记\n\n");
+    printf("O 翻开     F 标记      q 取消标记\n\n");
 }//打印表棋盘函数结束
 
 
