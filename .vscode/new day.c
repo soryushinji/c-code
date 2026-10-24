@@ -5954,6 +5954,7 @@ void Gobang(void)//五子棋游戏函数
 }//游戏函数结束
 #endif
 //单词本+小测验
+
 int button = 0;//记录选项的
 int ch;
 int wordnum = 10;//统计录入的单词数量(默认有十个单词)
@@ -6538,8 +6539,10 @@ void print_count(void)//统计函数
         aveword += (double)strlen(wordbook[i]);
     }
     aveword /= (double)wordnum;
-    printf("单词平均长度: %.1f\n\n",aveword);
+    printf("单词平均长度: %.1f\n",aveword);
     printf("=========================================\n");
     //调用完后数据归零
     aveword = 0;
 }//统计函数结束
+//基础测试完毕
+//开始进阶
