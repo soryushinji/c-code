@@ -38,10 +38,10 @@ int main()
     //         continue;
     //     }
     // }
- printf("%-*d",97,14);
-printf("anb\n");
-char arr[30][1024] = {"apple","orange"};
-printf("%zu\n",strlen(arr[0]));
-printf("%zu\n",strlen(arr[1]));
+int row,col;
+char num;
+
+printf("%zu\n",scanf("%c %d %d",&num,&row,&col));
+
     return 0;
 }

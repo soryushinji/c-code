@@ -6557,6 +6557,7 @@ char outer[RMAXN][CMAXN];//表棋盘
 char inner[RMAXN][CMAXN];//里棋盘
 int rmine[500] = {0};//行储雷数组
 int cmine[500] = {0};//列储雷数组
+int mintime = 0;//记录最少时间
 void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项函数
 int read_usual(void);//询问是否沿用上局的函数
@@ -6567,6 +6568,7 @@ int read_ccustom(void);//列自定义函数
 int read_mcustom(int row,int col);//雷自定义函数
 void game(int row,int col,int mine);//游戏函数
 void print_outchess(int row,int col);//打印表棋盘函数
+int read_find(void);//扫雷函数
 
 int main()
 {
@@ -6997,13 +6999,55 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
     }
     printf("O 翻开     F 标记      q 取消标记\n\n");
 }//打印表棋盘函数结束
+int read_find(void)//扫雷函数
+{
+    while(1)
+    {
+        char way;
+        int rows,cols;
+        printf("请选择(如O 3 4) >> ");
+        int ret = scanf("%c %d %d",&way,&rows,&cols);
+        //接着排除非法输入
+        if(ret == EOF)
+        {
+            return -1;
+        }
+        //如果一开始输入非O或F或q
+        
 
+    }
+}//扫雷函数结束
 
 void game(int row,int col,int mine)//游戏函数
 {
     while(1)
     {
+        clock_t t_start;//计时起点
         print_outchess(row,col);//打印表棋盘
-        break;
+        // ---- 每次打印棋盘时（实时显示）---- 
+        int elapsed = (int)((clock() - t_start) / CLOCKS_PER_SEC);
+        printf("已用时: %02d:%02d\n", elapsed / 60, elapsed % 60);
+        int note = read_find();//开始扫雷
+
+        if(note = -1)
+        {
+            break;
+        }
+        break;//用于中途检验代码,最后删去
     }
 }//游戏函数结束
+// // ---- 结束时 ---- 
+// int total = (int)((clock() - t_start) / CLOCKS_PER_SEC);
+////记录最少时间
+// if(rounds == 1)//第一局
+// {
+//     mintime = total;
+// }
+// else//非第一局
+// {
+//     if(mintime > total)
+//     {
+//         mintime = total;
+//     }
+// }
+// printf("本局用时: %02d:%02d\n", total / 60, total % 60);
