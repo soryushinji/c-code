@@ -6546,32 +6546,39 @@ void print_count(void)//统计函数
 }//统计函数结束
 #endif
 //扫雷进阶版
-#define RMAXN 26
-#define CMAXN 38
+#define RMAXN 28
+#define CMAXN 40
 int ch;
 int button = 0;//录入选项
+int pre_button = 0;//判断这一局选择的棋盘是否与上一局一致的标致
 int rounds = 0;//记录玩扫雷游戏的局数
 int as_usual = 0;//记录是否沿用上局
 char outer[RMAXN][CMAXN];//表棋盘
 char inner[RMAXN][CMAXN];//里棋盘
+int rmine[500] = {0};//行储雷数组
+int cmine[500] = {0};//列储雷数组
 void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项函数
 int read_usual(void);//询问是否沿用上局的函数
 void read_outer(int row,int col);//录入表棋盘
+void read_inner(int row,int col,int mine,int as_usual);//录入里棋盘(as_usual作为是否重新防止雷的位置的条件)
 void print_outchess(int row,int col);//打印表棋盘函数
+
 
 int main()
 {
+    srand((unsigned)time(NULL));//设置种子
     print_menu();
     do
     {
         button = read_chosen();//录入选项函数
         printf("\n");
-        if(rounds > 0)
+        if(rounds > 0 && pre_button == button)//成立条件：至少玩了一局,且这一局选择的棋盘与上一局一致
         {
-            as_usual = read_usual();//询问是否沿用上局的函数
+            as_usual = read_usual();//询问是否沿用上局的函数(前提时两局选择的棋盘一致)
             printf("\n");
         }
+        pre_button = button;//判断这一局选择的棋盘是否与上一局一致的标致
         switch(button)
         {
             case 1:
@@ -6580,15 +6587,17 @@ int main()
                 int col = 9;
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 10;
+                read_inner(row,col,mine,as_usual);//录入里棋盘
                 print_outchess(row,col);//打印表棋盘函数
                 break;
             }
             case 2:
             {
-                int row = 26;
-                int col = 38;
+                int row = 12;
+                int col = 12;
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 25;
+                read_inner(row,col,mine,as_usual);//录入里棋盘
                 print_outchess(row,col);//打印表棋盘函数
                 break;
             }
@@ -6598,12 +6607,14 @@ int main()
                 int col = 16;
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 50;
+                read_inner(row,col,mine,as_usual);//录入里棋盘
                 print_outchess(row,col);//打印表棋盘函数
                 break;
             }
             case 4:
             {
 
+                //read_inner(row,col,mine,as_usual);//录入里棋盘
                 //read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 //print_outchess(row,col);//打印表棋盘函数
                 break;
@@ -6718,40 +6729,121 @@ void read_outer(int row,int col)//录入表棋盘
         }
     }
 }//录入表棋盘函数结束
-void print_outchess(int row,int col)//打印表棋盘函数
+void read_inner(int row,int col,int mine,int as_usual)//录入里棋盘函数
 {
+    //先将所有的格子填'0',包括边界
+
+    for(int i = 0;i < row + 2;i++)
+    {
+        for(int j = 0;j < col + 2;j++)
+        {
+            inner[i][j] = '0';
+        }
+    }
+    if(as_usual == 0)//选择重新生成雷/第一局玩
+    {
+        for(int i = 0;i < mine;i++)
+        {
+            rmine[i] = rand() % (row - 0 + 1) + 0;
+            cmine[i] = rand() % (col - 0 + 1) + 0;
+        }
+        //好了,到万恶的查重
+        int k = 0;
+        int m = 0;
+        while(k < mine)
+        {
+            m = k + 1;
+            while(m < mine)
+            {
+                if((rmine[k] == rmine[m]) && (cmine[k] == cmine[m]))//出现相同坐标
+                {
+                    //重新赋值
+                    rmine[m] = rand() % (row - 0 + 1) + 0;
+                    cmine[m] = rand() % (col - 0 + 1) + 0;
+                    continue;//重新循环,m值不变
+                }
+                m++;
+            }
+        }
+        //查重结束
+    }
+    //开始给里函数的雷赋值
+    for(int i = 0;i < mine;i++)
+    {
+        inner[rmine[i]][cmine[i]] = '1';
+    }
+    //雷填进去了
+    //设置影武者数组
+    char copy[28][40];
+    for(int i = 0;i < row + 2;i++)
+    {
+        for(int j = 0;j < col + 2;j++)
+        {
+            copy[i][j] = inner[i][j];
+        }
+    }
+    //开始填非雷格
+    for(int i = 1;i < row + 1;i++)
+    {
+        int n = 0;
+        for(int j = 1;j < col + 1;j++)
+        {
+            if(inner[i][j] == '1')
+            {
+                inner[i][j] = '*';
+                continue;
+            }
+            n = (int)((copy[i - 1][j - 1] - '0') + (copy[i][j - 1] - '0') + (copy[i + 1][j - 1] - '0') + (copy[i + 1][j] - '0') + (copy[i + 1][j + 1] - '0') + (copy[i][j + 1] - '0') + (copy[i - 1][j + 1] - '0') + (copy[i - 1][j] - '0'));
+            inner[i][j] = (n + '0');
+        }
+    }
+    //里棋盘布置完成
+    //输出里棋盘测验
+    for(int i = 1;i < row + 1;i++)
+    {
+        for(int j = 1;j < col + 1;j++)
+        {
+            printf("%c ",inner[i][j]);
+        }
+        printf("\n");
+    }
+}//录入里棋盘函数结束
+void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一圈)
+{
+    row += 2;
+    col += 2;//将棋盘扩大一圈
     printf("    ");
     //计算col的位数,确保打印一个等距的棋盘
-    int re_col = col;
+    int re_col = col - 2;
     int ccount = 0;//计算col位数
     while(re_col >= 1)
     {
         ccount++;
         re_col /= 10;
     }
-    for(int i = 1;i <= col;i++)
+    for(int i = 1;i < col - 1;i++)
     {
         printf("%-*d ",ccount,i);
     }
     printf("\n");
     printf("    ");
-    for(int i = 1;i <= col;i++)
+    for(int i = 1;i < col - 1;i++)
     {
         printf("---");
     }
     printf("\n");
     //在计算row的位数
-    int re_row = row;
+    int re_row = row - 2;
     int rcount = 0;//记录col的位数
     while(re_row >= 1)
     {
         rcount++;
         re_row /= 10;
     }
-    for(int i = 0;i < row;i++)
+    for(int i = 1;i < row - 1;i++)
     {
-        printf("%-*d| ",rcount,i + 1);
-        for(int j = 0;j < col;j++)
+        printf("%-*d| ",rcount,i);
+        for(int j = 1;j < col - 1;j++)
         {
             printf("%-*c ",ccount,outer[i][j]);
         }
