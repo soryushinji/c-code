@@ -6557,8 +6557,8 @@ char outer[RMAXN][CMAXN];//表棋盘
 char inner[RMAXN][CMAXN];//里棋盘
 int rmine[500] = {0};//行储雷数组
 int cmine[500] = {0};//列储雷数组
-int mintime = 0;//记录最少时间
-int recurse = 0;//递归中用的
+int mintime[4] = {0};//记录最少时间
+int mark = 0;//记录标记的雷数用的
 void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项函数
 int read_usual(void);//询问是否沿用上局的函数
@@ -6567,7 +6567,7 @@ void read_inner(int row,int col,int mine,int as_usual);//录入里棋盘(as_usua
 int read_rcustom(void);//行自定义函数
 int read_ccustom(void);//列自定义函数
 int read_mcustom(int row,int col);//雷自定义函数
-void game(int row,int col,int mine);//游戏函数
+void game(int row,int col,int mine,int button);//游戏函数
 void print_outchess(int row,int col);//打印表棋盘函数
 int read_find(int row,int col);//扫雷函数
 int reveal(int rows,int cols,int row,int col);//翻开函数
@@ -6597,7 +6597,7 @@ int main()
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 10;
                 read_inner(row,col,mine,as_usual);//录入里棋盘
-                game(row,col,mine);//游戏函数
+                game(row,col,mine,button);//游戏函数
                 rounds++;
                 break;
             }
@@ -6608,7 +6608,7 @@ int main()
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 25;
                 read_inner(row,col,mine,as_usual);//录入里棋盘
-                game(row,col,mine);//游戏函数
+                game(row,col,mine,button);//游戏函数
                 rounds++;
                 break;
             }
@@ -6619,7 +6619,7 @@ int main()
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 50;
                 read_inner(row,col,mine,as_usual);//录入里棋盘
-                game(row,col,mine);//游戏函数
+                game(row,col,mine,button);//游戏函数
                 rounds++;
                 break;
             }
@@ -6635,7 +6635,7 @@ int main()
                 }
                 read_inner(row,col,mine,as_usual);//录入里棋盘
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
-                game(row,col,mine);//游戏函数
+                game(row,col,mine,button);//游戏函数
                 rounds++;
                 break;
             }
@@ -6645,7 +6645,23 @@ int main()
             }
         }
     } while ((button != 0) && (button != -1));
-    
+    //输出各难度的最少用时
+    if(mintime[0] > 0)
+    {
+        printf("简单难度最少用时: %02d:%02d\n", mintime[0] / 60, mintime[0] % 60);
+    }
+    if(mintime[1] > 0)
+    {
+        printf("中等难度最少用时: %02d:%02d\n", mintime[1] / 60, mintime[1] % 60);
+    }
+    if(mintime[2] > 0)
+    {
+        printf("困难难度最少用时: %02d:%02d\n", mintime[2] / 60, mintime[2] % 60);
+    }
+    if(mintime[3] > 0)
+    {
+        printf("自定义难度最少用时: %02d:%02d\n", mintime[3] / 60, mintime[3] % 60);
+    }
     return 0;
 }
 void print_menu(void)//输出菜单函数
@@ -7052,8 +7068,22 @@ int reveal(int rows,int cols,int row,int col)//翻开函数(如果翻开的格�
 void flag(int rows,int cols)//标记函数
 {
     //将表棋盘对应的格子换成F
-    outer[rows][cols] = 'F';
-    //好像就完了,这函数好像没必要。。。
+    if (outer[rows][cols] == '#')      
+    {
+        outer[rows][cols] = 'F';
+        mark++;
+    
+    }    
+    else if (outer[rows][cols] == 'F')  
+    {
+        outer[rows][cols] = '#';
+        mark--;
+    }
+    else                                
+    {
+        printf("这个格子已经翻开，不能标记\n");
+    }
+        //好像就完了,这函数好像没必要。。。
     //算了,就放这吧
 }//标记函数结束
 void cancel(int rows,int cols)//取消函数
@@ -7066,6 +7096,7 @@ void cancel(int rows,int cols)//取消函数
     else
     {
         outer[rows][cols] = '#';
+        mark--;
     }
 }//取消函数结束
 int read_find(int row,int col)//扫雷函数
@@ -7098,7 +7129,7 @@ int read_find(int row,int col)//扫雷函数
             continue;
         }
         //如果数字超出范围
-        if((rows < 0) || (rows > row + 1) || (cols < 0) || (cols > col + 1))
+        if((rows < 1) || (rows > row ) || (cols < 1) || (cols > col))
         {
             printf("错误,超出棋盘范围!\n");
             //清空缓冲区
@@ -7133,36 +7164,54 @@ int read_find(int row,int col)//扫雷函数
     }
 }//扫雷函数结束
 
-void game(int row,int col,int mine)//游戏函数
+void game(int row,int col,int mine,int button)//游戏函数
 {
-    clock_t t_start;//计时起点
+    clock_t t_start = clock();//计时起点
     int note;
+    mark = 0;//记录标记的雷数用的,每轮游戏清零
     while(1)
     {
+        int pin = 0;//判断胜利的条件
         print_outchess(row,col);//打印表棋盘
         // ---- 每次打印棋盘时（实时显示）---- 
         int elapsed = (int)((clock() - t_start) / CLOCKS_PER_SEC);
         printf("已用时: %02d:%02d\n", elapsed / 60, elapsed % 60);
+        printf("总雷数: %d   标记数: %d\n",mine,mark);
         note = read_find(row,col);//开始扫雷
-
+        //开始判断胜利
+        for(int i = 1;i < row + 1;i++)
+        {
+            for(int j = 1;j < col + 1;j++)
+            {
+                if((outer[i][j] == inner[i][j]) && inner[i][j] != '*')//表棋盘与里棋盘相等,除了雷格
+                {
+                    pin++;
+                }
+            }
+        }
+        if(pin == (row * col) - mine)
+        {
+            printf("恭喜您获胜了\n");
+            // ---- 结束时 ---- 
+            int total = (int)((clock() - t_start) / CLOCKS_PER_SEC);
+            //记录最少时间
+            if(rounds == 0)//第一局
+            {
+                mintime[button - 1] = total;
+            }
+            else//非第一局
+            {
+                if(mintime[button - 1] > total)
+                {
+                    mintime[button - 1] = total;
+                }
+            }
+            printf("本局用时: %02d:%02d\n", total / 60, total % 60);
+            break;
+        }
         if(note == -1)
         {
             break;
         }
     }
 }//游戏函数结束
-// // ---- 结束时 ---- 
-// int total = (int)((clock() - t_start) / CLOCKS_PER_SEC);
-////记录最少时间
-// if(rounds == 1)//第一局
-// {
-//     mintime = total;
-// }
-// else//非第一局
-// {
-//     if(mintime > total)
-//     {
-//         mintime = total;
-//     }
-// }
-// printf("本局用时: %02d:%02d\n", total / 60, total % 60);
