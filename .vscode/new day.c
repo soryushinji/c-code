@@ -5954,7 +5954,7 @@ void Gobang(void)//五子棋游戏函数
 }//游戏函数结束
 #endif
 //单词本+小测验
-
+#if 0
 int button = 0;//记录选项的
 int ch;
 int wordnum = 10;//统计录入的单词数量(默认有十个单词)
@@ -6540,9 +6540,159 @@ void print_count(void)//统计函数
     }
     aveword /= (double)wordnum;
     printf("单词平均长度: %.1f\n",aveword);
-    printf("=========================================\n");
+    printf("=========================================\n\n");
     //调用完后数据归零
     aveword = 0;
 }//统计函数结束
-//基础测试完毕
-//开始进阶
+#endif
+//扫雷进阶版
+#define MAXN 100
+int ch;
+int button = 0;//录入选项
+int round = 0;//记录玩扫雷游戏的局数
+int as_usual = 0;//记录是否沿用上局
+char outer[MAXN][MAXN];//表棋盘
+char inner[MAXN][MAXN];//里棋盘
+void print_menu(void);//输出菜单函数
+int read_chosen(void);//录入选项函数
+int read_usual(void);//询问是否沿用上局的函数
+
+int main()
+{
+    print_menu();
+    do
+    {
+        button = read_chosen();//录入选项函数
+        printf("\n");
+        if(round > 0)
+        {
+            as_usual = read_usual();//询问是否沿用上局的函数
+            printf("\n");
+        }
+        switch(button)
+        {
+            case 1:
+            {
+                int row = 9;
+                int col = 9;
+                int mine = 10;
+                break;
+            }
+            case 2:
+            {
+                int row = 12;
+                int col = 12;
+                int mine = 25;
+                break;
+            }
+            case 3:
+            {
+                int row = 16;
+                int col = 16;
+                int mine = 50;
+                break;
+            }
+            case 4:
+            {
+                break;
+            }
+            case 0:
+            {
+                break;
+            }
+        }
+
+    } while ((button == 0) || (button == -1));
+    
+    return 0;
+}
+void print_menu(void)//输出菜单函数
+{
+    printf("*********************** 扫  雷 **************************\n");
+    printf("   1) 简单  9 x 9   10 雷\n");
+    printf("   2) 中等  12 x 12 25 雷\n");
+    printf("   3) 困难  16 x 16 50 雷\n");
+    printf("   4) 自定义\n");
+    printf("   0) 退出\n");
+    printf("*********************************************************\n");
+}//输出菜单函数结束
+int read_chosen(void)//录入选项函数
+{
+    while(1)
+    {
+        int chosen;
+        printf("请选择 >> ");
+        int ret = scanf("%d",&chosen);
+        //如果是EOF
+        if(ret == EOF)
+        {
+            return -1;//直接退出
+        }
+        //如果输入非数字
+        if(ret == 0)
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //如果输入其他数字
+        if(chosen > 4 || chosen < 0)
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //如果数字之后输入别的,如2.1,2abc之类的
+        if(((ch = getchar()) < '0' || ch > '9') && ch != '\n')
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //至此,你成为了一个合格的选项
+        return chosen;
+    }
+}//录入选项函数结束
+int read_usual(void)//询问是否沿用上局的函数
+{
+    while(1)
+    {
+        int chosen;
+        printf("本局是否沿用上一局的雷区？(1=是  0=重新生成) >> ");
+        int ret = scanf("%d",&chosen);
+        //如果是EOF
+        if(ret == EOF)
+        {
+            return -1;//直接退出
+        }
+        //如果输入非数字
+        if(ret == 0)
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //如果输入其他数字
+        if(chosen > 1 || chosen < 0)
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //如果数字之后输入别的,如2.1,2abc之类的
+        if(((ch = getchar()) < '0' || ch > '9') && ch != '\n')
+        {
+            printf("错误,请输入选项提供的数字\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //至此,你成为了一个合格的选项
+        return chosen;
+    }
+}//沿用函数结束
