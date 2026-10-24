@@ -6570,7 +6570,7 @@ int read_mcustom(int row,int col);//雷自定义函数
 void game(int row,int col,int mine);//游戏函数
 void print_outchess(int row,int col);//打印表棋盘函数
 int read_find(int row,int col);//扫雷函数
-void reveal(int rows,int cols,int m,int n,int recurse);//翻开函数
+int reveal(int rows,int cols,int m,int n,int recurse);//翻开函数
 void flag(int rows,int cols);//标记函数
 void cancel(int rows,int cols);//取消函数
 
@@ -7003,7 +7003,7 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
     }
     printf("O 翻开     F 标记      q 取消标记\n\n");
 }//打印表棋盘函数结束
-void reveal(int rows,int cols,int m,int n,int recurse)//翻开函数(如果翻开的格子是0,周围8个格子都要翻开)
+int reveal(int rows,int cols,int m,int n,int recurse)//翻开函数(如果翻开的格子是0,周围8个格子都要翻开)
 {
     //将里棋盘对应的格子放到表棋盘上
     outer[rows][cols] = inner[rows][cols];
@@ -7022,6 +7022,7 @@ void reveal(int rows,int cols,int m,int n,int recurse)//翻开函数(如果翻�
     {
         printf("\n****************boom~~!!!!***********************\n");
         printf("******************你被炸死了************************\n\n");
+        return -2;
     }
     //然后,好像没了
 }//翻开函数结束
@@ -7087,7 +7088,11 @@ int read_find(int row,int col)//扫雷函数
         {
             case 'O':
             {
-                reveal(rows,cols,0,0,recurse);//翻开函数
+                int pin = reveal(rows,cols,0,0,recurse);//翻开函数
+                if(pin == -2)
+                {
+                    return -1;
+                }
                 break;
             }
             case 'F':
@@ -7107,16 +7112,17 @@ int read_find(int row,int col)//扫雷函数
 
 void game(int row,int col,int mine)//游戏函数
 {
+    clock_t t_start;//计时起点
+    int note;
     while(1)
     {
-        clock_t t_start;//计时起点
         print_outchess(row,col);//打印表棋盘
         // ---- 每次打印棋盘时（实时显示）---- 
         int elapsed = (int)((clock() - t_start) / CLOCKS_PER_SEC);
         printf("已用时: %02d:%02d\n", elapsed / 60, elapsed % 60);
-        int note = read_find(row,col);//开始扫雷
+        note = read_find(row,col);//开始扫雷
 
-        if(note = -1)
+        if(note == -1)
         {
             break;
         }
