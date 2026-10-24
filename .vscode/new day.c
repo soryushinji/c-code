@@ -6563,6 +6563,10 @@ int read_usual(void);//询问是否沿用上局的函数
 void read_outer(int row,int col);//录入表棋盘
 void read_inner(int row,int col,int mine,int as_usual);//录入里棋盘(as_usual作为是否重新防止雷的位置的条件)
 void print_outchess(int row,int col);//打印表棋盘函数
+int read_rcustom(void);//行自定义函数
+int read_ccustom(void);//列自定义函数
+int read_mcustom(int row,int col);//雷自定义函数
+
 
 
 int main()
@@ -6616,10 +6620,17 @@ int main()
             }
             case 4:
             {
-
-                //read_inner(row,col,mine,as_usual);//录入里棋盘
-                //read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
-                //print_outchess(row,col);//打印表棋盘函数
+                int row = read_rcustom();//行自定义函数
+                int col = read_ccustom();//列自定义函数
+                int mine = read_mcustom(row,col);//雷自定义函数
+                if(row == -1 || col == -1 || mine == -1)
+                {
+                    button = -1;
+                    break;
+                }
+                read_inner(row,col,mine,as_usual);//录入里棋盘
+                read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
+                print_outchess(row,col);//打印表棋盘函数
                 rounds++;
                 break;
             }
@@ -6628,7 +6639,6 @@ int main()
                 break;
             }
         }
-
     } while ((button != 0) && (button != -1));
     
     return 0;
@@ -6804,14 +6814,14 @@ void read_inner(int row,int col,int mine,int as_usual)//录入里棋盘函数
     }
     //里棋盘布置完成
     //输出里棋盘测验
-    for(int i = 1;i < row + 1;i++)
-    {
-        for(int j = 1;j < col + 1;j++)
-        {
-            printf("%c ",inner[i][j]);
-        }
-        printf("\n");
-    }
+    // for(int i = 1;i < row + 1;i++)
+    // {
+    //     for(int j = 1;j < col + 1;j++)
+    //     {
+    //         printf("%c ",inner[i][j]);
+    //     }
+    //     printf("\n");
+    // }
     //完成
 }//录入里棋盘函数结束
 void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一圈)
@@ -6856,3 +6866,127 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
         printf("\n");
     }
 }//打印表棋盘函数结束
+int read_rcustom(void)//行自定义函数
+{
+    while(1)
+    {
+        int row;
+        printf("请输入棋盘的行数(9-26) >> ");
+        int ret = scanf("%d",&row);
+        //EOF
+        if(ret == EOF)
+        {
+            return -1;
+        }
+        //输入非数字
+        if(ret == 0)
+        {
+            printf("错误,请输入数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //超出范围
+        if(row > 26 || row < 9)
+        {
+            printf("超出范围,请输入范围内的数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //防止数字后输入非数字字符
+        if(((ch = getchar()) < '0' || ch > '9') && ch != '\n')
+        {
+            printf("错误,请输入数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //到这就是个合格的数字了
+        printf("\n");
+        return row;
+    }
+}//行自定义函数结束
+int read_ccustom(void)//列自定义函数
+{
+    while(1)
+    {
+        int col;
+        printf("请输入棋盘的列数(9-38) >> ");
+        int ret = scanf("%d",&col);
+        //EOF
+        if(ret == EOF)
+        {
+            return -1;
+        }
+        //输入非数字
+        if(ret == 0)
+        {
+            printf("错误,请输入数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //超出范围
+        if(col > 38 || col < 9)
+        {
+            printf("超出范围,请输入范围内的数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //防止数字后输入非数字字符
+        if(((ch = getchar()) < '0' || ch > '9') && ch != '\n')
+        {
+            printf("错误,请输入数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        printf("\n");
+        //到这就是个合格的数字了
+        return col;
+    }
+}//列自定义函数结束
+int read_mcustom(int row,int col)//雷自定义函数
+{
+    while(1)
+    {
+        int mine;
+        int sum = (row * col) / 2;
+        printf("请输入棋盘的雷数(10-%d) >> ",sum);
+        int ret = scanf("%d",&mine);
+        //EOF
+        if(ret == EOF)
+        {
+            return -1;
+        }
+        //输入非数字
+        if(ret == 0)
+        {
+            printf("错误,请输入数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //超出范围
+        if(mine > sum || mine < 10)
+        {
+            printf("超出范围,请输入范围内的数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        //防止数字后输入非数字字符
+        if(((ch = getchar()) < '0' || ch > '9') && ch != '\n')
+        {
+            printf("错误,请输入数字!\n");
+            //清空缓冲区
+            while((ch = getchar()) != '\n' && ch != EOF) ;
+            continue;
+        }
+        printf("\n");
+        //到这就是个合格的数字了
+        return mine;
+    }
+}//雷自定义函数结束
