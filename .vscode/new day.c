@@ -6570,7 +6570,7 @@ int read_mcustom(int row,int col);//雷自定义函数
 void game(int row,int col,int mine);//游戏函数
 void print_outchess(int row,int col);//打印表棋盘函数
 int read_find(int row,int col);//扫雷函数
-int reveal(int rows,int cols,int m,int n,int recurse);//翻开函数
+int reveal(int rows,int cols,int row,int col);//翻开函数
 void flag(int rows,int cols);//标记函数
 void cancel(int rows,int cols);//取消函数
 
@@ -7003,26 +7003,34 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
     }
     printf("O 翻开     F 标记      q 取消标记\n\n");
 }//打印表棋盘函数结束
-int reveal(int rows,int cols,int m,int n,int recurse)//翻开函数(如果翻开的格子是0,周围8个格子都要翻开)
+int reveal(int rows,int cols,int row,int col)//翻开函数(如果翻开的格子是0,周围8个格子都要翻开)
 {
     //将里棋盘对应的格子放到表棋盘上
     outer[rows][cols] = inner[rows][cols];
-    outer[m][n] = inner[m][n];
-    //再进行判断
-    if(inner[rows][cols] == '0')
+    if(outer[rows][cols] == '*')//翻到雷
     {
-        int r[8] = {-1,0,1,1,1,0,-1,-1};
-        int c[8] = {-1,-1,-1,0,1,1,1,0};
-        while(recurse < 8)
-        {
-            reveal(rows,cols,rows + r[recurse],cols + c[recurse],recurse++);
-        }
-    }
-    if(outer[rows][cols] == '*')
-    {
+        print_outchess(row,col);//打印一次棋盘
         printf("\n****************boom~~!!!!***********************\n");
         printf("******************你被炸死了************************\n\n");
         return -2;
+    }
+    //翻到非零数字,无事发生
+    if(inner[rows][cols] > '0' && inner[rows][cols] < '9')
+    {
+        return 1;
+    }
+    //所有的情况都排查了,到这里说明翻到了0
+    int dr,dc;
+    for(dr = -1;dr <= 1;dr++)
+    {
+        for(dc = -1;dc <= 1;dc++)
+        {
+            if(dr == 0 && dc == 0)
+            {
+                continue;
+            }
+            reveal(rows + dr,cols + dc,row,col);
+        }
     }
     //然后,好像没了
 }//翻开函数结束
@@ -7088,7 +7096,7 @@ int read_find(int row,int col)//扫雷函数
         {
             case 'O':
             {
-                int pin = reveal(rows,cols,0,0,recurse);//翻开函数
+                int pin = reveal(rows,cols,row,col);//翻开函数
                 if(pin == -2)
                 {
                     return -1;
