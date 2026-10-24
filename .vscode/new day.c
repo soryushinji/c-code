@@ -7009,6 +7009,11 @@ void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一�
 }//打印表棋盘函数结束
 int reveal(int rows,int cols,int row,int col)//翻开函数(如果翻开的格子是0,周围8个格子都要翻开)
 {
+    //边界检查
+    if (rows < 1 || rows > row || cols < 1 || cols > col) 
+    {
+        return 1;
+    }
     //讨论递归的情况
     if (outer[rows][cols] != '#') //已开过检查
     {
@@ -7041,6 +7046,7 @@ int reveal(int rows,int cols,int row,int col)//翻开函数(如果翻开的格�
             reveal(rows + dr,cols + dc,row,col);
         }
     }
+    return 1;
     //然后,好像没了
 }//翻开函数结束
 void flag(int rows,int cols)//标记函数
@@ -7095,19 +7101,6 @@ int read_find(int row,int col)//扫雷函数
         if((rows < 0) || (rows > row + 1) || (cols < 0) || (cols > col + 1))
         {
             printf("错误,超出棋盘范围!\n");
-            //清空缓冲区
-            while((ch = getchar()) != '\n' && ch != EOF) ;
-            continue;
-        }
-        //如果后面输入空格
-        if((ch = getchar()) == ' ' || ch == '\t')
-        {
-            while(ch == ' ' || ch == '\t') ch = getchar();//跳过空格
-        }
-        //如果后面输入非数字
-        if(((ch = getchar()) < '0' || ch > '9') && ch != '\n' && ch != ' ' && ch != '\t')
-        {
-            printf("错误,请按照规定的格式输入!\n");
             //清空缓冲区
             while((ch = getchar()) != '\n' && ch != EOF) ;
             continue;
