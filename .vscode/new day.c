@@ -6561,13 +6561,12 @@ void print_menu(void);//输出菜单函数
 int read_chosen(void);//录入选项函数
 int read_usual(void);//询问是否沿用上局的函数
 void read_outer(int row,int col);//录入表棋盘
-void read_inner(int row,int col,int mine,int as_usual);//录入里棋盘(as_usual作为是否重新防止雷的位置的条件)
-void print_outchess(int row,int col);//打印表棋盘函数
+void read_inner(int row,int col,int mine,int as_usual);//录入里棋盘(as_usual作为是否重置雷的位置的条件)
 int read_rcustom(void);//行自定义函数
 int read_ccustom(void);//列自定义函数
 int read_mcustom(int row,int col);//雷自定义函数
-
-
+void game(int row,int col,int mine);//游戏函数
+void print_outchess(int row,int col);//打印表棋盘函数
 
 int main()
 {
@@ -6592,7 +6591,7 @@ int main()
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 10;
                 read_inner(row,col,mine,as_usual);//录入里棋盘
-                print_outchess(row,col);//打印表棋盘函数
+                game(row,col,mine);//游戏函数
                 rounds++;
                 break;
             }
@@ -6603,7 +6602,7 @@ int main()
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 25;
                 read_inner(row,col,mine,as_usual);//录入里棋盘
-                print_outchess(row,col);//打印表棋盘函数
+                game(row,col,mine);//游戏函数
                 rounds++;
                 break;
             }
@@ -6614,7 +6613,7 @@ int main()
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 int mine = 50;
                 read_inner(row,col,mine,as_usual);//录入里棋盘
-                print_outchess(row,col);//打印表棋盘函数
+                game(row,col,mine);//游戏函数
                 rounds++;
                 break;
             }
@@ -6630,7 +6629,7 @@ int main()
                 }
                 read_inner(row,col,mine,as_usual);//录入里棋盘
                 read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
-                print_outchess(row,col);//打印表棋盘函数
+                game(row,col,mine);//游戏函数
                 rounds++;
                 break;
             }
@@ -6824,48 +6823,6 @@ void read_inner(int row,int col,int mine,int as_usual)//录入里棋盘函数
     // }
     //完成
 }//录入里棋盘函数结束
-void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一圈)
-{
-    row += 2;
-    col += 2;//将棋盘扩大一圈
-    printf("    ");
-    //计算col的位数,确保打印一个等距的棋盘
-    int re_col = col - 2;
-    int ccount = 0;//计算col位数
-    while(re_col >= 1)
-    {
-        ccount++;
-        re_col /= 10;
-    }
-    for(int i = 1;i < col - 1;i++)
-    {
-        printf("%-*d ",ccount,i);
-    }
-    printf("\n");
-    printf("    ");
-    for(int i = 1;i < col - 1;i++)
-    {
-        printf("---");
-    }
-    printf("\n");
-    //在计算row的位数
-    int re_row = row - 2;
-    int rcount = 0;//记录col的位数
-    while(re_row >= 1)
-    {
-        rcount++;
-        re_row /= 10;
-    }
-    for(int i = 1;i < row - 1;i++)
-    {
-        printf("%-*d| ",rcount,i);
-        for(int j = 1;j < col - 1;j++)
-        {
-            printf("%-*c ",ccount,outer[i][j]);
-        }
-        printf("\n");
-    }
-}//打印表棋盘函数结束
 int read_rcustom(void)//行自定义函数
 {
     while(1)
@@ -6990,3 +6947,63 @@ int read_mcustom(int row,int col)//雷自定义函数
         return mine;
     }
 }//雷自定义函数结束
+void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一圈)
+{
+    row += 2;
+    col += 2;//将棋盘扩大一圈
+    printf("    ");
+    //计算col的位数,确保打印一个等距的棋盘
+    int re_col = col - 2;
+    int ccount = 0;//计算col位数
+    while(re_col >= 1)
+    {
+        ccount++;
+        re_col /= 10;
+    }
+    for(int i = 1;i < col - 1;i++)
+    {
+        printf("%-*d ",ccount,i);
+    }
+    printf("\n");
+    printf("    ");
+    for(int i = 1;i < col - 1;i++)
+    {
+        if(col - 2 < 10)
+        {
+            printf("--");
+        }
+        else
+        {
+            printf("---");
+        }
+    }
+    printf("\n");
+    //在计算row的位数
+    int re_row = row - 2;
+    int rcount = 0;//记录col的位数
+    while(re_row >= 1)
+    {
+        rcount++;
+        re_row /= 10;
+    }
+    for(int i = 1;i < row - 1;i++)
+    {
+        printf("%-*d| ",rcount,i);
+        for(int j = 1;j < col - 1;j++)
+        {
+            printf("%-*c ",ccount,outer[i][j]);
+        }
+        printf("\n");
+    }
+    printf("       O 翻开     F 标记      q 取消标记\n\n");
+}//打印表棋盘函数结束
+
+
+void game(int row,int col,int mine)//游戏函数
+{
+    while(1)
+    {
+        print_outchess(row,col);//打印表棋盘
+        break;
+    }
+}//游戏函数结束
