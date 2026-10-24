@@ -6589,6 +6589,7 @@ int main()
                 int mine = 10;
                 read_inner(row,col,mine,as_usual);//录入里棋盘
                 print_outchess(row,col);//打印表棋盘函数
+                rounds++;
                 break;
             }
             case 2:
@@ -6599,6 +6600,7 @@ int main()
                 int mine = 25;
                 read_inner(row,col,mine,as_usual);//录入里棋盘
                 print_outchess(row,col);//打印表棋盘函数
+                rounds++;
                 break;
             }
             case 3:
@@ -6609,6 +6611,7 @@ int main()
                 int mine = 50;
                 read_inner(row,col,mine,as_usual);//录入里棋盘
                 print_outchess(row,col);//打印表棋盘函数
+                rounds++;
                 break;
             }
             case 4:
@@ -6617,6 +6620,7 @@ int main()
                 //read_inner(row,col,mine,as_usual);//录入里棋盘
                 //read_outer(row,col);//录入表棋盘,每局开始时先录入表棋盘,将其变为默认状态
                 //print_outchess(row,col);//打印表棋盘函数
+                rounds++;
                 break;
             }
             case 0:
@@ -6764,6 +6768,7 @@ void read_inner(int row,int col,int mine,int as_usual)//录入里棋盘函数
                 }
                 m++;
             }
+            k++;
         }
         //查重结束
     }
@@ -6798,15 +6803,16 @@ void read_inner(int row,int col,int mine,int as_usual)//录入里棋盘函数
         }
     }
     //里棋盘布置完成
-    // //输出里棋盘测验
-    // for(int i = 1;i < row + 1;i++)
-    // {
-    //     for(int j = 1;j < col + 1;j++)
-    //     {
-    //         printf("%c ",inner[i][j]);
-    //     }
-    //     printf("\n");
-    // }
+    //输出里棋盘测验
+    for(int i = 1;i < row + 1;i++)
+    {
+        for(int j = 1;j < col + 1;j++)
+        {
+            printf("%c ",inner[i][j]);
+        }
+        printf("\n");
+    }
+    //完成
 }//录入里棋盘函数结束
 void print_outchess(int row,int col)//打印表棋盘函数(表棋盘要大一圈)
 {
