@@ -6546,7 +6546,7 @@ void print_count(void)//统计函数
 }//统计函数结束
 #endif
 //扫雷进阶版
-//#if 0
+#if 0
 #define RMAXN 27
 #define CMAXN 40
 int ch;
@@ -6583,7 +6583,7 @@ int main()
     {
         button = read_chosen();//录入选项函数
         printf("\n");
-        if(rounds > 0 && pre_button == button)//成立条件：至少玩了一局,且这一局选择的棋盘与上一局一致
+        if(rounds > 0 && pre_button == button && button != 4)//成立条件：至少玩了一局,且这一局选择的棋盘与上一局一致
         {
             as_usual = read_usual();//询问是否沿用上局的函数(前提时两局选择的棋盘一致)
             printf("\n");
@@ -7216,5 +7216,27 @@ void game(int row,int col,int mine,int button)//游戏函数
         }
     }
 }//游戏函数结束
-//#endif
+#endif
+//重定向练习
+
+int main()
+{
+    int ch, lines = 0, words = 0, chars = 0;
+    int in_word = 0;
+ 
+    while ((ch = getchar()) != EOF)
+    {
+        chars++;
+        if (ch == '\n') lines++;
+        if (ch == ' ' || ch == '\n' || ch == '\t')
+            in_word = 0;
+        else if (!in_word)
+        {
+            in_word = 1;
+            words++;
+        }
+    }
+    printf("行 %d,词 %d,字符 %d\n", lines, words, chars);
+    return 0;
+}
 //开始指针的学习
