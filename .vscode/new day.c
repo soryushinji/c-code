@@ -7217,30 +7217,9 @@ void game(int row,int col,int mine,int button)//游戏函数
     }
 }//游戏函数结束
 #endif
-//重定向练习
-
-// file_eof.c --打开一个文件并显示该文件
-
-int main()
-{
-    int ch;
-    FILE * fp;
-    char fname[50];            // 储存文件名
-
-    printf("Enter the name of the file: ");
-    scanf("%s", fname);
-    fp = fopen(fname, "r");    // 打开待读取文件
-    if (fp == NULL)            // 如果失败
-    {
-        printf("Failed to open file. Bye\n");
-        exit(1);               // 退出程序
-    }
-    // getc(fp)从打开的文件中获取一个字符
-    while ((ch = getc(fp)) != EOF)
-        putchar(ch);
-    fclose(fp);                // 关闭文件
-
-    return 0;
-}
-
 //开始指针的学习
+//这里是你曾败北的地方
+//也许会再一次成为你的梦魇
+//但是
+//试一试吧
+//哪怕这是绝望的末路
