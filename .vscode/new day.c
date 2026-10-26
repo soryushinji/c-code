@@ -7229,8 +7229,10 @@ void test1(void);
 void test2(void);
 int main()
 {
-    void test1(void);
-    void test2(void);
+    test1();
+    printf("a为%d\n",a);
+    test2();
+    printf("a为%d\n",a);
     return 0;
 }
 void test1(void)
