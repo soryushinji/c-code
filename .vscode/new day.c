@@ -7223,6 +7223,7 @@ void game(int row,int col,int mine,int button)//游戏函数
 //但是
 //试一试吧
 //哪怕这是绝望的末路
+#if 0
 int a = 0;
 int* pa = &a;
 void test1(void);
@@ -7245,3 +7246,4 @@ void test2(void)
     *pa = 100;
     printf("在test2里a为%d\n",a);
 }
+#endif
