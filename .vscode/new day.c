@@ -7223,3 +7223,23 @@ void game(int row,int col,int mine,int button)//游戏函数
 //但是
 //试一试吧
 //哪怕这是绝望的末路
+int a = 0;
+int* pa = &a;
+void test1(void);
+void test2(void);
+int main()
+{
+    void test1(void);
+    void test2(void);
+    return 0;
+}
+void test1(void)
+{
+    a = 10;
+    printf("在test1里a为%d\n",a);
+}
+void test2(void)
+{
+    *pa = 100;
+    printf("在test2里a为%d\n",a);
+}
