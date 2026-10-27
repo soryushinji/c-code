@@ -7247,3 +7247,22 @@ void test2(void)
     printf("在test2里a为%d\n",a);
 }
 #endif
+//写一个自己的strlen函数、
+size_t my_strlen(char* ch);
+int main()
+{
+    char arr[100] = {"abcedfghijklmnopqrstuvwxyz"};
+    int num = my_strlen(arr);
+    printf("arr中有 %zu 个字符\n",num);
+    return 0;
+}
+size_t my_strlen(char* ch)
+{
+    int* start = ch;
+    while(*ch != '\0')
+    {
+        ch++;
+    }
+    size_t k = ch - start;
+    return k;
+}
