@@ -7223,6 +7223,7 @@ void game(int row,int col,int mine,int button)//游戏函数
 //但是
 //试一试吧
 //哪怕这是绝望的末路
+//也许仍是轮回的绝望
 #if 0
 int a = 0;
 int* pa = &a;
