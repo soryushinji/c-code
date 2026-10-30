@@ -7252,19 +7252,19 @@ void test2(void)
 size_t my_strlen(char* arr);
 int main()
 {
-    char arr[10] = {"helloworld"};
+    char arr[] = "hello world";
     size_t num = my_strlen(arr);
     printf("arr数组的长度为:%zu",num);
     return 0;
 }
 size_t my_strlen(char* arr)
 {
-    int start = arr[0];
-    int* p = &arr[0];
+    int* start = arr;
+    int* p = &arr;
     while(*p != '\0')
     {
         p++;
     }
-    int num = p - start;
+    size_t num = (size_t)(p - start);
     return num;
 }
