@@ -7249,3 +7249,22 @@ void test2(void)
 }
 #endif
 //写一个自己的strlen函数、
+size_t my_strlen(char* arr);
+int main()
+{
+    char arr[10] = {"helloworld"};
+    size_t num = my_strlen(arr);
+    printf("arr数组的长度为:%zu",num);
+    return 0;
+}
+size_t my_strlen(char* arr)
+{
+    int start = arr[0];
+    int* p = &arr[0];
+    while(*p != '\0')
+    {
+        p++;
+    }
+    int num = p - start;
+    return num;
+}
